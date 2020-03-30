@@ -1,5 +1,5 @@
-#ifndef VECT2D_H
-#define VECT2D_H
+#ifndef VECT2D_HPP
+#define VECT2D_HPP
 
 class Vect2D
 {
@@ -18,6 +18,7 @@ class Vect2D
 
         Vect2D operator+ (Vect2D const &vector);
         Vect2D operator- (Vect2D const &vector);
+        Vect2D& operator= (const Vect2D &vector);
 };
 
-#endif /* VECT2D_H */
+#endif /* VECT2D_HPP */

@@ -47,3 +47,11 @@ Vect2D Vect2D::operator- (Vect2D const &vector)
     result.y = y - vector.y; 
     return result;
 }
+
+Vect2D& Vect2D::operator= (const Vect2D &vector)
+{
+    x = vector.x;
+    y = vector.y;
+ 
+    return *this;
+}
