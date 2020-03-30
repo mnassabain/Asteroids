@@ -15,12 +15,16 @@ class Rect
         Rect(int x, int y, int w, int h);
 
         Vect2D getPosition();
-        int getWidth();
-        int getHeight();
-
-        void setPosition(Vect2D position);
+        void setPosition(Vect2D pos);
+        void setPosition(int x, int y);
+        
+        void setDimensions(Vect2D dim);
+        void setDimensions(int w, int h);
         void setWidth(int w);
         void setHeight(int h);
+        int getWidth();
+        int getHeight();
+        void set(int x, int y, int w, int h);
 
         // TODO: static test collision
 };
