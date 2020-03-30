@@ -1,5 +1,11 @@
 #include "Rect.hpp"
 
+Rect::Rect(Vect2D pos, Vect2D dim): position(pos), dimensions(dim)
+{}
+
+Rect::Rect(int x, int y, int w, int h) : position(x, y), dimensions(w, h)
+{}
+
 Vect2D Rect::getPosition()
 {
     return position;

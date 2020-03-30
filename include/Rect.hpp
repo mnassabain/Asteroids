@@ -10,6 +10,10 @@ class Rect
         Vect2D dimensions;  // x = width, y = height
 
     public:
+        Rect() {}
+        Rect(Vect2D pos, Vect2D dim);
+        Rect(int x, int y, int w, int h);
+
         Vect2D getPosition();
         int getWidth();
         int getHeight();
