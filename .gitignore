@@ -1,0 +1,6 @@
+# VS Code files
+.vscode/*
+
+# Object/binary files
+main
+*.o
