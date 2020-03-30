@@ -5,7 +5,7 @@
 
 class Object
 {
-    private:
+    protected:
         Rect hitbox;
         int orientation;    // 0 - 360
         int speed;          // 0 - 100
@@ -13,6 +13,8 @@ class Object
     
     public:
         Object();
+        Object(Vect2D, Vect2D);
+        Object(Vect2D, Vect2D, int, int);
 
         Rect getHitbox();
 
