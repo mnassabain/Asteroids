@@ -13,6 +13,8 @@ class Object
     
     public:
         Object();
+        Object(Vect2D, Vect2D);
+        Object(Vect2D, Vect2D, int, int);
 
         Rect getHitbox();
 
