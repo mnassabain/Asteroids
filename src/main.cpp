@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Vect2D.hpp"
+#include "Asteroid.hpp"
 
 int main()
 {
@@ -10,6 +11,8 @@ int main()
     Vect2D v3 = v1 + v2;
 
     std::cout << "(" << v3.getX() << ", " << v3.getY() << ")" << std::endl;
+
+    Asteroid a(LARGE_ASTEROID);
 
     return 0;
 }
