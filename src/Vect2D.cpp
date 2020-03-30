@@ -12,6 +12,12 @@ Vect2D::Vect2D(int x, int y)
     this->y = y;
 }
 
+Vect2D::Vect2D(const Vect2D &v)
+{
+    x = v.x;
+    y = v.y;
+}
+
 int Vect2D::getX()
 {
     return x;

@@ -10,6 +10,7 @@ class Vect2D
     public:
         Vect2D();
         Vect2D(int x, int y);
+        Vect2D(const Vect2D &v);
 
         int getX();
         void setX(int x);
