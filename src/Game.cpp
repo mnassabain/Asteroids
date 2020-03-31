@@ -20,7 +20,7 @@ void Game::update()
 
 void Game::display()
 {
-
+    Engine::draw();
 }
 
 bool Game::isRunning()
