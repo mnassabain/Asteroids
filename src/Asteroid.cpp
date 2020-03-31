@@ -32,3 +32,8 @@ void Asteroid::update()
 void Asteroid::display()
 {
 }
+
+int Asteroid::getSize()
+{
+    return size;
+}

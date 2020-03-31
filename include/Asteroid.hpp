@@ -17,9 +17,10 @@ class Asteroid : public Object
     
     public:
         Asteroid(int size);
-
         void update();
         void display();
+
+        int getSize();
 };
 
 #endif /* ASTEROID_H */
