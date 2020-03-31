@@ -25,3 +25,13 @@ Rect Object::getHitbox()
 {
     return hitbox;
 }
+
+void Object::setPosition(int x, int y)
+{
+    hitbox.setPosition(x, y);
+}
+
+void Object::setPosition(Vect2D pos)
+{
+    hitbox.setPosition(pos);
+}
