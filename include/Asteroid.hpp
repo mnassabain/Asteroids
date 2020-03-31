@@ -18,8 +18,8 @@ class Asteroid : public Object
     public:
         Asteroid(int size);
 
-        void destroy();
-        
+        void update();
+        void display();
 };
 
 #endif /* ASTEROID_H */

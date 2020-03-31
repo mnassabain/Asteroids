@@ -25,12 +25,10 @@ void Asteroid::init()
     }
 }
 
-void Asteroid::destroy()
+void Asteroid::update()
 {
-    size--;
-    hitbox.set(0, 0, 0, 0);
-    if (size != DESTROYED_ASTEROID)
-    {
-        // créer 2 asteroides et renvoyer ... à coder
-    }
+}
+
+void Asteroid::display()
+{
 }

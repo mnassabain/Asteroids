@@ -18,7 +18,8 @@ class Object
 
         Rect getHitbox();
 
-        virtual void destroy() = 0;
+        virtual void update() = 0;
+        virtual void display() = 0;
 };
 
 #endif /* OBJECT_HPP */
