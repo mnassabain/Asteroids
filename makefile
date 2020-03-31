@@ -3,9 +3,10 @@ OBJ_DIR = bin
 INC_DIR = include
 
 TARGET = main
-LIBS = -lm
 CC = g++
-CFLAGS = -g -Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS = -g -Wall -Wextra -Werror
+INC = -I$(INC_DIR) -I./libs/SDL2/include
+LIBS = -L./libs/SDL2/lib -lSDL2
 
 .PHONY: default all clean
 
@@ -17,12 +18,12 @@ OBJECTS = $(addprefix $(OBJ_DIR)/, $(patsubst %.cpp, %.o, $(notdir $(SOURCES))))
 HEADERS = $(wildcard $(INC_DIR)/*.hpp)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 .PRECIOUS: $(TARGET) $(OBJECTS)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@
+	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@ $(INC)
 
 clean:
 	-rm -f $(OBJ_DIR)/*.o
