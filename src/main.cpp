@@ -12,7 +12,7 @@ int main()
     // game loop
     Game game;
     game.init();
-    // while(game.isRunning())
+    while(game.isRunning())
     {
         game.update();
         game.display();

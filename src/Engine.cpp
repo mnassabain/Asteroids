@@ -25,11 +25,28 @@ void Engine::init()
 
 void Engine::draw()
 {
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
-    SDL_Delay(5000);
+    SDL_Delay(16);
+}
+
+int Engine::handleEvents()
+{
+    int result = 0;
+    SDL_Event event;
+    while(SDL_PollEvent(&event))
+    {
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                result = CLOSE_GAME_EVENT;
+                break;
+        }
+    }
+
+    return result;
 }
 
 void Engine::destroy()

@@ -15,7 +15,11 @@ void Game::init()
 
 void Game::update()
 {
-
+    int a = Engine::handleEvents();
+    if (a == CLOSE_GAME_EVENT)
+    {
+        running = false;
+    }
 }
 
 void Game::display()

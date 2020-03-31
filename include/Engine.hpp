@@ -8,6 +8,8 @@
 #define SCREEN_WIDTH    640
 #define SCREEN_HEIGHT   480
 
+#define CLOSE_GAME_EVENT    1
+
 class Engine
 {
     private:
@@ -17,6 +19,7 @@ class Engine
     public:
         static void init();
         static void draw();
+        static int handleEvents();
         static void destroy();
 };
 
