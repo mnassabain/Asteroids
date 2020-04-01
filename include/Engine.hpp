@@ -24,6 +24,8 @@ class Engine
         static void render();
         static int handleEvents();
         static void destroy();
+
+        static SDL_Renderer* getRenderer() { return renderer; }
 };
 
 #endif /* ENGINE_HPP */

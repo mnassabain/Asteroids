@@ -1,10 +1,5 @@
 #include "Spaceship.hpp"
 
-void Spaceship::display()
-{
-
-}
-
 void Spaceship::update()
 {
 

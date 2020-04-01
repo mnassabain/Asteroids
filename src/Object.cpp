@@ -5,6 +5,12 @@ Object::Object()
     orientation = 0;
     speed = 0;
     acceleration = 0;
+    spriteComponent = new SpriteComponent();
+}
+
+Object::~Object()
+{
+    delete spriteComponent;
 }
 
 Object::Object(Vect2D pos, Vect2D dim) : hitbox(pos, dim)
@@ -34,4 +40,9 @@ void Object::setPosition(int x, int y)
 void Object::setPosition(Vect2D pos)
 {
     hitbox.setPosition(pos);
+}
+
+void Object::display()
+{
+    spriteComponent->draw();
 }

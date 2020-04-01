@@ -17,7 +17,6 @@ class Spaceship : public Object
         static const int MAX_LIVES = PLAYER_MAX_LIVES;
 
     public:
-        void display();
         void update();
 
         int getScore();
