@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include <Engine.hpp>
+#include <EventManager.hpp>
 
 #define PLAYER_MOVE_UP_EVENT    2
 

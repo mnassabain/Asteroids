@@ -7,11 +7,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include <EventManager.hpp>
+
 #define SCREEN_WIDTH    640
 #define SCREEN_HEIGHT   480
-
-#define CLOSE_GAME_EVENT    1
-#define PLAYER_MOVE_UP_EVENT    2
 
 using namespace std;
 
@@ -20,6 +19,8 @@ class Engine
     private:
         static SDL_Window* window;
         static SDL_Renderer* renderer;
+
+        static EventManager eventManager;
 
     public:
         static void init();
@@ -30,7 +31,8 @@ class Engine
         static void destroy();
 
         static SDL_Renderer* getRenderer() { return renderer; }
-        static queue<int> events;
+
+        static Event pollEvent();
 };
 
 #endif /* ENGINE_HPP */

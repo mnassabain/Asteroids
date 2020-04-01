@@ -17,12 +17,16 @@ void Game::init()
 
 void Game::update()
 {
+    // handle events
     int a = Engine::handleEvents();
-    if (a == CLOSE_GAME_EVENT)
+    if (a == EVT_CLOSE_GAME)
     {
         running = false;
     }
 
+    // check if game closed
+
+    // update objects
     player.update();
 }
 

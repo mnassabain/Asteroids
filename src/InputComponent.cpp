@@ -5,15 +5,14 @@
 
 void InputComponent::update(Spaceship* ship)
 {
-    while(!Engine::events.empty())
+    Event event;
+    while((event = Engine::pollEvent()))
     {
-        int event;
-        switch(event = Engine::events.front())
+        switch(event)
         {
-            case PLAYER_MOVE_UP_EVENT:
+            case EVT_PLAYER_ACCELERATE:
                 ship->setPosition(ship->getPosition() + Vect2D(0, 10));
                 break;
         }
-        Engine::events.pop();
     }
 }

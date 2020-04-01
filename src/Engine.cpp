@@ -2,7 +2,7 @@
 
 SDL_Window* Engine::window = NULL;
 SDL_Renderer* Engine::renderer = NULL;
-queue<int> Engine::events;
+EventManager Engine::eventManager;
 
 void Engine::init()
 {
@@ -48,36 +48,20 @@ void Engine::render()
     SDL_Delay(16);
 }
 
-int Engine::handleEvents()
-{
-    int result = 0;
-    SDL_Event event;
-    while(SDL_PollEvent(&event))
-    {
-        switch(event.type)
-        {
-            case SDL_QUIT:
-                result = CLOSE_GAME_EVENT;
-                break;
-
-            case SDL_KEYDOWN:
-                switch (event.key.keysym.sym)
-                {
-                    case SDLK_z:
-                        events.push(PLAYER_MOVE_UP_EVENT);
-                        break;
-                }
-                break;
-        }
-    }
-
-    return result;
-}
-
 void Engine::destroy() // TODO: move to destructor ?
 {
     IMG_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+}
+
+int Engine::handleEvents()
+{
+    return eventManager.handleEvents();
+}
+
+Event Engine::pollEvent()
+{
+    return eventManager.poll();
 }

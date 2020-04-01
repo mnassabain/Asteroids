@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <vector>
+#include <EventCodes.hpp>
 #include <Object.hpp>
 #include <Engine.hpp>
 #include <Spaceship.hpp>
