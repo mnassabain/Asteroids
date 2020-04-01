@@ -1,6 +1,10 @@
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
+#define _USE_MATH_DEFINES
+
+#include <cmath>
+
 #include <Vect2D.hpp>
 #include <Rect.hpp>
 #include <SpriteComponent.hpp>
@@ -28,6 +32,8 @@ class Object
         Vect2D getPosition();
         void setPosition(int x, int y);
         void setPosition(Vect2D pos);
+
+        int getOrientation();
 
         virtual void update() = 0;
         void display();

@@ -5,7 +5,9 @@
 #include "Object.hpp"
 #include <SpaceshipSpriteComponent.hpp>
 
-#define PLAYER_MAX_LIVES   5
+#define PLAYER_MAX_LIVES    5
+#define CLOCKWISE           1
+#define COUNTERCLOCKWISE    -1
 
 class Spaceship : public Object
 {
@@ -16,6 +18,10 @@ class Spaceship : public Object
         bool shooting;  // y/n
 
         static const int MAX_LIVES = PLAYER_MAX_LIVES;
+        static const int MAX_SPEED = 3;
+
+        void turn();
+        void move();
 
     public:
         Spaceship();
@@ -28,7 +34,8 @@ class Spaceship : public Object
         int getLives();
         void accelerate();
         void decelerate();
-        void turn(int direction);
+        void startTurning(int direction);
+        void stopTurning();
         void teleport(int x, int y);
         void teleport(Vect2D pos);
         void startShooting();

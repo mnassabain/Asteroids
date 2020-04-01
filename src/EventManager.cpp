@@ -19,6 +19,14 @@ int EventManager::handleEvents()
                     case SDLK_z:
                         events.push(EVT_PLAYER_ACCELERATE);
                         break;
+
+                    case SDLK_q:
+                        events.push(EVT_PLAYER_START_TURN_CCW);
+                        break;
+
+                    case SDLK_d:
+                        events.push(EVT_PLAYER_START_TURN_CW);
+                        break;
                 }
                 break;
 
@@ -27,6 +35,11 @@ int EventManager::handleEvents()
                 {
                     case SDLK_z:
                         events.push(EVT_PLAYER_DECELERATE);
+                        break;
+
+                    case SDLK_q:
+                    case SDLK_d:
+                        events.push(EVT_PLAYER_STOP_TURN);
                         break;
                 }
                 break;

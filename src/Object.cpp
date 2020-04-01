@@ -42,6 +42,11 @@ Rect Object::getHitbox()
     return hitbox;
 }
 
+int Object::getOrientation()
+{
+    return orientation;
+}
+
 Vect2D Object::getPosition()
 {
     return hitbox.getPosition();
