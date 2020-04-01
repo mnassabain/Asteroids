@@ -7,6 +7,8 @@
 #include <Engine.hpp>
 #include <Spaceship.hpp>
 
+using namespace std;
+
 class Game
 {
     private:
@@ -16,14 +18,14 @@ class Game
         int highscore;
         int level;      // savoir le niveau
 
-        Spaceship player;
-        // std::vector<Object*> objects;    // contenir objets triés par pos.x
+        vector<Object*> objects; // contenir objets triés par pos.x
 
         void startPlaying();
         void stopPlaying();
 
     public:
         Game();
+        ~Game();
 
         void init();
         void update();

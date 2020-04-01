@@ -24,7 +24,7 @@ class Object
     public:
         Object(SpriteComponent*);
         Object(SpriteComponent*, InputComponent*);
-        ~Object();
+        virtual ~Object();
         Object(Vect2D, Vect2D);
         Object(Vect2D, Vect2D, int, int);
 

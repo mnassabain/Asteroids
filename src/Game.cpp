@@ -5,35 +5,52 @@ Game::Game()
     running = false;
     playing = false;
     highscore = 0; // load from file?
-    // objects.reserve()..
+    // objects.reserve() ?
+}
 
-    // player = new Spaceship(PlayerSpriteComponent, InputComponent);
+Game::~Game()
+{
+    vector<Object*>::iterator obj;
+    for(obj = objects.begin(); obj != objects.end(); obj++)
+    {
+        delete (*obj);
+    }
 }
 
 void Game::init()
 {
     running = true;
+
+    objects.push_back(new Spaceship());
 }
 
 void Game::update()
 {
     // handle events
     int a = Engine::handleEvents();
+
+    // check if game closed
     if (a == EVT_CLOSE_GAME)
     {
         running = false;
     }
 
-    // check if game closed
-
     // update objects
-    player.update();
+    vector<Object*>::iterator obj;
+    for(obj = objects.begin(); obj != objects.end(); obj++)
+    {
+        (*obj)->update();
+    }
 }
 
 void Game::display()
 {
     Engine::clear();
-    player.display();
+    vector<Object*>::iterator obj;
+    for(obj = objects.begin(); obj != objects.end(); obj++)
+    {
+        (*obj)->display();
+    }
     Engine::render();
 }
 

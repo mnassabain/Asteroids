@@ -21,6 +21,7 @@ Object::Object(SpriteComponent* s, InputComponent* i)
 Object::~Object()
 {
     delete spriteComponent;
+    delete inputComponent;
 }
 
 Object::Object(Vect2D pos, Vect2D dim) : hitbox(pos, dim)
