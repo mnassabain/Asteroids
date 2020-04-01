@@ -6,6 +6,8 @@ Game::Game()
     playing = false;
     highscore = 0; // load from file?
     // objects.reserve()..
+
+    // player = new Spaceship(PlayerSpriteComponent, InputComponent);
 }
 
 void Game::init()
@@ -25,6 +27,7 @@ void Game::update()
 void Game::display()
 {
     Engine::clear();
+    player.display();
     Engine::render();
 }
 

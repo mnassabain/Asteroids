@@ -4,6 +4,7 @@
 #include <vector>
 #include <Object.hpp>
 #include <Engine.hpp>
+#include <Spaceship.hpp>
 
 class Game
 {
@@ -14,7 +15,8 @@ class Game
         int highscore;
         int level;      // savoir le niveau
 
-        std::vector<Object*> objects;    // contenir objets triés par pos.x
+        Spaceship player;
+        // std::vector<Object*> objects;    // contenir objets triés par pos.x
 
         void startPlaying();
         void stopPlaying();

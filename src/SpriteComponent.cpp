@@ -20,5 +20,6 @@ SpriteComponent::~SpriteComponent()
 
 void SpriteComponent::draw()
 {
-    Engine::draw(texture, NULL, NULL);
+    SDL_Rect dest = { 300, 200, 30, 45 };
+    Engine::draw(texture, NULL, &dest);
 }
