@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #define SCREEN_WIDTH    640
 #define SCREEN_HEIGHT   480
@@ -18,7 +19,9 @@ class Engine
 
     public:
         static void init();
-        static void draw();
+        static void clear(); // TODO: move to display ?
+        static void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*);
+        static void render();
         static int handleEvents();
         static void destroy();
 };

@@ -21,12 +21,27 @@ void Engine::init()
     }
 
     renderer = SDL_CreateRenderer(window, -1, 0);
+
+    if (IMG_Init(IMG_INIT_PNG) < 0)
+    {
+        std::cout << "error: "<< std::endl;
+        exit(1);
+    }
 }
 
-void Engine::draw()
+void Engine::clear()
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
+}
+
+void Engine::draw(SDL_Texture* texture, SDL_Rect* src, SDL_Rect* dest)
+{
+    SDL_RenderCopy(renderer, texture, src, dest);
+}
+
+void Engine::render()
+{
     SDL_RenderPresent(renderer);
 
     SDL_Delay(16);
@@ -49,8 +64,9 @@ int Engine::handleEvents()
     return result;
 }
 
-void Engine::destroy()
+void Engine::destroy() // TODO: move to destructor ?
 {
+    IMG_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
