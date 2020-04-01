@@ -1,5 +1,5 @@
-#ifndef SPACESHIPSPRITECOMPONENT
-#define SPACESHIPSPRITECOMPONENT
+#ifndef SPACESHIPSPRITECOMPONENT_HPP
+#define SPACESHIPSPRITECOMPONENT_HPP
 
 #include <string>
 using namespace std;
@@ -16,4 +16,4 @@ class SpaceshipSpriteComponent : public SpriteComponent
 };
 
 
-#endif /* SPACESHIPSPRITECOMPONENT */
+#endif /* SPACESHIPSPRITECOMPONENT_HPP */
