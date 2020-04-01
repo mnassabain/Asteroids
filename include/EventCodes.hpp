@@ -12,5 +12,8 @@
 #define EVT_PLAYER_START_TURN_CW    4
 #define EVT_PLAYER_STOP_TURN        5
 
+#define EVT_PLAYER_START_SHOOTING   6
+#define EVT_PLAYER_STOP_SHOOTING    7
+
 
 #endif /* EVENTCODES_HPP */

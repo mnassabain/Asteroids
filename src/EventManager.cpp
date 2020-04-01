@@ -27,6 +27,10 @@ int EventManager::handleEvents()
                     case SDLK_d:
                         events.push(EVT_PLAYER_START_TURN_CW);
                         break;
+
+                    case SDLK_SPACE:
+                        events.push(EVT_PLAYER_START_SHOOTING);
+                        break;
                 }
                 break;
 
@@ -40,6 +44,10 @@ int EventManager::handleEvents()
                     case SDLK_q:
                     case SDLK_d:
                         events.push(EVT_PLAYER_STOP_TURN);
+                        break;
+
+                    case SDLK_SPACE:
+                        events.push(EVT_PLAYER_STOP_SHOOTING);
                         break;
                 }
                 break;

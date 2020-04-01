@@ -7,6 +7,7 @@
 #include <Engine.hpp>
 #include <Asteroid.hpp>
 #include <Spaceship.hpp>
+#include <Rocket.hpp>
 
 using namespace std;
 

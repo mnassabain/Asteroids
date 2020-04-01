@@ -3,7 +3,8 @@
 Spaceship::Spaceship() : 
     Object(new SpriteComponent("resources/player.png"), new InputComponent())
 {
-    setDimensions(30, 45);
+    setDimensions(50, 75);
+    shooting = false;
 }
 
 void Spaceship::update()

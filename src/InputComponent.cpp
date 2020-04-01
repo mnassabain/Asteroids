@@ -29,6 +29,14 @@ void InputComponent::update(Spaceship* ship)
             case EVT_PLAYER_STOP_TURN:
                 ship->stopTurning();
                 break;
+
+            case EVT_PLAYER_START_SHOOTING:
+                ship->startShooting();
+                break;
+
+            case EVT_PLAYER_STOP_SHOOTING:
+                ship->stopShooting();
+                break;
         }
     }
 }
