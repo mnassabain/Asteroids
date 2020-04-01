@@ -26,6 +26,7 @@ class Engine
         static void init();
         static void clear(); // TODO: move to display ?
         static void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*);
+        static void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*, int);
         static void render();
         static int handleEvents();
         static void destroy();

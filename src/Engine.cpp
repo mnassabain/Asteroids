@@ -41,6 +41,11 @@ void Engine::draw(SDL_Texture* texture, SDL_Rect* src, SDL_Rect* dest)
     SDL_RenderCopy(renderer, texture, src, dest);
 }
 
+void Engine::draw(SDL_Texture* texture, SDL_Rect* src, SDL_Rect* dest, int angle)
+{
+    SDL_RenderCopyEx(renderer, texture, src, dest, angle, NULL, SDL_FLIP_NONE);
+}
+
 void Engine::render()
 {
     SDL_RenderPresent(renderer);
