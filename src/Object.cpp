@@ -63,6 +63,21 @@ void Object::setPosition(Vect2D pos)
     hitbox.setPosition(pos);
 }
 
+Vect2D Object::getDimensions()
+{
+    return hitbox.getDimensions();
+}
+
+void Object::setDimensions(int x, int y)
+{
+    hitbox.setDimensions(x, y);
+}
+
+void Object::setDimensions(Vect2D dim)
+{
+    hitbox.setDimensions(dim);
+}
+
 void Object::display()
 {
     spriteComponent->draw(this);

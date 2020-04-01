@@ -31,6 +31,11 @@ void Rect::setPosition(int x, int y)
     position = Vect2D(x, y);
 }
 
+Vect2D Rect::getDimensions()
+{
+    return dimensions;
+}
+
 void Rect::setDimensions(Vect2D dim)
 {
     dimensions = dim;

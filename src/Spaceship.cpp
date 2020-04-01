@@ -1,7 +1,9 @@
 #include "Spaceship.hpp"
 
 Spaceship::Spaceship() : Object(new SpaceshipSpriteComponent(), new InputComponent())
-{}
+{
+    setDimensions(30, 45);
+}
 
 void Spaceship::update()
 {

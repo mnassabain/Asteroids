@@ -5,6 +5,7 @@
 #include <EventCodes.hpp>
 #include <Object.hpp>
 #include <Engine.hpp>
+#include <Asteroid.hpp>
 #include <Spaceship.hpp>
 
 using namespace std;

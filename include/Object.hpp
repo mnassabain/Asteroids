@@ -32,6 +32,9 @@ class Object
         Vect2D getPosition();
         void setPosition(int x, int y);
         void setPosition(Vect2D pos);
+        Vect2D getDimensions();
+        void setDimensions(int x, int y);
+        void setDimensions(Vect2D dim);
 
         int getOrientation();
 

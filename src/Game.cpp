@@ -22,6 +22,7 @@ void Game::init()
     running = true;
 
     objects.push_back(new Spaceship());
+    objects.push_back(new Asteroid(LARGE_ASTEROID));
 }
 
 void Game::update()

@@ -23,6 +23,7 @@ SpriteComponent::~SpriteComponent()
 void SpriteComponent::draw(Object* o) // TODO: add const ?
 {
     Vect2D pos = o->getPosition();
-    SDL_Rect dest = { pos.getX(), pos.getY(), 30, 45 };
+    Vect2D dim = o->getDimensions();
+    SDL_Rect dest = { pos.getX(), pos.getY(), dim.getX(), dim.getY() };
     Engine::draw(texture, NULL, &dest, o->getOrientation());
 }

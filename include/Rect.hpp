@@ -18,6 +18,7 @@ class Rect
         void setPosition(Vect2D pos);
         void setPosition(int x, int y);
         
+        Vect2D getDimensions();
         void setDimensions(Vect2D dim);
         void setDimensions(int w, int h);
         void setWidth(int w);
