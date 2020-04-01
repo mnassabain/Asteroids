@@ -16,7 +16,7 @@ class Object
         SpriteComponent* spriteComponent;
     
     public:
-        Object();
+        Object(SpriteComponent*);
         ~Object();
         Object(Vect2D, Vect2D);
         Object(Vect2D, Vect2D, int, int);

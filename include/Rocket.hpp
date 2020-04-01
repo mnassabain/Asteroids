@@ -6,6 +6,7 @@
 class Rocket : public Object
 {
     public:
+        Rocket();
         void update();
 };
 

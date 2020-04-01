@@ -1,6 +1,6 @@
 #include "Asteroid.hpp"
 
-Asteroid::Asteroid(int size)
+Asteroid::Asteroid(int size) : Object(NULL)
 {
     this->size = size;
     init();

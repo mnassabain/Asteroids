@@ -1,8 +1,10 @@
 #include "Spaceship.hpp"
 
+Spaceship::Spaceship() : Object(new SpaceshipSpriteComponent())
+{}
+
 void Spaceship::update()
 {
-
 }
 
 int Spaceship::getScore()

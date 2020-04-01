@@ -3,6 +3,7 @@
 
 #include "Vect2D.hpp"
 #include "Object.hpp"
+#include <SpaceshipSpriteComponent.hpp>
 
 #define PLAYER_MAX_LIVES   5
 
@@ -17,6 +18,7 @@ class Spaceship : public Object
         static const int MAX_LIVES = PLAYER_MAX_LIVES;
 
     public:
+        Spaceship();
         void update();
 
         int getScore();

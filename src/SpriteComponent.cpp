@@ -1,9 +1,9 @@
 #include <SpriteComponent.hpp>
 #include <iostream>
 
-SpriteComponent::SpriteComponent()
+SpriteComponent::SpriteComponent(string path)
 {
-    SDL_Surface* surface = IMG_Load("resources/player.png");
+    SDL_Surface* surface = IMG_Load(path.c_str());
     if (surface == NULL)
     {
         std::cout << "Error IMG_Load(): " << SDL_GetError() << std::endl;

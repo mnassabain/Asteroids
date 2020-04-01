@@ -1,11 +1,11 @@
 #include "Object.hpp"
 
-Object::Object()
+Object::Object(SpriteComponent* s)
 {
     orientation = 0;
     speed = 0;
     acceleration = 0;
-    spriteComponent = new SpriteComponent();
+    spriteComponent = s;
 }
 
 Object::~Object()
