@@ -22,6 +22,7 @@ class Object
         Object(Vect2D, Vect2D, int, int);
 
         Rect getHitbox();
+        Vect2D getPosition();
         void setPosition(int x, int y);
         void setPosition(Vect2D pos);
 

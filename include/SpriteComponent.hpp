@@ -6,7 +6,10 @@ using namespace std;
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <Vect2D.hpp>
 #include <Engine.hpp>
+
+class Object;
 
 class SpriteComponent
 {
@@ -16,7 +19,7 @@ class SpriteComponent
     public:
         SpriteComponent(string path);
         ~SpriteComponent();
-        void draw();
+        void draw(Object*);
 };
 
 #endif /* SPRITECOMPONENT_H */

@@ -32,6 +32,11 @@ Rect Object::getHitbox()
     return hitbox;
 }
 
+Vect2D Object::getPosition()
+{
+    return hitbox.getPosition();
+}
+
 void Object::setPosition(int x, int y)
 {
     hitbox.setPosition(x, y);
@@ -44,5 +49,5 @@ void Object::setPosition(Vect2D pos)
 
 void Object::display()
 {
-    spriteComponent->draw();
+    spriteComponent->draw(this);
 }

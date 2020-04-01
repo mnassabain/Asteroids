@@ -1,6 +1,8 @@
 #include <SpriteComponent.hpp>
 #include <iostream>
 
+#include <Object.hpp>
+
 SpriteComponent::SpriteComponent(string path)
 {
     SDL_Surface* surface = IMG_Load(path.c_str());
@@ -18,8 +20,9 @@ SpriteComponent::~SpriteComponent()
     SDL_DestroyTexture(texture);
 }
 
-void SpriteComponent::draw()
+void SpriteComponent::draw(Object* o) // TODO: add const ?
 {
-    SDL_Rect dest = { 300, 200, 30, 45 };
+    Vect2D pos = o->getPosition();
+    SDL_Rect dest = { pos.getX(), pos.getY(), 30, 45 };
     Engine::draw(texture, NULL, &dest);
 }
