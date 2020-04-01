@@ -3,7 +3,6 @@
 
 #include "Vect2D.hpp"
 #include "Object.hpp"
-#include <SpaceshipSpriteComponent.hpp>
 
 #define PLAYER_MAX_LIVES    5
 #define CLOCKWISE           1

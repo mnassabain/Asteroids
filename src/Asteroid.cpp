@@ -1,6 +1,7 @@
 #include "Asteroid.hpp"
 
-Asteroid::Asteroid(int size) : Object(new AsteroidSpriteComponent())
+Asteroid::Asteroid(int size) :
+    Object(new SpriteComponent("resources/asteroid.png"))
 {
     this->size = size;
     init();
