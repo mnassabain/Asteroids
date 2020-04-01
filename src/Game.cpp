@@ -22,6 +22,8 @@ void Game::update()
     {
         running = false;
     }
+
+    player.update();
 }
 
 void Game::display()

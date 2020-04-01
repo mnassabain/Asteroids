@@ -2,6 +2,7 @@
 #define ENGINE_HPP
 
 #include <iostream>
+#include <queue>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -10,6 +11,9 @@
 #define SCREEN_HEIGHT   480
 
 #define CLOSE_GAME_EVENT    1
+#define PLAYER_MOVE_UP_EVENT    2
+
+using namespace std;
 
 class Engine
 {
@@ -26,6 +30,7 @@ class Engine
         static void destroy();
 
         static SDL_Renderer* getRenderer() { return renderer; }
+        static queue<int> events;
 };
 
 #endif /* ENGINE_HPP */

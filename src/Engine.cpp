@@ -2,6 +2,7 @@
 
 SDL_Window* Engine::window = NULL;
 SDL_Renderer* Engine::renderer = NULL;
+queue<int> Engine::events;
 
 void Engine::init()
 {
@@ -57,6 +58,15 @@ int Engine::handleEvents()
         {
             case SDL_QUIT:
                 result = CLOSE_GAME_EVENT;
+                break;
+
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym)
+                {
+                    case SDLK_z:
+                        events.push(PLAYER_MOVE_UP_EVENT);
+                        break;
+                }
                 break;
         }
     }

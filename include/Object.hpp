@@ -1,9 +1,10 @@
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
-#include "Vect2D.hpp"
-#include "Rect.hpp"
-#include "SpriteComponent.hpp"
+#include <Vect2D.hpp>
+#include <Rect.hpp>
+#include <SpriteComponent.hpp>
+#include <InputComponent.hpp>
 
 class Object
 {
@@ -14,9 +15,11 @@ class Object
         int acceleration;   // 0 (no acc), 1 (acceleration)
 
         SpriteComponent* spriteComponent;
+        InputComponent* inputComponent;
     
     public:
         Object(SpriteComponent*);
+        Object(SpriteComponent*, InputComponent*);
         ~Object();
         Object(Vect2D, Vect2D);
         Object(Vect2D, Vect2D, int, int);

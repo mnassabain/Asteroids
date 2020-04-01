@@ -1,10 +1,11 @@
 #include "Spaceship.hpp"
 
-Spaceship::Spaceship() : Object(new SpaceshipSpriteComponent())
+Spaceship::Spaceship() : Object(new SpaceshipSpriteComponent(), new InputComponent())
 {}
 
 void Spaceship::update()
 {
+    inputComponent->update(this);
 }
 
 int Spaceship::getScore()

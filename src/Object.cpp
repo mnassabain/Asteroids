@@ -6,6 +6,16 @@ Object::Object(SpriteComponent* s)
     speed = 0;
     acceleration = 0;
     spriteComponent = s;
+    inputComponent = NULL;
+}
+
+Object::Object(SpriteComponent* s, InputComponent* i)
+{
+    orientation = 0;
+    speed = 0;
+    acceleration = 0;
+    spriteComponent = s;
+    inputComponent = i;
 }
 
 Object::~Object()
