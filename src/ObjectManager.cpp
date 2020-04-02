@@ -4,7 +4,6 @@
 #include <Rocket.hpp>
 
 vector<Object*> ObjectManager::objects;
-
 void ObjectManager::createObject(int code, void* params)
 {
     switch(code)
@@ -15,13 +14,20 @@ void ObjectManager::createObject(int code, void* params)
             
         case OBJECT_ASTEROID:
             {
-                int asteroidSize = *(int*)params;
-                objects.push_back(new Asteroid(asteroidSize));
+            int asteroidSize = *(int*)params;
+            objects.push_back(new Asteroid(asteroidSize));
             }
             break;
 
         case OBJECT_ROCKET:
-            objects.push_back(new Rocket());
+            {
+            Spaceship* s = (Spaceship*) params;
+            Vect2D delta = 
+                Vect2D(s->getDimensions().getX()/2,s->getDimensions().getY()/2);
+            Vect2D startPos = s->getPosition() + delta;
+            int orientation = s->getOrientation();
+            objects.push_back(new Rocket(startPos, orientation));
+            }
             break;
     }
 }
@@ -37,8 +43,9 @@ void ObjectManager::clearObjects()
 
 void ObjectManager::updateObjects()
 {
+    vector<Object*>::iterator end = objects.end();
     vector<Object*>::iterator obj;
-    for(obj = objects.begin(); obj != objects.end(); obj++)
+    for(obj = objects.begin(); obj != end; obj++)
     {
         (*obj)->update();
     }

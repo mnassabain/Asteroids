@@ -1,13 +1,41 @@
-#include "Rocket.hpp"
+#include <Rocket.hpp>
 
-Rocket::Rocket() : Object(new SpriteComponent("resources/rocket2.png"))
+Rocket::Rocket(Vect2D& startPos, int orientation) 
+    : Object(new SpriteComponent("resources/rocket2.png"))
 {
     hitbox.setDimensions(4, 8);
-    hitbox.setPosition(200, 400);
-    orientation = 58;
+    hitbox.setPosition(startPos);
+    this->orientation = orientation;
 }
+
+Rocket::~Rocket()
+{}
 
 void Rocket::update()
 {
+    int speed = 5;
+    int dx, dy;
+    double alpha = (orientation % 90) * M_PI / 180;
+    if (0 <= orientation && orientation < 90)
+    {
+        dx = sin(alpha) * speed * 2;
+        dy = -cos(alpha) * speed * 2;
+    }
+    else if (90 <= orientation && orientation < 180)
+    {
+        dx = cos(alpha) * speed * 2;
+        dy = sin(alpha) * speed * 2;
+    }
+    else if (180 <= orientation && orientation < 270)
+    {
+        dx = -sin(alpha) * speed * 2;
+        dy = cos(alpha) * speed * 2;
+    }
+    else
+    {
+        dx = -cos(alpha) * speed * 2;
+        dy = -sin(alpha) * speed * 2;
+    }
 
+    setPosition(getPosition() + Vect2D(dx, dy));
 }

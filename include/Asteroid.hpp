@@ -17,6 +17,7 @@ class Asteroid : public Object
     
     public:
         Asteroid(int size);
+        ~Asteroid();
         void update();
 
         int getSize();

@@ -7,11 +7,19 @@ Spaceship::Spaceship() :
     shooting = false;
 }
 
+Spaceship::~Spaceship()
+{}
+
 void Spaceship::update()
 {
     inputComponent->update(this);
     turn();
     move();
+    if (shooting)
+    {
+        shoot();
+        shooting = false;
+    }
 }
 
 int Spaceship::getScore()
@@ -70,6 +78,12 @@ void Spaceship::startShooting()
 void Spaceship::stopShooting()
 {
     shooting = false;
+}
+
+void Spaceship::shoot()
+{
+    std::cout << "shooting" << std::endl;
+    ObjectManager::createObject(OBJECT_ROCKET, this);
 }
 
 void Spaceship::startTurning(int direction)

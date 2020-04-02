@@ -1,8 +1,9 @@
 #ifndef SPACESHIP_HPP
 #define SPACESHIP_HPP
 
-#include "Vect2D.hpp"
-#include "Object.hpp"
+#include <Vect2D.hpp>
+#include <Object.hpp>
+#include <ObjectManager.hpp>
 
 #define PLAYER_MAX_LIVES    5
 #define CLOCKWISE           1
@@ -24,6 +25,7 @@ class Spaceship : public Object
 
     public:
         Spaceship();
+        ~Spaceship();
         void update();
 
         int getScore();
@@ -39,6 +41,7 @@ class Spaceship : public Object
         void teleport(Vect2D pos);
         void startShooting();
         void stopShooting();
+        void shoot();
 };
 
 #endif /* SPACESHIP_HPP */

@@ -7,6 +7,9 @@ Asteroid::Asteroid(int size) :
     init();
 }
 
+Asteroid::~Asteroid()
+{}
+
 void Asteroid::init()
 {
     // TODO: remplacer par valeurs aléatoires, ou les passer en arg?? 

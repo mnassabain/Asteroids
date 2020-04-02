@@ -20,7 +20,6 @@ void Game::init()
     int asteroidSize = LARGE_ASTEROID;
     ObjectManager::createObject(OBJECT_SPACESHIP, NULL);
     ObjectManager::createObject(OBJECT_ASTEROID, &asteroidSize);
-    ObjectManager::createObject(OBJECT_ROCKET, NULL);
 }
 
 void Game::update()

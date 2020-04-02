@@ -1,12 +1,14 @@
 #ifndef ROCKET_HPP
 #define ROCKET_HPP
 
-#include "Object.hpp"
+#include <Vect2D.hpp>
+#include <Object.hpp>
 
 class Rocket : public Object
 {
     public:
-        Rocket();
+        Rocket(Vect2D& startPos, int orientation);
+        ~Rocket();
         void update();
 };
 
