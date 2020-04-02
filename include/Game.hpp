@@ -4,6 +4,7 @@
 #include <vector>
 #include <EventCodes.hpp>
 #include <Object.hpp>
+#include <ObjectManager.hpp>
 #include <Engine.hpp>
 #include <Asteroid.hpp>
 #include <Spaceship.hpp>
@@ -19,8 +20,6 @@ class Game
 
         int highscore;
         int level;      // savoir le niveau
-
-        vector<Object*> objects; // contenir objets triés par pos.x
 
         void startPlaying();
         void stopPlaying();

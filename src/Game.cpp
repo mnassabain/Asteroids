@@ -10,20 +10,17 @@ Game::Game()
 
 Game::~Game()
 {
-    vector<Object*>::iterator obj;
-    for(obj = objects.begin(); obj != objects.end(); obj++)
-    {
-        delete (*obj);
-    }
+    ObjectManager::clearObjects();
 }
 
 void Game::init()
 {
     running = true;
 
-    objects.push_back(new Spaceship());
-    objects.push_back(new Asteroid(LARGE_ASTEROID));
-    objects.push_back(new Rocket());
+    int asteroidSize = LARGE_ASTEROID;
+    ObjectManager::createObject(OBJECT_SPACESHIP, NULL);
+    ObjectManager::createObject(OBJECT_ASTEROID, &asteroidSize);
+    ObjectManager::createObject(OBJECT_ROCKET, NULL);
 }
 
 void Game::update()
@@ -38,21 +35,13 @@ void Game::update()
     }
 
     // update objects
-    vector<Object*>::iterator obj;
-    for(obj = objects.begin(); obj != objects.end(); obj++)
-    {
-        (*obj)->update();
-    }
+    ObjectManager::updateObjects();
 }
 
 void Game::display()
 {
     Engine::clear();
-    vector<Object*>::iterator obj;
-    for(obj = objects.begin(); obj != objects.end(); obj++)
-    {
-        (*obj)->display();
-    }
+    ObjectManager::displayObjects();    // TODO: GraphicsManager ?
     Engine::render();
 }
 
