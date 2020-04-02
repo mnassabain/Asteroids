@@ -2,40 +2,61 @@
 
 Object::Object(SpriteComponent* s)
 {
+    active = true;
     orientation = 0;
     speed = 0;
     acceleration = 0;
     spriteComponent = s;
     inputComponent = NULL;
+    physicsComponent = NULL;
 }
 
 Object::Object(SpriteComponent* s, InputComponent* i)
 {
+    active = true;
     orientation = 0;
     speed = 0;
     acceleration = 0;
     spriteComponent = s;
     inputComponent = i;
+    physicsComponent = NULL;
+}
+
+Object::Object(SpriteComponent* s, InputComponent* i, PhysicsComponent* p)
+{
+    active = true;
+    orientation = 0;
+    speed = 0;
+    acceleration = 0;
+    spriteComponent = s;
+    inputComponent = i;
+    physicsComponent = p;
 }
 
 Object::~Object()
 {
+    cout << "destructor" << endl;
     delete spriteComponent;
     delete inputComponent;
+    delete physicsComponent;
 }
 
-Object::Object(Vect2D pos, Vect2D dim) : hitbox(pos, dim)
+Object& Object::operator= (const Object &o)
 {
-    orientation = 0;
-    speed = 0;
-    acceleration = 0;
-}
+    hitbox = o.hitbox;
+    orientation = o.orientation;
+    speed = o.speed;
+    acceleration = o.acceleration;
+    active = o.active;
 
-Object::Object(Vect2D pos, Vect2D dim, int s, int o) : hitbox(pos, dim)
-{
-    speed = s;
-    orientation = o;
-    acceleration = 0;
+    delete spriteComponent;
+    spriteComponent = o.spriteComponent;
+    delete inputComponent;
+    inputComponent = o.inputComponent;
+    delete physicsComponent;
+    physicsComponent = o.physicsComponent;
+
+    return *this;
 }
 
 Rect Object::getHitbox()
@@ -101,4 +122,14 @@ int Object::getH()
 void Object::display()
 {
     spriteComponent->draw(this);
+}
+
+void Object::destroy()
+{
+    active = false;
+}
+
+bool Object::isDestroyed()
+{
+    return !active;
 }

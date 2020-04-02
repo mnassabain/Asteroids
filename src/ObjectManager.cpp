@@ -43,12 +43,28 @@ void ObjectManager::clearObjects()
 
 void ObjectManager::updateObjects()
 {
+    vector<int> markedForDelete;
+
     vector<Object*>::iterator end = objects.end();
     vector<Object*>::iterator obj;
+    int index = 0;
     for(obj = objects.begin(); obj != end; obj++)
     {
-        // if (*obj)->isDestroyed() { save next ptr; splice this elt }
-        (*obj)->update();
+        if ((*obj)->isDestroyed())
+        {
+            markedForDelete.push_back(index);
+        }
+        else
+        {
+            (*obj)->update();
+        }
+        index++;
+    }
+
+    vector<int>::iterator idx;
+    for (idx = markedForDelete.begin(); idx != markedForDelete.end(); idx++)
+    {
+        objects.erase(objects.begin() + (*idx));
     }
 }
 

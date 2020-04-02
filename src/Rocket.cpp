@@ -1,7 +1,11 @@
 #include <Rocket.hpp>
 
 Rocket::Rocket(Vect2D& startPos, int orientation) 
-    : Object(new SpriteComponent("resources/rocket2.png"))
+    : Object(
+        new SpriteComponent("resources/rocket2.png"),
+        NULL,
+        new PhysicsComponent()
+    )
 {
     hitbox.setDimensions(4, 8);
     hitbox.setPosition(startPos);
@@ -13,7 +17,9 @@ Rocket::~Rocket()
 
 void Rocket::update()
 {
-    int speed = 5;
+    physicsComponent->update(this);
+
+    int speed = 10;
     int dx, dy;
     double alpha = (orientation % 90) * M_PI / 180;
     if (0 <= orientation && orientation < 90)

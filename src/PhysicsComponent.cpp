@@ -11,3 +11,11 @@ bool PhysicsComponent::outOfBounds(Object* o)
         || (o->getY() > WORLD_HEIGHT)
         || (o->getY() + o->getH() < 0);
 }
+
+void PhysicsComponent::update(Object* o)
+{
+    if (outOfBounds(o))
+    {
+        o->destroy();
+    }
+}

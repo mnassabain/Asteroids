@@ -19,6 +19,7 @@ class SpriteComponent
     public:
         SpriteComponent(string path);
         ~SpriteComponent();
+        SpriteComponent& operator= (const SpriteComponent &s);
         void draw(Object*);
 };
 

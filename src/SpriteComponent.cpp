@@ -20,6 +20,16 @@ SpriteComponent::~SpriteComponent()
     SDL_DestroyTexture(texture);
 }
 
+SpriteComponent& SpriteComponent::operator= (const SpriteComponent &s)
+{
+    // TODO: ajouter classe ou SDL_Texture est un sigleton
+    // et réécrire cette fonction
+
+    texture = s.texture;
+
+    return *this;
+}
+
 void SpriteComponent::draw(Object* o) // TODO: add const ?
 {
     Vect2D pos = o->getPosition();

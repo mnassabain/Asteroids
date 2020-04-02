@@ -9,6 +9,7 @@
 #include <Rect.hpp>
 #include <SpriteComponent.hpp>
 #include <InputComponent.hpp>
+#include <PhysicsComponent.hpp>
 
 class Object
 {
@@ -17,16 +18,19 @@ class Object
         int orientation;    // 0 - 360
         int speed;          // 0 - 100
         int acceleration;   // 0 (no acc), 1 (acceleration)
+        bool active;        // if false, object is destroyed
 
         SpriteComponent* spriteComponent;
         InputComponent* inputComponent;
+        PhysicsComponent* physicsComponent;
     
     public:
         Object(SpriteComponent*);
         Object(SpriteComponent*, InputComponent*);
+        Object(SpriteComponent*, InputComponent*, PhysicsComponent*);
         virtual ~Object();
-        Object(Vect2D, Vect2D);
-        Object(Vect2D, Vect2D, int, int);
+
+        Object& operator= (const Object &o);
 
         Rect getHitbox();
         Vect2D getPosition();
@@ -40,6 +44,9 @@ class Object
         int getY();
         int getW();
         int getH();
+
+        void destroy();
+        bool isDestroyed();
 
         int getOrientation();
 
