@@ -36,6 +36,11 @@ class Object
         void setDimensions(int x, int y);
         void setDimensions(Vect2D dim);
 
+        int getX();
+        int getY();
+        int getW();
+        int getH();
+
         int getOrientation();
 
         virtual void update() = 0;

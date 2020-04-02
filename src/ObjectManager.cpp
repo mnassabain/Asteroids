@@ -47,6 +47,7 @@ void ObjectManager::updateObjects()
     vector<Object*>::iterator obj;
     for(obj = objects.begin(); obj != end; obj++)
     {
+        // if (*obj)->isDestroyed() { save next ptr; splice this elt }
         (*obj)->update();
     }
 }

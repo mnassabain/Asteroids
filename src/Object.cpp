@@ -78,6 +78,26 @@ void Object::setDimensions(Vect2D dim)
     hitbox.setDimensions(dim);
 }
 
+int Object::getX()
+{
+    return getPosition().getX();
+}
+
+int Object::getY()
+{
+    return getPosition().getY();
+}
+
+int Object::getW()
+{
+    return getDimensions().getX();
+}
+
+int Object::getH()
+{
+    return getDimensions().getY();
+}
+
 void Object::display()
 {
     spriteComponent->draw(this);
