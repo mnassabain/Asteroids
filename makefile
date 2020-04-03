@@ -10,7 +10,7 @@ LIBS = -L./libs/SDL2/lib -lSDL2 -lSDL2_image -Wl,-rpath=./libs/SDL2/lib
 
 .PHONY: default all clean
 
-default: $(TARGET)
+default: tmp_fix $(TARGET)
 all: default
 
 SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
@@ -24,8 +24,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@ $(INC)
-	export LD_LIBRAIRY_PATH=./libs/libpng12
 
 clean:
 	-rm -f $(OBJ_DIR)/*.o
 	-rm -f $(TARGET)
+
+tmp_fix:
+	export LD_LIBRARY_PATH=./libs/libpng12
