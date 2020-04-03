@@ -6,7 +6,7 @@ TARGET = main
 CC = g++
 CFLAGS = -g -Wall -Wextra -Werror
 INC = -I$(INC_DIR) -I./libs/SDL2/include
-LIBS = -L./libs/SDL2/lib -L./libs/libpng12 -lSDL2 -lSDL2_image -Wl,-rpath=./libs/SDL2/lib
+LIBS = -L./libs/SDL2/lib -lSDL2 -lSDL2_image -Wl,-rpath=./libs/SDL2/lib -Wl,-rpath=./libs/libpng12
 
 .PHONY: default all clean
 
