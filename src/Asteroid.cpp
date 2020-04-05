@@ -1,7 +1,8 @@
 #include "Asteroid.hpp"
 
 Asteroid::Asteroid(int size) :
-    Object(new SpriteComponent("resources/asteroid.png"))
+    Object(new SpriteComponent("resources/asteroid.png"),
+    NULL, new PhysicsComponent())
 {
     this->size = size;
     init();
@@ -34,6 +35,8 @@ void Asteroid::init()
 
 void Asteroid::update()
 {
+    physicsComponent->update(this);
+
     int dx, dy;
     double alpha = (orientation % 90) * M_PI / 180;
     if (0 <= orientation && orientation < 90)

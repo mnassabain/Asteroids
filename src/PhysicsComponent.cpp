@@ -4,6 +4,9 @@
 int PhysicsComponent::WORLD_WIDTH = SCREEN_WIDTH;
 int PhysicsComponent::WORLD_HEIGHT = SCREEN_HEIGHT;
 
+PhysicsComponent::~PhysicsComponent()
+{}
+
 bool PhysicsComponent::outOfBounds(Object* o)
 {
     return (o->getX() > WORLD_WIDTH)
@@ -16,6 +19,7 @@ void PhysicsComponent::update(Object* o)
 {
     if (outOfBounds(o))
     {
-        o->destroy();
+        // circular world
+        o->setPosition(o->getX() % WORLD_WIDTH, o->getY() % WORLD_HEIGHT);
     }
 }

@@ -82,7 +82,6 @@ void Spaceship::stopShooting()
 
 void Spaceship::shoot()
 {
-    std::cout << "shooting" << std::endl;
     ObjectManager::createObject(OBJECT_ROCKET, this);
 }
 

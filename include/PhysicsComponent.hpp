@@ -7,14 +7,15 @@ class Object;
 
 class PhysicsComponent
 {
-    private:
+    protected:
         static int WORLD_WIDTH;
         static int WORLD_HEIGHT;
 
         static bool outOfBounds(Object*);
 
     public:
-        void update(Object*);
+        virtual ~PhysicsComponent();
+        virtual void update(Object*);
 };
 
 

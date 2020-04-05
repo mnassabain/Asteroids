@@ -3,6 +3,7 @@
 
 #include <Vect2D.hpp>
 #include <Object.hpp>
+#include <RocketPhysicsComponent.hpp>
 
 class Rocket : public Object
 {
