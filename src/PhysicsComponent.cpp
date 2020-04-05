@@ -20,6 +20,7 @@ void PhysicsComponent::update(Object* o)
     if (outOfBounds(o))
     {
         // circular world
-        o->setPosition(o->getX() % WORLD_WIDTH, o->getY() % WORLD_HEIGHT);
+        o->setPosition((o->getX() + WORLD_WIDTH) % WORLD_WIDTH, 
+            (o->getY() + WORLD_HEIGHT) % WORLD_HEIGHT);
     }
 }
