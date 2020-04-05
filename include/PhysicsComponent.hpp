@@ -1,6 +1,8 @@
 #ifndef PHYSICSCOMPONENT_HPP
 #define PHYSICSCOMPONENT_HPP
 
+#include <RandomGenerator.hpp>
+#include <Vect2D.hpp>
 #include <Engine.hpp>
 
 class Object;
@@ -15,6 +17,7 @@ class PhysicsComponent
 
     public:
         virtual ~PhysicsComponent();
+        static Vect2D getRandomPosition();
         virtual void update(Object*);
 };
 

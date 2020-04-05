@@ -13,8 +13,7 @@ Asteroid::~Asteroid()
 
 void Asteroid::init()
 {
-    // TODO: remplacer par valeurs aléatoires, ou les passer en arg?? 
-    hitbox.setPosition(0, 0);
+    hitbox.setPosition(physicsComponent->getRandomPosition());
     if (size == LARGE_ASTEROID)
     {
         // TODO: remplacer par valeurs precises + macro
@@ -29,7 +28,7 @@ void Asteroid::init()
         hitbox.setDimensions(30, 30);
     }
 
-    orientation = 150;
+    orientation = RandomGenerator::generate() % 360;
     speed = 2;
 }
 

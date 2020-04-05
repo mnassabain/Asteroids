@@ -1,7 +1,8 @@
 #ifndef ASTEROID_H
 #define ASTEROID_H
 
-#include "Object.hpp"
+#include <Object.hpp>
+#include <RandomGenerator.hpp>
 
 #define LARGE_ASTEROID      3
 #define MEDIUM_ASTEROID     2

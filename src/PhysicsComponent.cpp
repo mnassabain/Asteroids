@@ -24,3 +24,9 @@ void PhysicsComponent::update(Object* o)
             (o->getY() + WORLD_HEIGHT) % WORLD_HEIGHT);
     }
 }
+
+Vect2D PhysicsComponent::getRandomPosition()
+{
+    return Vect2D(RandomGenerator::generate() % WORLD_WIDTH,
+        RandomGenerator::generate() % WORLD_HEIGHT);
+}

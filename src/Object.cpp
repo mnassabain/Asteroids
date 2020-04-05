@@ -35,7 +35,6 @@ Object::Object(SpriteComponent* s, InputComponent* i, PhysicsComponent* p)
 
 Object::~Object()
 {
-    cout << "destructor" << endl;
     delete spriteComponent;
     delete inputComponent;
     delete physicsComponent;
