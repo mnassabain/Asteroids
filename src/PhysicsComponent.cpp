@@ -41,6 +41,12 @@ void PhysicsComponent::move(Object* o)
     }
 
     o->setPosition(o->getPosition() + Vect2D(dx, dy));
+
+    // move collisionBox
+    Rect collisionBox = o->getCollisionComponent()->getHitbox();
+    collisionBox.x(collisionBox.x() + dx);
+    collisionBox.y(collisionBox.y() + dy);
+    o->getCollisionComponent()->setHitbox(collisionBox);
 }
 
 void PhysicsComponent::update(Object* o)
@@ -52,6 +58,11 @@ void PhysicsComponent::update(Object* o)
         // circular world
         o->setPosition((o->getX() + WORLD_WIDTH) % WORLD_WIDTH, 
             (o->getY() + WORLD_HEIGHT) % WORLD_HEIGHT);
+
+        Rect collisionBox = o->getCollisionComponent()->getHitbox();
+        collisionBox.x((collisionBox.x() + WORLD_WIDTH) % WORLD_WIDTH);
+        collisionBox.y((collisionBox.y() + WORLD_HEIGHT) % WORLD_HEIGHT);
+        o->getCollisionComponent()->setHitbox(collisionBox);
     }
 }
 

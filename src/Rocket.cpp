@@ -28,4 +28,5 @@ Rocket::~Rocket()
 void Rocket::update()
 {
     physicsComponent->update(this);
+    collisionComponent->update(this);
 }

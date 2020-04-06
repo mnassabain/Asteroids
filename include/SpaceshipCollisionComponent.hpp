@@ -8,6 +8,8 @@ class SpaceshipCollisionComponent : public CollisionComponent
     public:
         SpaceshipCollisionComponent();
         SpaceshipCollisionComponent(Rect&);
+
+        void update(Object*);
 };
 
 #endif /* SPACESHIPCOLLISIONCOMPONENT_HPP */

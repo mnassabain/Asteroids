@@ -24,6 +24,7 @@ void Spaceship::update()
 {
     inputComponent->update(this);
     physicsComponent->update(this);
+    collisionComponent->update(this);
     if (shooting)
     {
         shoot();

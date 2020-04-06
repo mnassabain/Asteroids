@@ -43,6 +43,7 @@ void Asteroid::init()
 void Asteroid::update()
 {
     physicsComponent->update(this);
+    collisionComponent->update(this);
 }
 
 int Asteroid::getSize()

@@ -3,6 +3,8 @@
 
 #include <Rect.hpp>
 
+#define NO_COLLISION                0
+
 #define COLLISION_ID_SPACESHIP      0b1
 #define COLLISION_ID_ASTEROID       0b10
 #define COLLISION_ID_ROCKET         0b100
@@ -33,6 +35,8 @@ class CollisionComponent
 
         bool isCollidingWith(Object*);
         int getColliding();
+
+        virtual void update(Object*) {}
 };
 
 #endif /* COLLISIONCOMPONENT_HPP */
