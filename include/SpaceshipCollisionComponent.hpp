@@ -7,6 +7,7 @@ class SpaceshipCollisionComponent : public CollisionComponent
 {
     public:
         SpaceshipCollisionComponent();
+        SpaceshipCollisionComponent(Rect&);
 };
 
 #endif /* SPACESHIPCOLLISIONCOMPONENT_HPP */

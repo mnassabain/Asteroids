@@ -7,6 +7,7 @@ class AsteroidCollisionComponent : public CollisionComponent
 {
     public:
         AsteroidCollisionComponent();
+        AsteroidCollisionComponent(Rect&);
 };
 
 #endif /* ASTEROIDCOLLISIONCOMPONENT_HPP */

@@ -7,6 +7,7 @@ class RocketCollisionComponent : public CollisionComponent
 {
     public:
         RocketCollisionComponent();
+        RocketCollisionComponent(Rect&);
 };
 
 #endif /* ROCKETCOLLISIONCOMPONENT_HPP */

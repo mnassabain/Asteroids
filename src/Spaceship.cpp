@@ -5,8 +5,16 @@ Spaceship::Spaceship() :
         new PhysicsComponent(), new SpaceshipCollisionComponent()
     )
 {
-    setDimensions(50, 75);
     shooting = false;
+    setDimensions(50, 75);
+
+    Rect colliderBox(
+        hitbox.x(),
+        hitbox.y(),
+        hitbox.w(),
+        hitbox.h()
+    );
+    collisionComponent->setHitbox(colliderBox);
 }
 
 Spaceship::~Spaceship()

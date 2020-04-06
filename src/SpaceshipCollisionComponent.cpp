@@ -5,3 +5,10 @@ SpaceshipCollisionComponent::SpaceshipCollisionComponent()
     mask = COLLISION_MASK_SPACESHIP;
     collisionId = COLLISION_ID_SPACESHIP;
 }
+
+SpaceshipCollisionComponent::SpaceshipCollisionComponent(Rect& h) :
+    CollisionComponent(h)
+{
+    mask = COLLISION_MASK_SPACESHIP;
+    collisionId = COLLISION_ID_SPACESHIP;
+}

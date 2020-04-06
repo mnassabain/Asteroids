@@ -29,6 +29,7 @@ class CollisionComponent
         int getCollisionId();
         int getMask();
         Rect getHitbox();
+        void setHitbox(Rect&);
 
         bool isCollidingWith(Object*);
         int getColliding();

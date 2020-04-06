@@ -27,6 +27,14 @@ void Asteroid::init()
     {
         hitbox.setDimensions(30, 30);
     }
+    
+    Rect colliderBox(
+        hitbox.x(),
+        hitbox.y(),
+        hitbox.w(),
+        hitbox.h()
+    );
+    collisionComponent->setHitbox(colliderBox);
 
     orientation = RandomGenerator::generate() % 360;
     speed = 2;

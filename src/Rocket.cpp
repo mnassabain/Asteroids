@@ -11,6 +11,14 @@ Rocket::Rocket(Vect2D& startPos, int orientation)
     hitbox.setDimensions(4, 8);
     hitbox.setPosition(startPos);
     this->orientation = orientation;
+
+    Rect colliderBox(
+        hitbox.x(),
+        hitbox.y(),
+        hitbox.w(),
+        hitbox.h()
+    );
+    collisionComponent->setHitbox(colliderBox);
 }
 
 Rocket::~Rocket()

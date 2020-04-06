@@ -27,6 +27,11 @@ Rect CollisionComponent::getHitbox()
     return hitbox;
 }
 
+void CollisionComponent::setHitbox(Rect& h)
+{
+    hitbox = h;
+}
+
 bool CollisionComponent::isCollidingWith(Object* o)
 {
     bool result = false;
