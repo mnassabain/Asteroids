@@ -1,7 +1,9 @@
 #include "Spaceship.hpp"
 
 Spaceship::Spaceship() : 
-    Object(new SpriteComponent("resources/player.png"), new InputComponent())
+    Object(new SpriteComponent("resources/player.png"), new InputComponent(),
+        new PhysicsComponent(), new SpaceshipCollisionComponent()
+    )
 {
     setDimensions(50, 75);
     shooting = false;

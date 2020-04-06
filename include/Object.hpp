@@ -10,6 +10,7 @@
 #include <SpriteComponent.hpp>
 #include <InputComponent.hpp>
 #include <PhysicsComponent.hpp>
+#include <CollisionComponent.hpp>
 
 class Object
 {
@@ -23,11 +24,14 @@ class Object
         SpriteComponent* spriteComponent;
         InputComponent* inputComponent;
         PhysicsComponent* physicsComponent;
+        CollisionComponent* collisionComponent;
     
     public:
         Object(SpriteComponent*);
         Object(SpriteComponent*, InputComponent*);
         Object(SpriteComponent*, InputComponent*, PhysicsComponent*);
+        Object(SpriteComponent*, InputComponent*, PhysicsComponent*,
+            CollisionComponent*);
         virtual ~Object();
 
         Object& operator= (const Object &o);
@@ -49,6 +53,9 @@ class Object
         bool isDestroyed();
 
         int getOrientation();
+
+        CollisionComponent* getCollisionComponent();
+        bool collidingWith(Object*);
 
         virtual void update() = 0;
         void display();

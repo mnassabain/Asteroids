@@ -18,7 +18,7 @@ Vect2D::Vect2D(const Vect2D &v)
     y = v.y;
 }
 
-int Vect2D::getX()
+int Vect2D::getX() const
 {
     return x;
 }
@@ -28,7 +28,7 @@ void Vect2D::setX(int x)
     this->x = x;
 }
 
-int Vect2D::getY()
+int Vect2D::getY() const
 {
     return y;
 }

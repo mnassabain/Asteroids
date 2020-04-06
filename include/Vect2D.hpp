@@ -12,9 +12,9 @@ class Vect2D
         Vect2D(int x, int y);
         Vect2D(const Vect2D &v);
 
-        int getX();
+        int getX() const;
         void setX(int x);
-        int getY();
+        int getY() const;
         void setY(int y);
 
         Vect2D operator+ (Vect2D const &vector);
