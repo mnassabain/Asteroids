@@ -11,6 +11,7 @@ Rocket::Rocket(Vect2D& startPos, int orientation)
     hitbox.setDimensions(4, 8);
     hitbox.setPosition(startPos);
     this->orientation = orientation;
+    speed = 10;
 
     Rect colliderBox(
         hitbox.x(),
@@ -27,30 +28,4 @@ Rocket::~Rocket()
 void Rocket::update()
 {
     physicsComponent->update(this);
-
-    int speed = 10;
-    int dx, dy;
-    double alpha = (orientation % 90) * M_PI / 180;
-    if (0 <= orientation && orientation < 90)
-    {
-        dx = sin(alpha) * speed * 2;
-        dy = -cos(alpha) * speed * 2;
-    }
-    else if (90 <= orientation && orientation < 180)
-    {
-        dx = cos(alpha) * speed * 2;
-        dy = sin(alpha) * speed * 2;
-    }
-    else if (180 <= orientation && orientation < 270)
-    {
-        dx = -sin(alpha) * speed * 2;
-        dy = cos(alpha) * speed * 2;
-    }
-    else
-    {
-        dx = -cos(alpha) * speed * 2;
-        dy = -sin(alpha) * speed * 2;
-    }
-
-    setPosition(getPosition() + Vect2D(dx, dy));
 }

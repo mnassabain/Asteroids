@@ -84,6 +84,26 @@ int Object::getOrientation()
     return orientation;
 }
 
+void Object::setOrientation(int o)
+{
+    orientation = o;
+}
+
+int Object::getSpeed()
+{
+    return speed;
+}
+
+void Object::setSpeed(int s)
+{
+    speed = s;
+}
+
+int Object::getAcceleration()
+{
+    return acceleration;
+}
+
 Vect2D Object::getPosition()
 {
     return hitbox.getPosition();

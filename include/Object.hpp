@@ -44,6 +44,12 @@ class Object
         void setDimensions(int x, int y);
         void setDimensions(Vect2D dim);
 
+        int getOrientation();
+        void setOrientation(int);
+        int getSpeed();
+        void setSpeed(int);
+        int getAcceleration();
+
         int getX();
         int getY();
         int getW();
@@ -51,8 +57,6 @@ class Object
 
         void destroy();
         bool isDestroyed();
-
-        int getOrientation();
 
         CollisionComponent* getCollisionComponent();
         bool collidingWith(Object*);

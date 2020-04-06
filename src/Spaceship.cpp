@@ -2,7 +2,7 @@
 
 Spaceship::Spaceship() : 
     Object(new SpriteComponent("resources/player.png"), new InputComponent(),
-        new PhysicsComponent(), new SpaceshipCollisionComponent()
+        new SpaceshipPhysicsComponent(), new SpaceshipCollisionComponent()
     )
 {
     shooting = false;
@@ -24,8 +24,6 @@ void Spaceship::update()
 {
     inputComponent->update(this);
     physicsComponent->update(this);
-    turn();
-    move();
     if (shooting)
     {
         shoot();
@@ -106,51 +104,7 @@ void Spaceship::stopTurning()
     turning = 0;
 }
 
-void Spaceship::turn()
+int Spaceship::isTurning()
 {
-    if (turning == CLOCKWISE)
-    {
-        orientation = (orientation + 360 + 5) % 360;
-    }
-    else if (turning == COUNTERCLOCKWISE)
-    {
-        orientation = (orientation + 360 - 5) % 360;
-    }
-}
-
-void Spaceship::move()
-{
-    if (acceleration == 0)
-    {
-        speed == 0 ? 0 : speed--;
-    }
-    else
-    {
-        speed == MAX_SPEED ? speed : speed++;
-    }
-
-    int dx, dy;
-    double alpha = (orientation % 90) * M_PI / 180;
-    if (0 <= orientation && orientation < 90)
-    {
-        dx = sin(alpha) * speed * 2;
-        dy = -cos(alpha) * speed * 2;
-    }
-    else if (90 <= orientation && orientation < 180)
-    {
-        dx = cos(alpha) * speed * 2;
-        dy = sin(alpha) * speed * 2;
-    }
-    else if (180 <= orientation && orientation < 270)
-    {
-        dx = -sin(alpha) * speed * 2;
-        dy = cos(alpha) * speed * 2;
-    }
-    else
-    {
-        dx = -cos(alpha) * speed * 2;
-        dy = -sin(alpha) * speed * 2;
-    }
-
-    setPosition(getPosition() + Vect2D(dx, dy));
+    return turning;
 }

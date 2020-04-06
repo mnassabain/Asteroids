@@ -43,31 +43,6 @@ void Asteroid::init()
 void Asteroid::update()
 {
     physicsComponent->update(this);
-
-    int dx, dy;
-    double alpha = (orientation % 90) * M_PI / 180;
-    if (0 <= orientation && orientation < 90)
-    {
-        dx = sin(alpha) * speed * 1.7;
-        dy = -cos(alpha) * speed * 1.7;
-    }
-    else if (90 <= orientation && orientation < 180)
-    {
-        dx = cos(alpha) * speed * 1.7;
-        dy = sin(alpha) * speed * 1.7;
-    }
-    else if (180 <= orientation && orientation < 270)
-    {
-        dx = -sin(alpha) * speed * 1.7;
-        dy = cos(alpha) * speed * 1.7;
-    }
-    else
-    {
-        dx = -cos(alpha) * speed * 1.7;
-        dy = -sin(alpha) * speed * 1.7;
-    }
-
-    setPosition(getPosition() + Vect2D(dx, dy));
 }
 
 int Asteroid::getSize()

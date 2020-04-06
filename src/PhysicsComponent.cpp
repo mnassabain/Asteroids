@@ -15,8 +15,38 @@ bool PhysicsComponent::outOfBounds(Object* o)
         || (o->getY() + o->getH() < 0);
 }
 
+void PhysicsComponent::move(Object* o)
+{
+    int dx, dy;
+    double alpha = (o->getOrientation() % 90) * M_PI / 180;
+    if (0 <= o->getOrientation() && o->getOrientation() < 90)
+    {
+        dx = sin(alpha) * o->getSpeed() * 2;
+        dy = -cos(alpha) * o->getSpeed() * 2;
+    }
+    else if (90 <= o->getOrientation() && o->getOrientation() < 180)
+    {
+        dx = cos(alpha) * o->getSpeed() * 2;
+        dy = sin(alpha) * o->getSpeed() * 2;
+    }
+    else if (180 <= o->getOrientation() && o->getOrientation() < 270)
+    {
+        dx = -sin(alpha) * o->getSpeed() * 2;
+        dy = cos(alpha) * o->getSpeed() * 2;
+    }
+    else
+    {
+        dx = -cos(alpha) * o->getSpeed() * 2;
+        dy = -sin(alpha) * o->getSpeed() * 2;
+    }
+
+    o->setPosition(o->getPosition() + Vect2D(dx, dy));
+}
+
 void PhysicsComponent::update(Object* o)
 {
+    move(o);
+
     if (outOfBounds(o))
     {
         // circular world
