@@ -11,13 +11,26 @@ class Rect
 
     public:
         Rect() {}
+        Rect(const Rect& r);
         Rect(Vect2D pos, Vect2D dim);
         Rect(int x, int y, int w, int h);
+
+        Rect& operator= (const Rect&);
 
         Vect2D getPosition();
         void setPosition(Vect2D pos);
         void setPosition(int x, int y);
-        
+
+        int x() const;
+        int y() const;
+        int w() const;
+        int h() const;
+
+        void x(int);
+        void y(int);
+        void w(int);
+        void h(int);
+
         Vect2D getDimensions();
         void setDimensions(Vect2D dim);
         void setDimensions(int w, int h);

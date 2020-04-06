@@ -9,6 +9,7 @@ Object::Object(SpriteComponent* s)
     spriteComponent = s;
     inputComponent = NULL;
     physicsComponent = NULL;
+    collisionComponent = NULL;
 }
 
 Object::Object(SpriteComponent* s, InputComponent* i)
@@ -20,6 +21,7 @@ Object::Object(SpriteComponent* s, InputComponent* i)
     spriteComponent = s;
     inputComponent = i;
     physicsComponent = NULL;
+    collisionComponent = NULL;
 }
 
 Object::Object(SpriteComponent* s, InputComponent* i, PhysicsComponent* p)
@@ -31,6 +33,20 @@ Object::Object(SpriteComponent* s, InputComponent* i, PhysicsComponent* p)
     spriteComponent = s;
     inputComponent = i;
     physicsComponent = p;
+    collisionComponent = NULL;
+}
+
+Object::Object(SpriteComponent* s, InputComponent* i, PhysicsComponent* p, 
+    CollisionComponent* c)
+{
+    active = true;
+    orientation = 0;
+    speed = 0;
+    acceleration = 0;
+    spriteComponent = s;
+    inputComponent = i;
+    physicsComponent = p;
+    collisionComponent = c;
 }
 
 Object::~Object()
@@ -131,4 +147,14 @@ void Object::destroy()
 bool Object::isDestroyed()
 {
     return !active;
+}
+
+bool Object::collidingWith(Object* o)
+{
+    return collisionComponent->isCollidingWith(o);
+}
+
+CollisionComponent* Object::getCollisionComponent()
+{
+    return collisionComponent;
 }

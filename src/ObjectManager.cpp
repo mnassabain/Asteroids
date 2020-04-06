@@ -45,6 +45,7 @@ void ObjectManager::updateObjects()
 {
     vector<int> markedForDelete;
 
+    int size = objects.size();
     vector<Object*>::iterator end = objects.end();
     vector<Object*>::iterator obj;
     int index = 0;
@@ -56,6 +57,16 @@ void ObjectManager::updateObjects()
         }
         else
         {
+            // check collisions
+            int counter = 1;
+            while(counter < size - index - 1
+                && (*obj)->collidingWith(*(obj + counter))
+            )
+            {
+                counter++;
+            }
+
+            // update
             (*obj)->update();
         }
         index++;

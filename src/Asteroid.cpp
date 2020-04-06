@@ -2,7 +2,7 @@
 
 Asteroid::Asteroid(int size) :
     Object(new SpriteComponent("resources/asteroid.png"),
-    NULL, new PhysicsComponent())
+    NULL, new PhysicsComponent(), new AsteroidCollisionComponent())
 {
     this->size = size;
     init();

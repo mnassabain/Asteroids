@@ -4,7 +4,8 @@ Rocket::Rocket(Vect2D& startPos, int orientation)
     : Object(
         new SpriteComponent("resources/rocket2.png"),
         NULL,
-        new RocketPhysicsComponent()
+        new RocketPhysicsComponent(),
+        new RocketCollisionComponent()
     )
 {
     hitbox.setDimensions(4, 8);

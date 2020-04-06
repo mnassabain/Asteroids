@@ -6,6 +6,7 @@
 #define OBJECT_ROCKET       3
 
 #include <vector>
+#include <CollisionComponent.hpp>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ class ObjectManager
 {
     private:
         static vector<Object*> objects;
+        static bool collision(Object*, Object*);
 
     public:
         static void createObject(int, void*);

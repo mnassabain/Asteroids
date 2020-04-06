@@ -3,6 +3,7 @@
 
 #include <Object.hpp>
 #include <RandomGenerator.hpp>
+#include <AsteroidCollisionComponent.hpp>
 
 #define LARGE_ASTEROID      3
 #define MEDIUM_ASTEROID     2
