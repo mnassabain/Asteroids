@@ -2,7 +2,7 @@
 
 Spaceship::Spaceship() : 
     Object(new SpriteComponent("resources/player.png"), new InputComponent(),
-        NULL, new SpaceshipCollisionComponent()
+        new PhysicsComponent(), new SpaceshipCollisionComponent()
     )
 {
     setDimensions(50, 75);
@@ -15,6 +15,7 @@ Spaceship::~Spaceship()
 void Spaceship::update()
 {
     inputComponent->update(this);
+    physicsComponent->update(this);
     turn();
     move();
     if (shooting)
