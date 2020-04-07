@@ -27,9 +27,14 @@ void Spaceship::update()
     collisionComponent->update(this);
     if (shooting)
     {
-        shoot();
-        shooting = false;
-    }
+        if (reload == 0)
+        {
+            shoot();
+            reload = RELOAD_FRAMES;
+        }
+        else
+            reload--;
+    }   
 }
 
 int Spaceship::getScore()

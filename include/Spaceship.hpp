@@ -20,6 +20,9 @@ class Spaceship : public Object
         int turning;    // 0: no turning, -1: ccw, 1: cw
         bool shooting;  // y/n
 
+        int reload;     // reload frames
+        static const int RELOAD_FRAMES = 8; // x frames to reload
+
     public:
         static const int MAX_LIVES = PLAYER_MAX_LIVES;
         static const int MAX_SPEED = 3;
