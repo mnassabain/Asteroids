@@ -12,8 +12,26 @@ CollisionComponent::CollisionComponent()
 CollisionComponent::CollisionComponent(Rect& h) : hitbox(h)
 {}
 
+CollisionComponent::CollisionComponent(const CollisionComponent& c)
+{
+    collisionId = c.collisionId;
+    mask = c.mask;
+    hitbox = c.hitbox;
+    colliding = c.colliding;
+}
+
 CollisionComponent::~CollisionComponent()
 {}
+
+CollisionComponent& CollisionComponent::operator=(const CollisionComponent& c)
+{
+    collisionId = c.collisionId;
+    mask = c.mask;
+    hitbox = c.hitbox;
+    colliding = c.colliding;
+
+    return *this;
+}
 
 int CollisionComponent::getCollisionId()
 {

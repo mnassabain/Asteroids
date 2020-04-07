@@ -49,11 +49,24 @@ Object::Object(SpriteComponent* s, InputComponent* i, PhysicsComponent* p,
     collisionComponent = c;
 }
 
+Object::Object(Object& o)
+{
+    active = true;
+    orientation = o.getOrientation();
+    speed = 0;
+    acceleration = 0;
+    // spriteComponent = s;
+    // inputComponent = i;
+    // physicsComponent = p;
+    // collisionComponent = c;
+}
+
 Object::~Object()
 {
     delete spriteComponent;
     delete inputComponent;
     delete physicsComponent;
+    delete collisionComponent;
 }
 
 Object& Object::operator= (const Object &o)
@@ -70,6 +83,8 @@ Object& Object::operator= (const Object &o)
     inputComponent = o.inputComponent;
     delete physicsComponent;
     physicsComponent = o.physicsComponent;
+    delete collisionComponent;
+    collisionComponent = o.collisionComponent;
 
     return *this;
 }

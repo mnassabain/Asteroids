@@ -32,6 +32,7 @@ class Object
         Object(SpriteComponent*, InputComponent*, PhysicsComponent*);
         Object(SpriteComponent*, InputComponent*, PhysicsComponent*,
             CollisionComponent*);
+        Object(Object&);
         virtual ~Object();
 
         Object& operator= (const Object &o);

@@ -22,6 +22,8 @@ class PhysicsComponent
         void move(Object*);
 
     public:
+        PhysicsComponent() {}
+        PhysicsComponent(const PhysicsComponent&) {}
         virtual ~PhysicsComponent();
         static Vect2D getRandomPosition();
         virtual void update(Object*);

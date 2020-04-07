@@ -28,6 +28,8 @@ class CollisionComponent
     public:
         CollisionComponent();
         CollisionComponent(Rect&);
+        CollisionComponent(const CollisionComponent&);
+        CollisionComponent& operator=(const CollisionComponent&); 
         virtual ~CollisionComponent();
         int getCollisionId();
         int getMask();
