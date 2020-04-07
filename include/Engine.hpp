@@ -30,6 +30,7 @@ class Engine
         static void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*, int);
         static void render();
         static int handleEvents();
+        static void manageFrames();
         static void destroy();
 
         static SDL_Renderer* getRenderer() { return renderer; }

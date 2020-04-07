@@ -51,8 +51,11 @@ void Engine::draw(SDL_Texture* texture, SDL_Rect* src, SDL_Rect* dest, int angle
 void Engine::render()
 {
     SDL_RenderPresent(renderer);
+}
 
-    SDL_Delay(16);
+void Engine::manageFrames()
+{
+    SDL_Delay(16); // 1/60 * 1000 = 16ms (60fps)
 }
 
 void Engine::destroy() // TODO: move to destructor ?

@@ -45,6 +45,7 @@ void Game::display()
     Engine::clear();
     ObjectManager::displayObjects();    // TODO: GraphicsManager ?
     Engine::render();
+    Engine::manageFrames();
 }
 
 bool Game::isRunning()
