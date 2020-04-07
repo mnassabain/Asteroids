@@ -12,6 +12,9 @@ CollisionComponent::CollisionComponent()
 CollisionComponent::CollisionComponent(Rect& h) : hitbox(h)
 {}
 
+CollisionComponent::~CollisionComponent()
+{}
+
 int CollisionComponent::getCollisionId()
 {
     return collisionId;

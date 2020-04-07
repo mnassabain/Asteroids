@@ -28,6 +28,7 @@ class CollisionComponent
     public:
         CollisionComponent();
         CollisionComponent(Rect&);
+        virtual ~CollisionComponent();
         int getCollisionId();
         int getMask();
         Rect getHitbox();
