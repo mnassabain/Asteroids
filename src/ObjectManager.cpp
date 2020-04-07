@@ -59,10 +59,9 @@ void ObjectManager::updateObjects()
         {
             // check collisions
             int counter = 1;
-            while(counter < size - index - 1
-                && (*obj)->collidingWith(*(obj + counter))
-            )
+            while(counter < size - index)
             {
+                (*obj)->collidingWith(*(obj + counter));
                 counter++;
             }
 
@@ -80,7 +79,7 @@ void ObjectManager::updateObjects()
     }
 
     sort(objects.begin(), objects.end(),
-        [](Object* o1, Object* o2) -> bool { return o1->getX() < o2->getY(); }
+        [](Object* o1, Object* o2) -> bool { return o1->getX() < o2->getX(); }
     );
 }
 

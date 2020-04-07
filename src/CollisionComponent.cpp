@@ -61,10 +61,9 @@ bool CollisionComponent::isCollidingWith(Object* o)
 
     // check masks
     if (mask & cc2->getCollisionId())
-    {
+    {   
         // AABB
         Rect hitbox2 = cc2->getHitbox();
-
         if (hitbox.x() < hitbox2.x() + hitbox2.w() &&
             hitbox.x() + hitbox.w() > hitbox2.x() &&
             hitbox.y() < hitbox2.y() + hitbox2.h() &&
