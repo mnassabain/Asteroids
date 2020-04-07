@@ -6,6 +6,7 @@
 #define OBJECT_ROCKET       3
 
 #include <vector>
+#include <algorithm>
 #include <CollisionComponent.hpp>
 
 using namespace std;

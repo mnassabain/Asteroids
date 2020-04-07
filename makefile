@@ -3,7 +3,7 @@ OBJ_DIR = bin
 INC_DIR = include
 
 TARGET = main
-CC = g++
+CC = g++ -std=c++11
 CFLAGS = -g -Wall -Wextra -Werror
 INC = -I$(INC_DIR) -I./libs/SDL2/include
 LIBS = -L./libs/SDL2/lib -lSDL2 -lSDL2_image -Wl,-rpath=./libs/SDL2/lib

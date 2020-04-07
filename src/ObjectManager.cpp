@@ -72,11 +72,16 @@ void ObjectManager::updateObjects()
         index++;
     }
 
-    vector<int>::iterator idx;
-    for (idx = markedForDelete.begin(); idx != markedForDelete.end(); idx++)
+    vector<int>::reverse_iterator idx;
+    for (idx = markedForDelete.rbegin(); idx != markedForDelete.rend(); idx++)
     {
+        delete *(objects.begin() + (*idx));
         objects.erase(objects.begin() + (*idx));
     }
+
+    sort(objects.begin(), objects.end(),
+        [](Object* o1, Object* o2) -> bool { return o1->getX() < o2->getY(); }
+    );
 }
 
 void ObjectManager::displayObjects()
