@@ -6,6 +6,7 @@
 #include <ObjectManager.hpp>
 #include <SpaceshipCollisionComponent.hpp>
 #include <SpaceshipPhysicsComponent.hpp>
+#include <SpaceshipSpriteComponent.hpp>
 
 #define PLAYER_MAX_LIVES    5
 #define CLOCKWISE           1

@@ -28,6 +28,8 @@ void Engine::init()
         std::cout << "error: "<< std::endl;
         exit(1);
     }
+
+    GraphicsManager::init();
 }
 
 void Engine::clear()
@@ -55,6 +57,7 @@ void Engine::render()
 
 void Engine::destroy() // TODO: move to destructor ?
 {
+    GraphicsManager::destroy();
     IMG_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

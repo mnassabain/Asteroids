@@ -5,6 +5,7 @@
 #include <Object.hpp>
 #include <RocketPhysicsComponent.hpp>
 #include <RocketCollisionComponent.hpp>
+#include <RocketSpriteComponent.hpp>
 
 class Rocket : public Object
 {

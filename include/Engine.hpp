@@ -7,6 +7,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include <GraphicsManager.hpp>
 #include <EventManager.hpp>
 
 #define SCREEN_WIDTH    1080

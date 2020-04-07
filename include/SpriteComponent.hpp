@@ -13,13 +13,11 @@ class Object;
 
 class SpriteComponent
 {
-    private:
+    protected:
         SDL_Texture * texture; // TODO: remplacer par Resource
     
     public:
-        SpriteComponent(string path);
-        ~SpriteComponent();
-        SpriteComponent& operator= (const SpriteComponent &s);
+        SpriteComponent();
         void draw(Object*);
 };
 

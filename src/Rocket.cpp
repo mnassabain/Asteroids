@@ -2,7 +2,7 @@
 
 Rocket::Rocket(Vect2D& startPos, int orientation) 
     : Object(
-        new SpriteComponent("resources/rocket2.png"),
+        new RocketSpriteComponent(),
         NULL,
         new RocketPhysicsComponent(),
         new RocketCollisionComponent()

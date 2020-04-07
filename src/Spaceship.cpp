@@ -1,7 +1,7 @@
 #include "Spaceship.hpp"
 
 Spaceship::Spaceship() : 
-    Object(new SpriteComponent("resources/player.png"), new InputComponent(),
+    Object(new SpaceshipSpriteComponent(), new InputComponent(),
         new SpaceshipPhysicsComponent(), new SpaceshipCollisionComponent()
     )
 {
