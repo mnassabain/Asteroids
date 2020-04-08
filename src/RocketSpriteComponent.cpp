@@ -2,5 +2,5 @@
 
 RocketSpriteComponent::RocketSpriteComponent()
 {
-    texture = GraphicsManager::getRocketTexture();
+    texture = Engine::getRocketTexture();
 }

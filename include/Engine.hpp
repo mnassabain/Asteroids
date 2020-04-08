@@ -10,17 +10,12 @@
 #include <GraphicsManager.hpp>
 #include <EventManager.hpp>
 
-#define SCREEN_WIDTH    1080
-#define SCREEN_HEIGHT   720
-
 using namespace std;
 
 class Engine
 {
     private:
-        static SDL_Window* window;
-        static SDL_Renderer* renderer;
-
+        static GraphicsManager graphicsManager;
         static EventManager eventManager;
 
     public:
@@ -29,13 +24,15 @@ class Engine
         static void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*);
         static void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*, int);
         static void render();
-        static int handleEvents();
         static void manageFrames();
+        static int handleEvents();
         static void destroy();
 
-        static SDL_Renderer* getRenderer() { return renderer; }
-
         static Event pollEvent();
+
+        static SDL_Texture* getSpaceshipTexture() { return graphicsManager.getSpaceshipTexture(); }
+        static SDL_Texture* getAsteroidTexture() { return graphicsManager.getAsteroidTexture(); }
+        static SDL_Texture* getRocketTexture() { return graphicsManager.getRocketTexture(); }
 };
 
 #endif /* ENGINE_HPP */

@@ -1,29 +1,40 @@
 #ifndef GRAPHICSMANAGER_HPP
 #define GRAPHICSMANAGER_HPP
 
+#include <iostream>
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <Engine.hpp>
 
 using namespace std;
+
+#define SCREEN_WIDTH    1080
+#define SCREEN_HEIGHT   720
 
 class GraphicsManager
 {
     private:
-        static SDL_Texture* spaceshipTexture;
-        static SDL_Texture* asteroidTexture;
-        static SDL_Texture* rocketTexture;
+        SDL_Window* window;
+        SDL_Renderer* renderer;
+    
+        SDL_Texture* spaceshipTexture;
+        SDL_Texture* asteroidTexture;
+        SDL_Texture* rocketTexture;
 
-        static SDL_Texture* getTextureFromPath(string path);
+        SDL_Texture* getTextureFromPath(string path);
     
     public:
-        static void init();
-        static void destroy();
+        void init();
+        void destroy();
 
-        static SDL_Texture* getSpaceshipTexture();
-        static SDL_Texture* getAsteroidTexture();
-        static SDL_Texture* getRocketTexture();
+        SDL_Texture* getSpaceshipTexture();
+        SDL_Texture* getAsteroidTexture();
+        SDL_Texture* getRocketTexture();
+
+        void clearScreen();
+        void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*);
+        void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*, int);
+        void render();
 };
 
 #endif /* GRAPHICSMANAGER_HPP */
