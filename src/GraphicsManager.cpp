@@ -86,3 +86,10 @@ void GraphicsManager::render()
 {
     SDL_RenderPresent(renderer);
 }
+
+void GraphicsManager::drawRect(const Rect& r)
+{
+    SDL_Rect rect = { r.x(), r.y(), r.w(), r.h() };
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderDrawRect(renderer, &rect);
+}

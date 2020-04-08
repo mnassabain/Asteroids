@@ -28,6 +28,8 @@ class Engine
         static int handleEvents();
         static void destroy();
 
+        static void drawRect(const Rect&);
+
         static Event pollEvent();
 
         static SDL_Texture* getSpaceshipTexture() { return graphicsManager.getSpaceshipTexture(); }

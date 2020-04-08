@@ -168,6 +168,7 @@ int Object::getH()
 void Object::display()
 {
     spriteComponent->draw(this);
+    // collisionComponent->draw(); // HERE: uncomment to display colliderBox
 }
 
 void Object::destroy()

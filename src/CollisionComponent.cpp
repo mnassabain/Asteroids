@@ -88,3 +88,8 @@ int CollisionComponent::getColliding()
 {
     return colliding;
 }
+
+void CollisionComponent::draw()
+{
+    Engine::drawRect(hitbox);
+}

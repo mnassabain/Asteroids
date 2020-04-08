@@ -2,6 +2,7 @@
 #define COLLISIONCOMPONENT_HPP
 
 #include <Rect.hpp>
+#include <Engine.hpp>
 
 #define NO_COLLISION                0
 
@@ -40,6 +41,8 @@ class CollisionComponent
         int getColliding();
 
         virtual void update(Object*) {}
+
+        void draw();
 };
 
 #endif /* COLLISIONCOMPONENT_HPP */
