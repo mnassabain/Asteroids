@@ -8,6 +8,16 @@ Asteroid::Asteroid(int size) :
     init();
 }
 
+Asteroid::Asteroid(int size, Vect2D pos) :
+    Object(new AsteroidSpriteComponent(),
+    NULL, new PhysicsComponent(), new AsteroidCollisionComponent())
+{
+    this->size = size;
+    init();
+    hitbox.setPosition(pos);
+    collisionComponent->setHitbox(hitbox);
+}
+
 Asteroid::~Asteroid()
 {}
 
@@ -49,4 +59,15 @@ void Asteroid::update()
 int Asteroid::getSize()
 {
     return size;
+}
+
+void Asteroid::destroy()
+{
+    active = false;
+    // Object::destroy();
+    if (size != SMALL_ASTEROID)
+    {
+        ObjectManager::createObject(OBJECT_ASTEROID, this);
+        ObjectManager::createObject(OBJECT_ASTEROID, this);
+    }
 }

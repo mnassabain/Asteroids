@@ -56,7 +56,7 @@ class Object
         int getW();
         int getH();
 
-        void destroy();
+        virtual void destroy();
         bool isDestroyed();
 
         CollisionComponent* getCollisionComponent();

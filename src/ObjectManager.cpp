@@ -14,8 +14,18 @@ void ObjectManager::createObject(int code, void* params)
             
         case OBJECT_ASTEROID:
             {
-            int asteroidSize = *(int*)params;
-            objects.push_back(new Asteroid(asteroidSize));
+                Asteroid* parentAst = (Asteroid*)params;
+                if (parentAst != NULL)
+                {
+                    objects.push_back(
+                        new Asteroid(
+                            parentAst->getSize() - 1,
+                            parentAst->getPosition()
+                        )
+                    );
+                }
+                else
+                    objects.push_back(new Asteroid(LARGE_ASTEROID));
             }
             break;
 
@@ -61,7 +71,8 @@ void ObjectManager::updateObjects()
             int counter = 1;
             while(counter < size - index)
             {
-                (*obj)->collidingWith(*(obj + counter));
+                if (!(*(obj + counter))->isDestroyed())
+                    (*obj)->collidingWith(*(obj + counter));
                 counter++;
             }
 

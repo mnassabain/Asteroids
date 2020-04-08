@@ -2,6 +2,7 @@
 #define ASTEROID_H
 
 #include <Object.hpp>
+#include <ObjectManager.hpp>
 #include <RandomGenerator.hpp>
 #include <AsteroidCollisionComponent.hpp>
 #include <AsteroidSpriteComponent.hpp>
@@ -20,8 +21,10 @@ class Asteroid : public Object
     
     public:
         Asteroid(int size);
+        Asteroid(int size, Vect2D pos);
         ~Asteroid();
         void update();
+        void destroy();
 
         int getSize();
 };

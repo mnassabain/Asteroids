@@ -17,11 +17,10 @@ void Game::init()
 {
     running = true;
 
-    int asteroidSize = LARGE_ASTEROID;
     ObjectManager::createObject(OBJECT_SPACESHIP, NULL);
     for (int i = 0; i < 4; i++)
     {
-        ObjectManager::createObject(OBJECT_ASTEROID, &asteroidSize);
+        ObjectManager::createObject(OBJECT_ASTEROID, NULL);
     }
 }
 
