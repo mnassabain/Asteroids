@@ -5,6 +5,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <Rect.hpp>
 
 using namespace std;
 
@@ -34,6 +35,7 @@ class GraphicsManager
         void clearScreen();
         void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*);
         void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*, int);
+        void drawRect(const Rect&);
         void render();
 };
 

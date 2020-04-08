@@ -28,6 +28,11 @@ void Engine::draw(SDL_Texture* texture, SDL_Rect* src, SDL_Rect* dest, int angle
     graphicsManager.draw(texture, src, dest, angle);
 }
 
+void Engine::drawRect(const Rect& r)
+{
+    graphicsManager.drawRect(r);
+}
+
 void Engine::render()
 {
     graphicsManager.render();
