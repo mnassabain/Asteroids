@@ -59,28 +59,27 @@ void ObjectManager::updateObjects()
     int size = objects.size();
     vector<Object*>::iterator end = objects.end();
     vector<Object*>::iterator obj;
-    int index = 0;
-    for(obj = objects.begin(); obj != end; obj++)
+    for(int i = 0; i < size; ++i)
     {
-        if ((*obj)->isDestroyed())
+        if (objects[i]->isDestroyed())
         {
-            markedForDelete.push_back(index);
+            markedForDelete.push_back(i);
         }
         else
         {
             // check collisions
             int counter = 1;
-            while(counter < size - index)
+            while(counter < size - i)
             {
-                if (!(*(obj + counter))->isDestroyed())
-                    (*obj)->collidingWith(*(obj + counter));
+                if (!objects[i + counter]->isDestroyed())
+                {
+                    objects[i]->collidingWith(objects[i + counter]);
+                }
                 counter++;
             }
-
             // update
-            (*obj)->update();
+            objects[i]->update();
         }
-        index++;
     }
 
     vector<int>::reverse_iterator idx;

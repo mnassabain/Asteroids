@@ -14,7 +14,8 @@ class Object;
 class SpriteComponent
 {
     protected:
-        SDL_Texture * texture; // TODO: remplacer par Resource
+        SDL_Texture * texture;  // TODO: remplacer par Resource
+        Rect box;               // box on texture
     
     public:
         SpriteComponent();

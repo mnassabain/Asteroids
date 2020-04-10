@@ -49,7 +49,7 @@ Object::Object(SpriteComponent* s, InputComponent* i, PhysicsComponent* p,
     collisionComponent = c;
 }
 
-Object::Object(Object& o)
+Object::Object(const Object& o)
 {
     active = true;
     orientation = o.getOrientation();
@@ -90,7 +90,7 @@ Rect Object::getHitbox()
     return hitbox;
 }
 
-int Object::getOrientation()
+int Object::getOrientation() const
 {
     return orientation;
 }

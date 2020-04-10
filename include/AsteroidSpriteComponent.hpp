@@ -6,7 +6,7 @@
 class AsteroidSpriteComponent : public SpriteComponent
 {
     public:
-        AsteroidSpriteComponent();
+        AsteroidSpriteComponent(int);
 };
 
 #endif /* ASTEROIDSPRITECOMPONENT_HPP */

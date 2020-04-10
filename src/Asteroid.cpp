@@ -1,7 +1,7 @@
 #include "Asteroid.hpp"
 
 Asteroid::Asteroid(int size) :
-    Object(new AsteroidSpriteComponent(),
+    Object(new AsteroidSpriteComponent(size),
     NULL, new PhysicsComponent(), new AsteroidCollisionComponent())
 {
     this->size = size;
@@ -9,7 +9,7 @@ Asteroid::Asteroid(int size) :
 }
 
 Asteroid::Asteroid(int size, Vect2D pos) :
-    Object(new AsteroidSpriteComponent(),
+    Object(new AsteroidSpriteComponent(size),
     NULL, new PhysicsComponent(), new AsteroidCollisionComponent())
 {
     this->size = size;
@@ -31,11 +31,11 @@ void Asteroid::init()
     }
     else if (size == MEDIUM_ASTEROID)
     {
-        hitbox.setDimensions(50, 50);
+        hitbox.setDimensions(80, 80);
     }
     else
     {
-        hitbox.setDimensions(30, 30);
+        hitbox.setDimensions(60, 60);
     }
     
     Rect colliderBox(

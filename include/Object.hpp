@@ -32,7 +32,7 @@ class Object
         Object(SpriteComponent*, InputComponent*, PhysicsComponent*);
         Object(SpriteComponent*, InputComponent*, PhysicsComponent*,
             CollisionComponent*);
-        Object(Object&);
+        Object(const Object&);
         virtual ~Object();
 
         Object& operator= (const Object &o);
@@ -45,7 +45,7 @@ class Object
         void setDimensions(int x, int y);
         void setDimensions(Vect2D dim);
 
-        int getOrientation();
+        int getOrientation() const;
         void setOrientation(int);
         int getSpeed();
         void setSpeed(int);
