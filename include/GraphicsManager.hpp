@@ -16,13 +16,11 @@ class GraphicsManager
 {
     private:
         SDL_Window* window;
-        SDL_Renderer* renderer;
+        static SDL_Renderer* renderer;
     
         SDL_Texture* spaceshipTexture;
         SDL_Texture* asteroidTexture;
         SDL_Texture* rocketTexture;
-
-        SDL_Texture* getTextureFromPath(string path);
     
     public:
         void init();
@@ -37,6 +35,8 @@ class GraphicsManager
         void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*, int);
         void drawRect(const Rect&);
         void render();
+
+        static SDL_Texture* getTextureFromPath(string path);
 };
 
 #endif /* GRAPHICSMANAGER_HPP */

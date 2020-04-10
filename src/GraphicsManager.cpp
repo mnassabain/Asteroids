@@ -1,5 +1,7 @@
 #include <GraphicsManager.hpp>
 
+SDL_Renderer* GraphicsManager::renderer = NULL;
+
 void GraphicsManager::init()
 {
     window = SDL_CreateWindow(
