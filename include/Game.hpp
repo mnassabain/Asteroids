@@ -5,12 +5,12 @@
 #include <EventCodes.hpp>
 #include <Object.hpp>
 #include <ObjectManager.hpp>
+#include <ImageManager.hpp>
 #include <Engine.hpp>
 #include <Asteroid.hpp>
 #include <Spaceship.hpp>
 #include <Rocket.hpp>
 
-#include <Image.hpp>
 
 using namespace std;
 
@@ -22,8 +22,6 @@ class Game
 
         int highscore;
         int level;      // savoir le niveau
-
-        Image* title;
 
         void startPlaying();
         void stopPlaying();

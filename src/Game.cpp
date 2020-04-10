@@ -5,12 +5,13 @@ Game::Game()
     running = false;
     playing = false;
     highscore = 0; // load from file?
+    level = 0;
     // objects.reserve() ?
 }
 
 Game::~Game()
 {
-    delete title;
+    ImageManager::clearImages();
     ObjectManager::clearObjects();
 }
 
@@ -18,13 +19,13 @@ void Game::init()
 {
     running = true;
 
-    title = new Image("resources/title.png");
-
     // ObjectManager::createObject(OBJECT_SPACESHIP, NULL);
     for (int i = 0; i < 4; i++)
     {
         ObjectManager::createObject(OBJECT_ASTEROID, NULL);
     }
+
+    ImageManager::init(level);
 }
 
 void Game::update()
@@ -46,7 +47,7 @@ void Game::display()
 {
     Engine::clear();
     ObjectManager::displayObjects();    // TODO: GraphicsManager ?
-    title->draw();
+    ImageManager::displayImages();
     Engine::render();
     Engine::manageFrames();
 }
