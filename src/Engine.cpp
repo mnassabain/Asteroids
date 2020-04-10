@@ -58,3 +58,8 @@ Event Engine::pollEvent()
 {
     return eventManager.poll();
 }
+
+void Engine::clearEvents()
+{
+    eventManager.clearEvents();
+}

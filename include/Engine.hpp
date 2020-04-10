@@ -31,6 +31,7 @@ class Engine
         static void drawRect(const Rect&);
 
         static Event pollEvent();
+        static void clearEvents();
 
         static SDL_Texture* getTexture(int code) { return graphicsManager.getTexture(code); }
 };

@@ -31,6 +31,10 @@ int EventManager::handleEvents()
                     case SDLK_SPACE:
                         events.push(EVT_PLAYER_START_SHOOTING);
                         break;
+
+                    case SDLK_RETURN:
+                        result = EVT_START_GAME;
+                        break;
                 }
                 break;
 
@@ -69,4 +73,10 @@ int EventManager::poll()
     }
 
     return event;
+}
+
+void EventManager::clearEvents()
+{
+    queue<Event> empty;
+    swap(events, empty);
 }

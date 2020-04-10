@@ -33,6 +33,7 @@ class Game
         void init();
         void update();
         void display();
+        void levelUp();
 
         bool isRunning();
 };

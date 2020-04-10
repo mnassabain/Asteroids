@@ -49,6 +49,7 @@ void ObjectManager::clearObjects()
     {
         delete(*obj);
     }
+    objects.clear();
 }
 
 void ObjectManager::updateObjects()
@@ -100,5 +101,26 @@ void ObjectManager::displayObjects()
     for(obj = objects.begin(); obj != objects.end(); obj++)
     {
         (*obj)->display();
+    }
+}
+
+void ObjectManager::init(int level)
+{
+    switch(level)
+    {
+        case 0:
+            for (int i = 0; i < 4; i++)
+            {
+                ObjectManager::createObject(OBJECT_ASTEROID, NULL);
+            }
+            break;
+
+        default:
+            ObjectManager::createObject(OBJECT_SPACESHIP, NULL); // TODO: save old spaceship no replace
+            for (int i = 0; i < 2; i++)
+            {
+                ObjectManager::createObject(OBJECT_ASTEROID, NULL);
+            }
+            break;
     }
 }

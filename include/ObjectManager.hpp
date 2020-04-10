@@ -20,6 +20,7 @@ class ObjectManager
         static bool collision(Object*, Object*);
 
     public:
+        static void init(int);
         static void createObject(int, void*);
         static void clearObjects();
         static void displayObjects();

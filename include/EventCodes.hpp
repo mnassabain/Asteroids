@@ -1,6 +1,7 @@
 #ifndef EVENTCODES_HPP
 #define EVENTCODES_HPP
 
+#define EVT_START_GAME              -2
 #define EVT_CLOSE_GAME              -1
 
 #define NO_EVENTS                   0

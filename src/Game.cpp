@@ -19,12 +19,7 @@ void Game::init()
 {
     running = true;
 
-    // ObjectManager::createObject(OBJECT_SPACESHIP, NULL);
-    for (int i = 0; i < 4; i++)
-    {
-        ObjectManager::createObject(OBJECT_ASTEROID, NULL);
-    }
-
+    ObjectManager::init(level);
     ImageManager::init(level);
 }
 
@@ -37,6 +32,11 @@ void Game::update()
     if (a == EVT_CLOSE_GAME)
     {
         running = false;
+    }
+    else if (a == EVT_START_GAME && level == 0)
+    {
+        Engine::clearEvents();
+        levelUp();
     }
 
     // update objects
@@ -67,4 +67,14 @@ void Game::startPlaying()
 void Game::stopPlaying()
 {
     playing = false;
+}
+
+
+void Game::levelUp()
+{
+    level++;
+    ImageManager::clearImages();
+    ImageManager::init(level);
+    ObjectManager::clearObjects();
+    ObjectManager::init(level);
 }

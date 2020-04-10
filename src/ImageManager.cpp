@@ -30,6 +30,7 @@ void ImageManager::clearImages()
     {
         delete (*it);
     }
+    images.clear();
 }
 
 void ImageManager::displayImages()

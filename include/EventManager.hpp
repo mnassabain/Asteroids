@@ -17,6 +17,7 @@ class EventManager
 
     public:
         int handleEvents();
+        void clearEvents();
         int poll();
 };
 
