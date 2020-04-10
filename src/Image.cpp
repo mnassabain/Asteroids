@@ -1,20 +1,13 @@
 #include <Image.hpp>
 
-Image::Image(string path)
+Image::Image(SDL_Texture* t, Rect& b)
 {
-    texture = GraphicsManager::getTextureFromPath(path);
-}
-
-Image::~Image()
-{
-    SDL_DestroyTexture(texture);
+    texture = t;
+    box = b;
 }
 
 void Image::draw()
 {
-    Vect2D dim = Vect2D(382, 32); // TODO: MACROS
-    Vect2D pos = Vect2D((SCREEN_WIDTH - dim.getX()) / 2,
-        (SCREEN_HEIGHT - dim.getY()) / 2 - 50);
-    SDL_Rect dest = { pos.getX(), pos.getY(), dim.getX(), dim.getY() };
+    SDL_Rect dest = { box.x(), box.y(), box.w(), box.h() };
     Engine::draw(texture, NULL, &dest, 0);
 }

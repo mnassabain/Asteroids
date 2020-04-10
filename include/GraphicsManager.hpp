@@ -21,6 +21,7 @@ class GraphicsManager
         SDL_Texture* spaceshipTexture;
         SDL_Texture* asteroidTexture;
         SDL_Texture* rocketTexture;
+        SDL_Texture* titleTexture;
     
     public:
         void init();
@@ -29,6 +30,7 @@ class GraphicsManager
         SDL_Texture* getSpaceshipTexture();
         SDL_Texture* getAsteroidTexture();
         SDL_Texture* getRocketTexture();
+        SDL_Texture* getTitleTexture();
 
         void clearScreen();
         void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*);

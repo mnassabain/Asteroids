@@ -2,6 +2,7 @@
 #define IMAGEMANAGER_HPP
 
 #include <Image.hpp>
+#include <Engine.hpp>
 
 class ImageManager
 {

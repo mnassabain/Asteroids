@@ -35,6 +35,7 @@ class Engine
         static SDL_Texture* getSpaceshipTexture() { return graphicsManager.getSpaceshipTexture(); }
         static SDL_Texture* getAsteroidTexture() { return graphicsManager.getAsteroidTexture(); }
         static SDL_Texture* getRocketTexture() { return graphicsManager.getRocketTexture(); }
+        static SDL_Texture* getTitleTexture() { return graphicsManager.getTitleTexture(); }
 };
 
 #endif /* ENGINE_HPP */

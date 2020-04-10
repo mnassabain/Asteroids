@@ -25,6 +25,7 @@ void GraphicsManager::init()
     spaceshipTexture = getTextureFromPath("resources/player.png");
     asteroidTexture = getTextureFromPath("resources/asteroid.png");
     rocketTexture = getTextureFromPath("resources/rocket2.png");
+    titleTexture = getTextureFromPath("resources/title.png");
 }
 
 void GraphicsManager::destroy()
@@ -32,6 +33,7 @@ void GraphicsManager::destroy()
     SDL_DestroyTexture(spaceshipTexture);
     SDL_DestroyTexture(asteroidTexture);
     SDL_DestroyTexture(rocketTexture);
+    SDL_DestroyTexture(titleTexture);
 
     IMG_Quit();
     SDL_DestroyRenderer(renderer);
@@ -51,6 +53,11 @@ SDL_Texture* GraphicsManager::getAsteroidTexture()
 SDL_Texture* GraphicsManager::getRocketTexture()
 {
     return rocketTexture;
+}
+
+SDL_Texture* GraphicsManager::getTitleTexture()
+{
+    return titleTexture;
 }
 
 SDL_Texture* GraphicsManager::getTextureFromPath(string path)
