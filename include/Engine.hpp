@@ -32,10 +32,7 @@ class Engine
 
         static Event pollEvent();
 
-        static SDL_Texture* getSpaceshipTexture() { return graphicsManager.getSpaceshipTexture(); }
-        static SDL_Texture* getAsteroidTexture() { return graphicsManager.getAsteroidTexture(); }
-        static SDL_Texture* getRocketTexture() { return graphicsManager.getRocketTexture(); }
-        static SDL_Texture* getTitleTexture() { return graphicsManager.getTitleTexture(); }
+        static SDL_Texture* getTexture(int code) { return graphicsManager.getTexture(code); }
 };
 
 #endif /* ENGINE_HPP */

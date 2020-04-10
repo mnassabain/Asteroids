@@ -2,5 +2,5 @@
 
 AsteroidSpriteComponent::AsteroidSpriteComponent()
 {
-    texture = Engine::getAsteroidTexture();
+    texture = Engine::getTexture(GraphicsManager::TEXTURE_ASTEROID);
 }

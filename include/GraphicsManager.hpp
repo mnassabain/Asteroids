@@ -2,6 +2,7 @@
 #define GRAPHICSMANAGER_HPP
 
 #include <iostream>
+#include <vector>
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -18,19 +19,13 @@ class GraphicsManager
         SDL_Window* window;
         static SDL_Renderer* renderer;
     
-        SDL_Texture* spaceshipTexture;
-        SDL_Texture* asteroidTexture;
-        SDL_Texture* rocketTexture;
-        SDL_Texture* titleTexture;
-    
+        vector<SDL_Texture*> textures;
+
     public:
         void init();
         void destroy();
 
-        SDL_Texture* getSpaceshipTexture();
-        SDL_Texture* getAsteroidTexture();
-        SDL_Texture* getRocketTexture();
-        SDL_Texture* getTitleTexture();
+        SDL_Texture* getTexture(int);
 
         void clearScreen();
         void draw(SDL_Texture*, SDL_Rect*, SDL_Rect*);
@@ -38,6 +33,10 @@ class GraphicsManager
         void drawRect(const Rect&);
         void render();
 
+        static const int TEXTURE_SPACESHIP = 0;
+        static const int TEXTURE_ASTEROID = 1;
+        static const int TEXTURE_ROCKET = 2;
+        static const int TEXTURE_TITLE = 3;
         static SDL_Texture* getTextureFromPath(string path);
 };
 

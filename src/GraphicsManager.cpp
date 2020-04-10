@@ -22,42 +22,27 @@ void GraphicsManager::init()
         exit(1);
     }
 
-    spaceshipTexture = getTextureFromPath("resources/player.png");
-    asteroidTexture = getTextureFromPath("resources/asteroid.png");
-    rocketTexture = getTextureFromPath("resources/rocket2.png");
-    titleTexture = getTextureFromPath("resources/title.png");
+    textures.push_back(getTextureFromPath("resources/player.png"));
+    textures.push_back(getTextureFromPath("resources/asteroid.png"));
+    textures.push_back(getTextureFromPath("resources/rocket2.png"));
+    textures.push_back(getTextureFromPath("resources/title.png"));
 }
 
 void GraphicsManager::destroy()
 {
-    SDL_DestroyTexture(spaceshipTexture);
-    SDL_DestroyTexture(asteroidTexture);
-    SDL_DestroyTexture(rocketTexture);
-    SDL_DestroyTexture(titleTexture);
+    for (auto it = textures.begin(); it < textures.begin(); it++)
+    {
+        SDL_DestroyTexture(*it);
+    }
 
     IMG_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 }
 
-SDL_Texture* GraphicsManager::getSpaceshipTexture()
+SDL_Texture* GraphicsManager::getTexture(int code)
 {
-    return spaceshipTexture;
-}
-
-SDL_Texture* GraphicsManager::getAsteroidTexture()
-{
-    return asteroidTexture;
-}
-
-SDL_Texture* GraphicsManager::getRocketTexture()
-{
-    return rocketTexture;
-}
-
-SDL_Texture* GraphicsManager::getTitleTexture()
-{
-    return titleTexture;
+    return textures[code];
 }
 
 SDL_Texture* GraphicsManager::getTextureFromPath(string path)

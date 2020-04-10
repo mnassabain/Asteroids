@@ -2,5 +2,5 @@
 
 SpaceshipSpriteComponent::SpaceshipSpriteComponent()
 {
-    texture = Engine::getSpaceshipTexture();
+    texture = Engine::getTexture(GraphicsManager::TEXTURE_SPACESHIP);
 }

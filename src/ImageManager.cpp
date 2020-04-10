@@ -11,7 +11,9 @@ void ImageManager::init(int stage)
         Vect2D pos = Vect2D((SCREEN_WIDTH - dim.getX()) / 2,
             (SCREEN_HEIGHT - dim.getY()) / 2 - 50);
         Rect r(pos.getX(), pos.getY(), dim.getX(), dim.getY());
-        images.push_back(new Image(Engine::getTitleTexture(), r));
+        images.push_back(
+            new Image(Engine::getTexture(GraphicsManager::TEXTURE_TITLE), r)
+        );
     }
 }
 
