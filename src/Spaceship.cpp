@@ -6,6 +6,7 @@ Spaceship::Spaceship() :
     )
 {
     shooting = false;
+    reload = 0;
     setDimensions(50, 75);
 
     Rect colliderBox(
