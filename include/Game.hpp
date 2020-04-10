@@ -10,6 +10,8 @@
 #include <Spaceship.hpp>
 #include <Rocket.hpp>
 
+#include <Image.hpp>
+
 using namespace std;
 
 class Game
@@ -20,6 +22,8 @@ class Game
 
         int highscore;
         int level;      // savoir le niveau
+
+        Image* title;
 
         void startPlaying();
         void stopPlaying();

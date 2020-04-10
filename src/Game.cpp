@@ -10,6 +10,7 @@ Game::Game()
 
 Game::~Game()
 {
+    delete title;
     ObjectManager::clearObjects();
 }
 
@@ -17,7 +18,9 @@ void Game::init()
 {
     running = true;
 
-    ObjectManager::createObject(OBJECT_SPACESHIP, NULL);
+    title = new Image("resources/title.png");
+
+    // ObjectManager::createObject(OBJECT_SPACESHIP, NULL);
     for (int i = 0; i < 4; i++)
     {
         ObjectManager::createObject(OBJECT_ASTEROID, NULL);
@@ -43,6 +46,7 @@ void Game::display()
 {
     Engine::clear();
     ObjectManager::displayObjects();    // TODO: GraphicsManager ?
+    title->draw();
     Engine::render();
     Engine::manageFrames();
 }
