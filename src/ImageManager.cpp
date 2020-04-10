@@ -14,6 +14,13 @@ void ImageManager::init(int stage)
         images.push_back(
             new Image(Engine::getTexture(GraphicsManager::TEXTURE_TITLE), r)
         );
+
+        Vect2D dim2 = Vect2D(393, 16);
+        Vect2D pos2 = pos + Vect2D(0, dim.getY() + 25);
+        Rect r2(pos2.getX(), pos2.getY(), dim2.getX(), dim2.getY());
+        images.push_back(
+            new Image(Engine::getTexture(GraphicsManager::TEXTURE_SUBTITLE), r2)
+        );
     }
 }
 

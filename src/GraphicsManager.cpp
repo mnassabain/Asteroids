@@ -26,6 +26,7 @@ void GraphicsManager::init()
     textures.push_back(getTextureFromPath("resources/asteroid.png"));
     textures.push_back(getTextureFromPath("resources/rocket2.png"));
     textures.push_back(getTextureFromPath("resources/title.png"));
+    textures.push_back(getTextureFromPath("resources/subtitle.png"));
 }
 
 void GraphicsManager::destroy()
