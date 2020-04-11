@@ -43,9 +43,14 @@ void Game::update()
 
     // update objects
     ObjectManager::updateObjects();
-    // int tmp = score; // HERE: uncomment 2 lines to display score
+
+    int prevScore = score;
     score += ObjectManager::getPoints();
-    // if (tmp != score) cout << "score: " << score << endl;
+    if (prevScore != score)
+    {
+        // cout << "score: " << score << endl; // HERE: uncomment to show score
+        ImageManager::updateScore(score);
+    }
 
     // int tmp2 = nbAsteroids; // HERE: uncomment 2 lines to display nbAsteroids
     nbAsteroids = ObjectManager::getNbAsteroids();
@@ -82,6 +87,7 @@ void Game::stopPlaying()
 void Game::levelUp()
 {
     level++;
+    cout << "level up = " << level << endl;
     ImageManager::clearImages();
     ImageManager::init(level);
     ObjectManager::clearObjects();
