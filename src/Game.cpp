@@ -87,6 +87,7 @@ void Game::stopPlaying()
 void Game::levelUp()
 {
     level++;
+    cout << "level up = " << level << endl;
     ImageManager::clearImages();
     ImageManager::init(level);
     ObjectManager::clearObjects();
