@@ -7,6 +7,7 @@
 #include <SpaceshipCollisionComponent.hpp>
 #include <SpaceshipPhysicsComponent.hpp>
 #include <SpaceshipSpriteComponent.hpp>
+#include <RandomGenerator.hpp>
 
 #define PLAYER_MAX_LIVES    5
 #define CLOCKWISE           1
@@ -38,8 +39,7 @@ class Spaceship : public Object
         void startTurning(int direction);
         void stopTurning();
         int isTurning(); 
-        void teleport(int x, int y);
-        void teleport(Vect2D pos);
+        void teleport();
         void startShooting();
         void stopShooting();
         void shoot();

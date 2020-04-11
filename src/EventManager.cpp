@@ -32,6 +32,10 @@ int EventManager::handleEvents()
                         events.push(EVT_PLAYER_START_SHOOTING);
                         break;
 
+                    case SDLK_LSHIFT:
+                        events.push(EVT_PLAYER_TELEPORT);
+                        break;
+                        
                     case SDLK_RETURN:
                         result = EVT_START_GAME;
                         break;

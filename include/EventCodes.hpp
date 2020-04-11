@@ -16,5 +16,7 @@
 #define EVT_PLAYER_START_SHOOTING   6
 #define EVT_PLAYER_STOP_SHOOTING    7
 
+#define EVT_PLAYER_TELEPORT         8
+
 
 #endif /* EVENTCODES_HPP */

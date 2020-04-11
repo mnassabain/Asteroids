@@ -66,14 +66,23 @@ void Spaceship::decelerate()
     acceleration = 0;
 }
 
-void Spaceship::teleport(int x, int y)
+void Spaceship::teleport()
 {
-    setPosition(x, y);
-}
+    int x = (RandomGenerator::generate() + SCREEN_WIDTH) % SCREEN_WIDTH;
+    int y = (RandomGenerator::generate() + SCREEN_HEIGHT) % SCREEN_HEIGHT;
 
-void Spaceship::teleport(Vect2D pos)
-{
-    setPosition(pos);
+    Vect2D oldObjPos = getPosition();
+    Rect oldBox = collisionComponent->getHitbox();
+    
+    int dx = oldBox.x() - oldObjPos.getX();
+    int dy = oldBox.y() - oldObjPos.getY();
+
+    setPosition(x, y);
+
+    oldBox.x(x + dx);
+    oldBox.y(y + dy);
+
+    collisionComponent->setHitbox(oldBox);
 }
 
 void Spaceship::startShooting()

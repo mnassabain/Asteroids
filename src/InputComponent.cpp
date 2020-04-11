@@ -37,6 +37,10 @@ void InputComponent::update(Spaceship* ship)
             case EVT_PLAYER_STOP_SHOOTING:
                 ship->stopShooting();
                 break;
+
+            case EVT_PLAYER_TELEPORT:
+                ship->teleport();
+                break;
         }
     }
 }
