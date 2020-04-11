@@ -1,7 +1,6 @@
 #include <ImageManager.hpp>
 
 std::vector<Image*> ImageManager::images;
-int ImageManager::score = 0;
 
 #include <cmath>
 
@@ -11,27 +10,6 @@ void ImageManager::addNumber(int n, int pos)
     Rect surface(n*18, 0, 18, 16);
     images.push_back(new Image(Engine::getTexture(GraphicsManager::TEXTURE_NUM),
         box, surface));
-}
-
-
-void ImageManager::addScore()
-{
-    int pos = 0;
-    int s = score;
-    // cout << "adding nums - score: " << score << endl;
-    int maxpow = floor(log10(s));
-    while(maxpow >= 0)
-    {
-        int plusFort = s / pow(10, maxpow);
-        addNumber(plusFort, pos);
-        s = s - plusFort * pow(10, maxpow);
-        pos++;
-        maxpow--;
-    }
-    if (pos == 0)
-    {
-        addNumber(0, 0);
-    }
 }
 
 void ImageManager::init(int stage)
@@ -54,10 +32,6 @@ void ImageManager::init(int stage)
             new Image(Engine::getTexture(GraphicsManager::TEXTURE_SUBTITLE), r2)
         );
     }
-    else
-    {
-        addScore();
-    }
 }
 
 void ImageManager::clearImages()
@@ -77,9 +51,23 @@ void ImageManager::displayImages()
     }
 }
 
-void ImageManager::updateScore(int s)
+void ImageManager::displayScore(int score)
 {
-    score = s;
     clearImages();
-    addScore();
+    int pos = 0;
+    int s = score;
+    // cout << "adding nums - score: " << score << endl;
+    int maxpow = floor(log10(s));
+    while(maxpow >= 0)
+    {
+        int plusFort = s / pow(10, maxpow);
+        addNumber(plusFort, pos);
+        s = s - plusFort * pow(10, maxpow);
+        pos++;
+        maxpow--;
+    }
+    if (pos == 0)
+    {
+        addNumber(0, 0);
+    }
 }

@@ -8,8 +8,8 @@ class ImageManager
 {
     private:
         static std::vector<Image*> images;
-        static int score;
         static void addNumber(int, int);
+        static void addScore(int);
 
     public:
         // void createImage(int);
@@ -17,7 +17,7 @@ class ImageManager
         static void clearImages();
         static void displayImages();
         static void updateScore(int);
-        static void addScore();
+        static void displayScore(int);
 };
 
 
