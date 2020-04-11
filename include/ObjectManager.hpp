@@ -20,6 +20,7 @@ class ObjectManager
         static bool collision(Object*, Object*);
         static int points; // points collected during current frame
         static int nbAsteroids; // current nb of asteroids
+        static bool spaceshipActive; // is spaceship alive
 
     public:
         static void init(int);
@@ -31,6 +32,8 @@ class ObjectManager
         static int getPoints();
         static void removeAsteroid();
         static int getNbAsteroids();
+        static void spaceshipDestroyed();
+        static bool isSpaceshipActive();
 };
 
 #endif /* OBJECTMANAGER_HPP */

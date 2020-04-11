@@ -7,7 +7,9 @@ Game::Game()
     highscore = 0; // load from file?
     level = 0;
     score = 0;
+    extraLifeCounter = 0;
     nbAsteroids = 0;
+    lives = 3;
     // objects.reserve() ?
 }
 
@@ -20,6 +22,9 @@ Game::~Game()
 void Game::init()
 {
     running = true;
+    score = 0;
+    lives = 3;
+    nbAsteroids = 0;
 
     ObjectManager::init(level);
     ImageManager::init(level);
@@ -44,8 +49,33 @@ void Game::update()
     // update objects
     ObjectManager::updateObjects();
 
+    if (level != 0 && !ObjectManager::isSpaceshipActive())
+    {
+        if (lives == 1)
+        {
+            gameOver();
+            if (score > highscore) highscore = score;
+            score = 0;
+            extraLifeCounter = 0;
+            lives = 3;
+            nbAsteroids = 0;
+        }
+        else
+        {
+            lives--;
+            ObjectManager::createObject(OBJECT_SPACESHIP, NULL);
+        }
+    }
+
     // int prevScore = score;
-    score += ObjectManager::getPoints();
+    int newPoints = ObjectManager::getPoints();
+    score += newPoints;
+    extraLifeCounter += newPoints;
+    if (extraLifeCounter >= 1000)
+    {
+        if (lives < MAX_LIVES) lives++;
+        extraLifeCounter -= 1000;
+    }
 
     // int tmp2 = nbAsteroids; // HERE: uncomment 2 lines to display nbAsteroids
     nbAsteroids = ObjectManager::getNbAsteroids();
@@ -60,7 +90,10 @@ void Game::display()
     ObjectManager::displayObjects();    // TODO: GraphicsManager ?
     ImageManager::displayImages();
     if (level != 0)
+    {
         ImageManager::displayScore(score);
+        ImageManager::displayLives(lives);
+    }
     Engine::render();
     Engine::manageFrames();
 }
@@ -86,6 +119,15 @@ void Game::stopPlaying()
 void Game::levelUp()
 {
     level++;
+    ImageManager::clearImages();
+    ImageManager::init(level);
+    ObjectManager::clearObjects();
+    ObjectManager::init(level);
+}
+
+void Game::gameOver()
+{
+    level = 0;
     ImageManager::clearImages();
     ImageManager::init(level);
     ObjectManager::clearObjects();

@@ -114,3 +114,9 @@ int Spaceship::isTurning()
 {
     return turning;
 }
+
+void Spaceship::destroy()
+{
+    Object::destroy();
+    ObjectManager::spaceshipDestroyed();
+}

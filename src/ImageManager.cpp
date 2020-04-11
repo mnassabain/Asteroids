@@ -71,3 +71,37 @@ void ImageManager::displayScore(int score)
         addNumber(0, 0);
     }
 }
+
+void ImageManager::addLife(bool x, int pos)
+{
+    int n;
+    if (x) n = 0;
+    else n = 1;
+    Rect box(35 + pos*18*2 + pos*5, 77, 18*2, 16*2); // TODO: macros
+    Rect surface(n*21, 0, 21, 18);
+    images.push_back(
+        new Image(
+            Engine::getTexture(GraphicsManager::TEXTURE_LIVES),
+            box,
+            surface
+        )
+    );
+}
+
+void ImageManager::displayLives(int lives)
+{
+    int l = 0;
+    int pos = 0;
+    while (l < lives)
+    {
+        addLife(true, pos);
+        l++;
+        pos++;
+    }
+    while (l < 5)
+    {
+        addLife(false, pos);
+        l++;
+        pos++;
+    }
+}

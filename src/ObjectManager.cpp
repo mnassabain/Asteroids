@@ -6,6 +6,7 @@
 vector<Object*> ObjectManager::objects;
 int ObjectManager::nbAsteroids = 0;
 int ObjectManager::points = 0;
+bool ObjectManager::spaceshipActive = false;
 
 void ObjectManager::createObject(int code, void* params)
 {
@@ -13,6 +14,7 @@ void ObjectManager::createObject(int code, void* params)
     {
         case OBJECT_SPACESHIP:
             objects.push_back(new Spaceship());
+            spaceshipActive = true;
             break;
             
         case OBJECT_ASTEROID:
@@ -149,4 +151,14 @@ void ObjectManager::removeAsteroid()
 int ObjectManager::getNbAsteroids()
 {
     return nbAsteroids;
+}
+
+void ObjectManager::spaceshipDestroyed()
+{
+    spaceshipActive = false;
+}
+
+bool ObjectManager::isSpaceshipActive()
+{
+    return spaceshipActive;
 }

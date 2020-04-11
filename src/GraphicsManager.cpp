@@ -28,6 +28,7 @@ void GraphicsManager::init()
     textures.push_back(getTextureFromPath("resources/title.png"));
     textures.push_back(getTextureFromPath("resources/subtitle.png"));
     textures.push_back(getTextureFromPath("resources/numbers.png"));
+    textures.push_back(getTextureFromPath("resources/lives.png"));
 }
 
 void GraphicsManager::destroy()

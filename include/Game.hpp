@@ -24,6 +24,10 @@ class Game
         int level;      // savoir le niveau
         int score;      // current score
         int nbAsteroids;
+        int lives;      // nb vies joueur
+        int extraLifeCounter;   // 0 - 10000, to add extra life
+
+        static const int MAX_LIVES = 5;
 
         void startPlaying();
         void stopPlaying();
@@ -36,6 +40,7 @@ class Game
         void update();
         void display();
         void levelUp();
+        void gameOver();
 
         bool isRunning();
 };

@@ -10,6 +10,7 @@ class ImageManager
         static std::vector<Image*> images;
         static void addNumber(int, int);
         static void addScore(int);
+        static void addLife(bool, int);
 
     public:
         // void createImage(int);
@@ -18,6 +19,7 @@ class ImageManager
         static void displayImages();
         static void updateScore(int);
         static void displayScore(int);
+        static void displayLives(int);
 };
 
 

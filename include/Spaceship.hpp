@@ -43,6 +43,7 @@ class Spaceship : public Object
         void startShooting();
         void stopShooting();
         void shoot();
+        void destroy();
 
 };
 
