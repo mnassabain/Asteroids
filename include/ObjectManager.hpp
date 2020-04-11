@@ -18,6 +18,7 @@ class ObjectManager
     private:
         static vector<Object*> objects;
         static bool collision(Object*, Object*);
+        static int points; // points collected during current frame
 
     public:
         static void init(int);
@@ -25,6 +26,8 @@ class ObjectManager
         static void clearObjects();
         static void displayObjects();
         static void updateObjects();
+        static void addPoints(int);
+        static int getPoints();
 };
 
 #endif /* OBJECTMANAGER_HPP */

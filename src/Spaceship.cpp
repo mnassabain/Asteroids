@@ -38,16 +38,6 @@ void Spaceship::update()
     }   
 }
 
-int Spaceship::getScore()
-{
-    return score;
-}
-
-void Spaceship::addPoints(int points)
-{
-    score += points;
-}
-
 void Spaceship::addLife()
 {
     if (lives < MAX_LIVES)

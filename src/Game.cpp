@@ -6,6 +6,7 @@ Game::Game()
     playing = false;
     highscore = 0; // load from file?
     level = 0;
+    score = 0;
     // objects.reserve() ?
 }
 
@@ -41,6 +42,9 @@ void Game::update()
 
     // update objects
     ObjectManager::updateObjects();
+    score += ObjectManager::getPoints();
+    // int tmp = score; // HERE: uncomment 2 lines to display score
+    // if (tmp != score) cout << "score: " << score << endl;
 }
 
 void Game::display()

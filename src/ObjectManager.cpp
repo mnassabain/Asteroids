@@ -4,6 +4,8 @@
 #include <Rocket.hpp>
 
 vector<Object*> ObjectManager::objects;
+int ObjectManager::points = 0;
+
 void ObjectManager::createObject(int code, void* params)
 {
     switch(code)
@@ -122,4 +124,16 @@ void ObjectManager::init(int level)
             }
             break;
     }
+}
+
+void ObjectManager::addPoints(int p)
+{
+    points += p;
+}
+
+int ObjectManager::getPoints()
+{
+    int result = points;
+    points = 0;
+    return result;
 }

@@ -16,7 +16,6 @@ class Spaceship : public Object
 {
     private:
         int lives;       // 0 - 5
-        int score;
         int turning;    // 0: no turning, -1: ccw, 1: cw
         bool shooting;  // y/n
 
@@ -31,8 +30,6 @@ class Spaceship : public Object
         ~Spaceship();
         void update();
 
-        int getScore();
-        void addPoints(int points);
         void addLife();
         void removeLife();
         int getLives();

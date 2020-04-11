@@ -22,6 +22,7 @@ class Game
 
         int highscore;
         int level;      // savoir le niveau
+        int score;      // current score
 
         void startPlaying();
         void stopPlaying();

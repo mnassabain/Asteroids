@@ -65,9 +65,22 @@ void Asteroid::destroy()
 {
     active = false;
     // Object::destroy();
-    if (size != SMALL_ASTEROID)
+    switch(size)
     {
-        ObjectManager::createObject(OBJECT_ASTEROID, this);
-        ObjectManager::createObject(OBJECT_ASTEROID, this);
+        case SMALL_ASTEROID:
+            ObjectManager::addPoints(100); // TODO: macros
+            break;
+
+        case MEDIUM_ASTEROID:
+            ObjectManager::createObject(OBJECT_ASTEROID, this);
+            ObjectManager::createObject(OBJECT_ASTEROID, this);
+            ObjectManager::addPoints(50);
+            break;
+        
+        case LARGE_ASTEROID:
+            ObjectManager::createObject(OBJECT_ASTEROID, this);
+            ObjectManager::createObject(OBJECT_ASTEROID, this);
+            ObjectManager::addPoints(20);
+            break;
     }
 }
