@@ -65,6 +65,7 @@ void Asteroid::destroy()
 {
     active = false;
     // Object::destroy();
+    ObjectManager::removeAsteroid();
     switch(size)
     {
         case SMALL_ASTEROID:

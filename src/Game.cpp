@@ -7,6 +7,7 @@ Game::Game()
     highscore = 0; // load from file?
     level = 0;
     score = 0;
+    nbAsteroids = 0;
     // objects.reserve() ?
 }
 
@@ -42,9 +43,13 @@ void Game::update()
 
     // update objects
     ObjectManager::updateObjects();
-    score += ObjectManager::getPoints();
     // int tmp = score; // HERE: uncomment 2 lines to display score
+    score += ObjectManager::getPoints();
     // if (tmp != score) cout << "score: " << score << endl;
+
+    // int tmp2 = nbAsteroids; // HERE: uncomment 2 lines to display nbAsteroids
+    nbAsteroids = ObjectManager::getNbAsteroids();
+    // if (tmp2 != nbAsteroids) cout << "nb Asteroids: " << nbAsteroids << endl;
 }
 
 void Game::display()

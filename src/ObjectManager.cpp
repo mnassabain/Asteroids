@@ -4,6 +4,7 @@
 #include <Rocket.hpp>
 
 vector<Object*> ObjectManager::objects;
+int ObjectManager::nbAsteroids = 0;
 int ObjectManager::points = 0;
 
 void ObjectManager::createObject(int code, void* params)
@@ -28,6 +29,7 @@ void ObjectManager::createObject(int code, void* params)
                 }
                 else
                     objects.push_back(new Asteroid(LARGE_ASTEROID));
+                nbAsteroids++;
             }
             break;
 
@@ -52,6 +54,7 @@ void ObjectManager::clearObjects()
         delete(*obj);
     }
     objects.clear();
+    nbAsteroids = 0;
 }
 
 void ObjectManager::updateObjects()
@@ -136,4 +139,14 @@ int ObjectManager::getPoints()
     int result = points;
     points = 0;
     return result;
+}
+
+void ObjectManager::removeAsteroid()
+{
+    nbAsteroids--;
+}
+
+int ObjectManager::getNbAsteroids()
+{
+    return nbAsteroids;
 }

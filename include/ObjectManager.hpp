@@ -19,6 +19,7 @@ class ObjectManager
         static vector<Object*> objects;
         static bool collision(Object*, Object*);
         static int points; // points collected during current frame
+        static int nbAsteroids; // current nb of asteroids
 
     public:
         static void init(int);
@@ -28,6 +29,8 @@ class ObjectManager
         static void updateObjects();
         static void addPoints(int);
         static int getPoints();
+        static void removeAsteroid();
+        static int getNbAsteroids();
 };
 
 #endif /* OBJECTMANAGER_HPP */
