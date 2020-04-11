@@ -38,6 +38,7 @@ class GraphicsManager
         static const int TEXTURE_ROCKET = 2;
         static const int TEXTURE_TITLE = 3;
         static const int TEXTURE_SUBTITLE = 4;
+        static const int TEXTURE_NUM = 5;
         static SDL_Texture* getTextureFromPath(string path);
 };
 
