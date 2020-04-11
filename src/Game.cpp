@@ -54,6 +54,8 @@ void Game::update()
 
     // int tmp2 = nbAsteroids; // HERE: uncomment 2 lines to display nbAsteroids
     nbAsteroids = ObjectManager::getNbAsteroids();
+    if (nbAsteroids == 0)
+        levelUp();
     // if (tmp2 != nbAsteroids) cout << "nb Asteroids: " << nbAsteroids << endl;
 }
 

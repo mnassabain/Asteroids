@@ -121,7 +121,7 @@ void ObjectManager::init(int level)
 
         default:
             ObjectManager::createObject(OBJECT_SPACESHIP, NULL); // TODO: save old spaceship no replace
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < level + 1; i++)
             {
                 ObjectManager::createObject(OBJECT_ASTEROID, NULL);
             }
