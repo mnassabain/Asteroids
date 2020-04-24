@@ -64,7 +64,7 @@ void ObjectManager::updateObjects()
     vector<int> markedForDelete;
 
     int size = objects.size();
-    vector<Object*>::iterator end = objects.end();
+    // vector<Object*>::iterator end = objects.end();
     vector<Object*>::iterator obj;
     for(int i = 0; i < size; ++i)
     {
