@@ -2,7 +2,7 @@ SRC_DIR = src
 OBJ_DIR = bin
 INC_DIR = include
 
-TARGET = main
+TARGET = asteroids
 CC = g++ -std=c++11
 CFLAGS = -g -Wall -Wextra -Werror
 INC = -I$(INC_DIR) -I./libs/build/include
@@ -14,7 +14,7 @@ SDL_INSTALLED  	:= $(shell test -e ./libs/.installed && echo -n 1 || echo -n 0)
 
 .PHONY: default all clean
 
-default: setup-sdl $(TARGET)
+default: setup-sdl setup-asteroids
 all: default
 
 SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
@@ -26,50 +26,58 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
 
 .PRECIOUS: $(TARGET) $(OBJECTS)
 
-$(TARGET): $(OBJECTS)
-	@echo ### COMPILING PROGRAM
-	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@ $(INC)
+# compiler le jeu (sans compiler sdl)
+setup-asteroids: $(TARGET)
 
+$(TARGET): $(OBJECTS)
+	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@ $(INC)
+	@echo === COMPILATION FINISHED EXECUTABLE CREATED asteroids
+
+# effacer seulement fichiers projet
 clean:
 	-rm -f $(OBJ_DIR)/*.o
 	-rm -f $(TARGET)
 
+# installer sdl
 setup-sdl:
-	@echo ### SETTING UP SDL2
+	@echo === SETTING UP SDL2
 ifeq ($(SDL_INSTALLED), 1)
-	@echo ### SDL2 ALREADY INSTALLED
+	@echo === SDL2 ALREADY INSTALLED
 else
-	@echo ### STARTING SETUP
-# @echo ### Unzipping SDL2 and SDL2_image archives
+	@echo === STARTING SETUP
+# @echo === Unzipping SDL2 and SDL2_image archives
 # cd libs && unzip SDL2-2.0.12.zip
 # cd libs && unzip SDL2_image-2.0.5.zip
-	@echo ### Installing SDL2 into libs/build folder
+	@echo === Installing SDL2 into libs/build folder
 	cd libs/SDL2-2.0.12 && ./configure --prefix=$(INSTALLDIR); make; make install
-	@echo ### Installing SDL2_image into libs/build folder
+	@echo === Installing SDL2_image into libs/build folder
 	cd libs/SDL2_image-2.0.5 && ./configure --prefix=$(INSTALLDIR); make all; make install
 # fichier qui nous dit si sdl est installé ou pas
 	@touch libs/.installed
-	@echo ### SETUP COMPLETE
+	@echo === SETUP COMPLETE
 endif
 
+# commande à utiliser pour effacer tout tout
+uninstall-all: clean uninstall-sdl mr-clean
+
+# effacer fichiers sdl dans dossier final
 uninstall-sdl:
 ifeq ($(SDL_INSTALLED), 0)
-	@echo ### SDL NOT INSTALLED
+	@echo === SDL NOT INSTALLED
 else
-	@echo ### REMOVING BUILT FILES
+	@echo === REMOVING BUILT FILES
 	rm -rf libs/build/bin
 	rm -rf libs/build/include
 	rm -rf libs/build/lib
 	rm -rf libs/build/share
-# @echo ### REMOVING EXTRACTED FILES
+# @echo === REMOVING EXTRACTED FILES
 # rm -rf libs/SDL2-2.0.12
 # rm -rf libs/SDL2_image-2.0.5
 	rm libs/.installed
-	@echo ### SDL2 SUCCESSFULLY UNINSTALLED
+	@echo === SDL2 SUCCESSFULLY UNINSTALLED
 endif
 
-uninstall-all: clean uninstall-sdl mr-clean
-
+# effacer fichiers créés pendant l'installation qui peuvent accélerer une réinstallation
 mr-clean:
 	rm -rf libs/SDL2-2.0.12/build
 	rm -rf libs/SDL2_image-2.0.5/.deps
