@@ -11,3 +11,7 @@ libs/build/include/*
 libs/build/lib/*
 libs/build/share/*
 libs/.installed
+
+# SDL install logs
+libs/SDL2_image-2.0.5/config.log
+libs/SDL2-2.0.12/config.log
