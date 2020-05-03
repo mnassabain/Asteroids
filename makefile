@@ -68,4 +68,13 @@ else
 	@echo ### SDL2 SUCCESSFULLY UNINSTALLED
 endif
 
-uninstall: clean uninstall-sdl
+uninstall-all: clean uninstall-sdl mr-clean
+
+mr-clean:
+	rm -rf libs/SDL2-2.0.12/build
+	rm -rf libs/SDL2_image-2.0.5/.deps
+	rm -rf libs/SDL2_image-2.0.5/.libs
+	rm libs/SDL2_image-2.0.5/*.o
+	rm libs/SDL2_image-2.0.5/*.lo
+	rm libs/SDL2_image-2.0.5/libSDL2_image.la
+	rm libs/SDL2_image-2.0.5/libtool
