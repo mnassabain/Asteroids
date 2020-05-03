@@ -2,7 +2,8 @@
 .vscode/*
 
 # Object/binary files
-main
+/main
+/asteroids
 *.o
 
 # Built SDL files
