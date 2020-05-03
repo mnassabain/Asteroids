@@ -51,6 +51,7 @@ else
 	@echo === Installing SDL2 into libs/build folder
 	chmod +x libs/SDL2-2.0.12/configure
 	chmod +x libs/SDL2_image-2.0.5/configure
+	touch libs/SDL2_image-2.0.5/*
 	cd libs/SDL2-2.0.12 && ./configure --prefix=$(INSTALLDIR); make; make install
 	@echo === Installing SDL2_image into libs/build folder
 	cd libs/SDL2_image-2.0.5 && ./configure --prefix=$(INSTALLDIR); make all; make install
