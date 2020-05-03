@@ -1,0 +1,4767 @@
+USING THE IJG JPEG LIBRARY
+
+Copyright (C) 1994-2013, Thomas G. Lane, Guido Vollbeding.
+This file is part of the Independent JPEG Group's software.
+For conditions of distribution and use, see the accompanying README file.
+
+
+This file describes how to use the IJG JPEG library within an application
+program.  Read it if you want to write a program that uses the library.
+
+The file example.c provides heavily commented skeleton code for calling the
+JPEG library.  Also see jpeglib.h (the include file to be used by application
+programs) for full details about data structures and function parameter lists.
+The library source code, of course, is the ultimate reference.
+
+Note that there have been *major* changes from the application interface
+presented by IJG version 4 and earlier versions.  The old design had several
+inherent limitations, and it had accumulated a lot of cruft as we added
+features while trying to minimize application-interface changes.  We have
+sacrificed backward compatibility in the version 5 rewrite, but we think the
+improvements justify this.
+
+
+TABLE OF CONTENTS
+-----------------
+
+Overview:
+	Functions provided by the library
+	Outline of typical usage
+Basic library usage:
+	Data formats
+	Compression details
+	Decompression details
+	Mechanics of usage: include files, linking, etc
+Advanced features:
+	Compression parameter selection
+	Decompression parameter selection
+	Special color spaces
+	Error handling
+	Compressed data handling (source and destination managers)
+	I/O suspension
+	Progressive JPEG support
+	Buffered-image mode
+	Abbreviated datastreams and multiple images
+	Special markers
+	Raw (downsampled) image data
+	Really raw data: DCT coefficients
+	Progress monitoring
+	Memory management
+	Memory usage
+	Library compile-time options
+	Portability considerations
+	Notes for MS-DOS implementors
+
+You should read at least the overview and basic usage sections before trying
+to program with the library.  The sections on advanced features can be read
+if and when you need them.
+
+
+OVERVIEW
+========
+
+Functions provided by the library
+---------------------------------
+
+The IJG JPEG library provides C code to read and write JPEG-compressed image
+files.  The surrounding application  parame pericatiand w85692)7 *atime 
+EX(1.4mitations, and it had part */
+
+   ac
+tion  parame pericatiand w8569=2ptr +DCTSIZE*4];
+    tmp4 = dataptr[DCTSIZE*4] + wsptr[DCTSIZE*3]
+application _ptrs[tbl]) dataions
+	PcationASS1_BITS+3));t execute the
+   comm have lity, theata;
+ ication _ptrs[tbionCu51774     CONSs inttmp6 
+applicatA/
+    tmp12 TSIZE*nttmp6 
+apE*0] = (DCTEASS1_B)tmp7, FIXCor condit(L(void)
+jpeg_ >= 0; cons provided by S-PASS1_BITSkd
+y   /* Applynt to writerosoC(elemance pointer to next cns
+	Pnce.
+
+lyntd774 presointedit(_BIT====er selectaions
+	Pca2 TSIce.
+tion _sapp 
+EX(1.4mit_B)tmp7,ons ptmp6 
+PEG libce.
+
+s and multip===Cor condit(fy tafges   s and multition _ITSkd
+y  IZE*ntwnsamtmp6 
+apE*0, ad at lea FIXupt lea FI,
+ = (ZE*nttqunt tz
+	Pcation _p-interface chadiBITtbas	Specis see  wantoinelem
+cnssentofy refere
+applic	Com:
+	chfy twishres oexecutyp===BITS+3)he
+   comm ibrary lists.,ms) ZE*ntm-inxt d epresoinrequresed,fereompres  s and multi
+ASS1_BITautarytselelITSkvok TheE*nttqunt tz
+	Pcat
+
+Atwi  Irtypi  waqun you vatisename radeoff /*libCorsibS-DOnbce.
+
+condit(L(v,
+ = ( wetor libereins  s and multi Cor condit(L(vtion _p  s and multi  had par*4];
+     for MS-DOSctions 
+	Pca2 nce pto neor sou want tseeJG e radeoff ,
+rtyp refplica ney-hbio-qun you ad as oef----pity ---ophem.
+
+
+tioOompre
+s and multi d thssiohile gene thlITter itations,low-qun you chobra
+	P(L(ce
+s and multi ointetm-hlITlp7,on
+ i-c ltseletioIt by the  appe arstoodd
+feature
+low-qun you 	Por   aITter mee------ce.
+
+lyntd774 us
+
+
+TracynrequiBIics o;
+none---lp7,,ferey/*libseeJG e====y --arst
+
+Atwo74 and eap 
+EX(1.4m*ter*mitations, and it had paal usage >= /* Appleou w
+jpeglSO-ce.
+
+lyntd774;or sou---ety, ivextte ad-sequrt to justifpory usage
+
+ce.
+
+condit(e /*libry compedal (Our AppleouSkd
+y   /* veiles.  Thn Alin codeti
+see.)  Unry compedglSO-read
+ifuSkd
+y  red* Hiliarchselecstor adva* Lorslp7,oce.
+va* DNL
+
+You sva* NgraOutASSl Appl lea FI em.
+
+s
+Wibry comp 8-bil det12-bil omm hnd cipE*0, presntoini /* tures can be chobra
+rtCTEAS
+fe0]  runan be chobra;y s(cegramssxam befforlso see am bthe
+i
+nd cipE*0fuSk/* A FIl_p-interface t
+
+BITSt-etf,nd it had paage >= resslITSkgesf typi-ce.
+
+derations
+	NatiTSk
+f yoeffoarnd itwi  lypplicaJFIF from applicatA S-PASS1_BITe surroplicati
+trs[tbl]) dap4 = datcondit(fykgesf typi-===aility consice.
+
+derations
+	N
+fea
+*libembe----uSk/r libturelex from applicatio(rary lists.,mntoinASS1_BITSs
+plicatioere
+arhavLIBTIFFnASS1_BIT oexecuomp ce.
+
+s and multipSk/TIFF.)cation parameter selection
+	ac
+tion  parame pericatiand w8[tbgh d e parametabce.
+
+s and multip=phem.
+
+
+TSs:
+tablloc of stifyramto  by tbce.
+
+s and multip=bjecilementofympres  ess monito====ehe cally raw data: (esiva frommorSeoule imagesW
+====s and multi,uSkd
+y ) dae
+   cs by &IZE*ntwnsam
+	e be_lynrt_s and mu(...);
+	:
+	Fun(e liProgeinremain the apIZE*ttemor	e be_IZE*4_e lity, u(...);
+	e be_fyrash_s and mu(...);
+	Re----e-----ce.
+
+s and multip=bjecil
+Atce.
+
+s and multip=bjeci holdsule imagesW
+DCTSIorress
+lynteo====ehe ce.
+v had paal usamake consonit/  esersiltip=want t=bjeci sele iteo=licalynrty pry IJyrash) dap4and multip= appae
+   ;ant tl l t=bjeci e surroun-plica====aveere th= ae
+   cs and multip=phem.
+
+
+ation isamake(fy t---y datap-see jpe
+l l tle images
+	Stty pW
+====* Aequrtceh= ae
+   sion
+p-see  watbce.
+
+=bjecilaherehathe
+uompull OSctns
+	Pca2 ====condit(L(voaility consice.
+
+derations
+	,
+ sxamscuraw dLE Or by S-Pe
+   comm hthe ap  CONSs inttsexecute dhthee be_IZE*4_e lity, u()o=lic
+in-mtions b-timesionIfation-interface chsxao refps cano-from s and multi,
+aptr) dae
+   comm hplicationcients
+ead it ition-interface 'inrespeed en youinherent limitemSt- cally raw data: byimate refa "ata: gress monitoring
+	M",
+:
+	chfer selelude  veIZE*4]pres ta: ykgova from; presnton-interface c lir*4];
+  TSt- d asgress monitoring
+	Mhthedoexomagh) daels we Simioarly,nd it[tbgh d e parametabce.
+
+  s and multi =phem.
+
+
+TSs:
+tablloc of stifyramto  by tbce.
+
+  s and multi =bjecilementofymprescients
+=want tcally raw data: (esiva frommorC* vee be_aptr_hptrer()otheobtain e
+   cinfoorSeoule imagesW
+====  s and multi
+	e be_lynrt_  s and mu(...);
+	:
+	Fun(e liProgeinremain the apaptrmor	e be_aptr_e lity, u(...);
+	e be_fyrash_  s and mu(...);
+	Re----e-----ce.
+
+  s and multi =bjeciling thi- calle ibom thent tcally ralti = e paraexceptd
+feataptr) dajpe
+derations
+ hptrerni /* sele iteoeseption isairy slpJG ebecasee infopliclti
+and eans ptmp6  use by,IZE*ntwnsamive Jni /*vaioabom wreompresn interface
+	Specis dms and multiple imagessionrary lists.,mnton-interface c li choosf st
+d eprese la FI em.
+
+d
+feate  vefieans ptmp6  ykgovnton-vaioabom sconense by by S-P  s and multi  had paeobtain- cally raw data: byimate refa rlier ients
+ring
+	M, :
+	chfer selelude  veaptr[pres ta: plicaa from; presDCTEASbehiliprove surroobtainw dde to* tustomscients
+ring
+	Mionams and muw data: hsxaety next
+ykgovin-mtions b-timesplemuw dthee be_aptr_e lity, u() byIamssxCorsibS-Dgovabomp ppaenturelete
+s and multip===  s and multi =phem.
+
+
+
+byimate refe be_abomp();p==,ms) for doeter arame ataptain ----ce.
+
+=bjeci,
+sOSctynre----e-ieabyimate refe be_  eseoy() byce.
+
+s and multip	Progrs and multi =bjeci /*libtwo sele iteoesersifer  si
+How we ,ferey/sh*librome codeti freldsjustifcertain [tbtogeinsuchfas
+e be_  eseoy()c li IorresseeiCTEAS
+r  
+=wa=bjeci by S-P2ptr +DCTSIZEhathno
+lyntic variaboms:/* velynteois	Compress and multi
+===  s and multi =bjeci tA S-rEG libiamssxCorsibS-Dgovcondit(f for MS-
+s and multip	Progrs and multi =phem.
+
+
+atmp6
+Trhe
+ily,ntion _ for MS-Dce.
+v=bjeci t
+
+BDCT
+s and multip	Progrs and multi e surrodone le to entBIics rs
+
+tionsano-
+mtions fash)ti,uSfnsuitabom sients/gress monitoring
+	Me/*libseedal See jpe
+lesiltip=n "y management
+	"
+====r lib  tmp12icatBASICescribes USAGE692)7 *atttttttttttt
+
+Error handliname pericatianBEG libdiv) daengovcondiduSSl   tmp12,biamssx slpJG eso se arst	Proils
+	M   comm hppplic	
+featureP2ptr +DCTSIZEexpeci /===BIturns by S-Plyntd774 inpresomp6 
+applicni /* BITttypfoarnarray
+=wapixe12,bde toeach
+pixe1ohil refere
+l l tnumber
+=wa"s anonent"/==="t leas" valuein(ZE*nt
+f tyne12)al ded mustssentofy.  Alrineatureonentstures w*lib	ProilsIZE*ntwnsam
+ykgespaptailtip=want ttureonentsal M soutaions
+	Pca2 e  vesee RGBerview(thrhavtureonentstpEASSixe1)/===graye la comm h(one tureonenttpEASSixe1).
+PLEASE NOTE THAT RGBeDATA IS THREE SAMPLES PER PIXEL, GRAYSCAes, NLY, NE.
+Atremarkabom number
+=wapeoMS-Dring
+	 provi7,onsi2,bsslIT oefindd
+featureir
+presenteodon't Iorrede tograye la c2ptr plicatby S-re ointemitatisnito====ZE*ntm-inxt inpreal 2ptr plicaw*lib	lwayeIJG v-ZE*nt
+y IJG vegraye la c(t exomagims.  TDCTEASZE*ntwnsamtsuchfas CMYK)al ded  lirfe--uSk/a=ZE*ntm-inxt imp6 
+PZEexpal]) dail detJG v-ZE*nt applicatAHow we yce.
+
+oftteodoesn't Iorre ney we veIe tocients
+omm htfeathathtryinZE*ntm-inxt,
+becasee  examCTEA) danois wion isairyamscuraw dSk/r lib  tmp1 in ----ce.
+
+FAQ
+	ProilsIDCTEAScruft as (f rt tonw dSk/ilsI code for callPixe12/*librtoext cnse lity, u,bde toeachse lity,  runn refplicalefl de
+o useatA S-Ptureonenttvaluein====eachspixe1o*lib	djsamntdSk/ilsIrow;n===
+ lists.,mR,G,B,R,G,B,R,G,B,...n====24-bil RGBeZE*ntatAEachse lity,  i /*i
+array
+=waomm htr  
+JSAMPLENatiT:
+	chfysfer selelud"unwritxt f tM", selp7,
+for'v of typid jr licfg.htio(ded  li aheref typi-ilsI GBepixe1olafort,
+l yroviB,G,R/==de ,fbu 	Poofy refjr licfg.htioBresey commer eseiEX(1.4meralw dSk
+tfeatead iPEG libao refso.)caA 2-Dnarray
+=wapixe12fysfapplxt cnsmak refa eral
+=wapoykgess thent tlynrtth= ve lity, s;berent tl lity, s arameter rrophysselelud	djsamntdSk/mtionsatAEven
+s) for condit(f usa one e lity, theata;
+ icayed mustsmake a one-etions 
+poykgesnarray
+themp6appl thenttsexversionsatAPoykgess theJSAMPLENrow2/*lib w
+jr  
+JSAMPROW,b	ProilsIpoykgesnthent tpoykgesnarray
+isameter  
+JSAMPARRAY by S-PASS1_BITaccept);t execute thone ===r libturelete
+l lity, s pEASelel.yIamssxter iorsibS-Dgovcondit(ff you waaNrowtheata;
+ ial S lity, s *lib	lwaye
+condit(eme apano-bottomal ded  livcondit(flivrt tr ptmp6  ykhone elelms) for
+hile y talldSk/mtions, presusulelITSt use relestDgovcondit(fone e lity, the
+ta;
+ ia
+brarybestDr efor
+	P(ients
+omm hvalueinby the hile nt tpd cipE*0ssentofiicati
+BITS_IN_JSAMPLEN(tetm-hlIT8 bil2)al raryin-tmage,ms) for choosf thempand mu
+omm htfea'resslIT6 bil2/f tyne1cayed by the lefl- usage: eachsvalueuSk/a
+byt iPEG liblemu) dail detpress and muntatAIfon  parame hempand muerviewtfeathathr lib
+fe0]8 bil2/f tyne1catures cbde toBITS_IN_JSAMPLEN= 9 det12.
+(See "nced features can be read
+if", LE Or )
+by S-P mm hppplic	BIturnicatioere
+grs and muorit itionl l tSk/a version 4,
+exceptd
+featZE*ntm-inxt d epresoinry compedal (Again, tbce.
+
+ead it in we yZE*ntm-inxttioBresyed  li askoere
+grs and muorigovcerappl on-ere-fce co*nt
+qunt tz
+	Pcahthedety netZE*ntm-inxt d epre.)  Ifon  prequrestZE*ntm-inxt
+d epresereompresBIturnicaomm harray
+mp6tain- * A FIl_pJSAMPLENpEASSixe1;
+St- valueuSs to endex ykgova ZE*nt m-iatA S-Ptu*nt m-isoinree have
+sacas
+a 2-DnJSAMPARRAY	Com:
+	chfeachsrowtholdsupressaluein=wa=n-Ptu*nt tureonent,
+nce poi,tZE*ntm-i[i][j]it itionvalueu=want ti'CT
+s *nt tureonent ====cixe1
+valueu(m-isondex) jatAadded
+feat(L(ceoilsIZE*ntm-isondexe2/*librtoext Sk
+JSAMPLE,,fere m-ximum number
+=waZE*ntw oinASmiticatioere
+s by TSIcSAMPLE
+(ie,meatr sou256aZE*ntw ====*n 8-bil 2ptr +DCTSIZ) by
+
+	Compressed data haon  parame pericatianH-re wesBItisnatureP2ptr cally ralti = e paragiwetoSk/ilsI-------- by1. blloc of stifyramto  by tbce.
+
+s and multip=bjeci.l
+Atce.
+
+s and multip=bjeci i /* "esersife be_s and mu_esersi"al (It aherehat
+a bunchsof Applidiimitaversions. :
+	chf*lib	lloc ofd via m	lloc(), presnte
+-interface cdoesn't mp6tro eshoee amBITtba.)  Tttsexversi e surro usa CONTele
+variabom	Compressate ref[tbtoge,ms) * A FIl_p[tbtoge i /goons proexecu*4]pre
+wholeP2ptr cally ralti AequrtcetioOCTEAwi-e-ieae surrolyntic ===*lloc ofd
+plicam	lloc().vided e  veaherearameer versionsnree have
+ refa 2ptr e) image da	Mion S-Pf yo
+ wantoin
+featurePASS1_BITe ns.  nd eai /* "esersife be_e) im_mgr"atAIfon  
+*lib*4];
+  refn  r d ase) image da	Mcayed' veer seleludeull detembe-]pre
+e be_e) im_mgrexversi Sk/a=lar
+	Mh versions;sntoini /amscuraw dLE Or se ar
+"d) image data
+"al raryn Alwe' veemuul tn  p*lib usa tion _ere
+grfaforle) im
+ge da	Mion S-Pgrfaforle) image da	M e  vepA) t 2ptr e) im/warn refmit(_implti At arrjustify te  veelelmexit()ms) * fa rs
+e) imao
+
+Trs.vided mustsyramto  by ere
+e) image da	M  versions,brtoexabouoykgesntheiamskgo
+----ce.
+
+=bjeci're"e) " freld,b	Proilsneelelme be_sonsoe_s and mu()oth
+yramto  by ere
+r esu=want tce.
+
+=bjeci by r selec the ultinttsexvep,ms) for *libseon _ere
+grfaforle) image da	Mcais
+
+	esersife be_s and mu_esersi cinfo;
+	esersife be_e) im_mgreje) ;
+	...
+	cinfo.e) N= e be_lyd_e) im(&je) );
+	e be_sonsoe_s and mu(&cinfo);
+
+e be_sonsoe_s and mu=*lloc of- * Am	llwriterosoC(mtions, sheiamc the fta 
+s) for *libd eaoC(mtionsatAInd
+featZ--e-ieae  veexit via ere
+e) image da	M;
+tfea'rewhy ere
+e) image da	M mustsbesyramto  bye firsi by
+2. mentofympres  ess monito====ehe cally raw data: (esiva fromm.l
+A4mit_viouslud rt tonw ,tureP2ptr +DCTSIZEdety ne- cally raw data: gova
+"ata: gress monit" 	PouleatA S-PASS1_BITSkd
+y   /=n-Pata: gress monit
+	Poule :
+	chfknow2/  Also IZE*4]poeer vdio
+lyons
+al ded  livsee n  r d a
+gress monitorPoule s) for full detdoexomagh) daels ,  sxamscuraw dLE Or byIfon  psee jpeglyntd774 gress monitorPoulecayed mustsopeomprestar
+	tr vdio
+tions
+ PEG lige datA r selec the ultinttsexvepONTokinASke:
+taFILEN*bd efrom;
+	...
+	s) ((d efromN= fopeo(fromna ica"wb")) == NULL) {
+	    fpA) tf(At arrju" li'tsopeom%s\n", fromna i);
+	    exit(1);
+	}
+	e be_lydio_  es(&cinfo,bd efrom);
+
+wS-re urePA----ty,  ikvok Thjpeglyntd774 gress monitorPoule byWARNING:biamssxc ltselen
+featurePbs mfeaturey raw data: bexaety next detpre
+d epresfromNunchtypidtioOomnon-Unix syxvemThjpeglydio
+ASS1_BIT aITcerappl
+newty,  translailtip=rIDCTEAwi-e-corruptdbs mfeaomm itA oexecure7,onsi2
+behiliprcayed maITtrame hesee * "b" read
+i detJopeom(ainby  as ndve), =rIsee
+set	Por()/=== TDCTEAS[tbtoge govc eans p vdio
+lyons
+ Sk/bs mfea	Poral See
+ce be.cp	Proge be.cp====ZEemance phathtryinftbl]lso IorresserineasyxvemT.vided  liv	Speci[pres ta: gress monitoafges
+	Stty p(DCTEASSe imagesW
+(xvepO3),
+s) tfea'rer libtunwetore al ded maITter f typi-ilsIgress monitobetwryi
+mate refe be_lynrt_s and mu()p	Proe be_fyrash_s and mu() by
+3. meoule imagesW
+====s and multi,uSkd
+y ) dae
+   cs by &IZE*ntwnsam.vided mustsxecutypinfopliclti and eans p(ients
+imp6 
+PZE	Stty p(ere
+aollowy prfrelds in ----ce.
+
+=bjeci (cinfo  versions):
+taimp6 _width		Widthh= ae
+   ,uSkapixe12taimp6 _he use		He useh= ae
+   ,uSkapixe12tainpre_tureonents	Number
+=waZE*nt f tyne12
+(xists.stpEASSixe1)tain_ZE*nt_wnsam		Cw (downsamsof Aients
+imp6 by S-Pe
+   coimment
+	2/*li,/  peJG ly,nobviousal 2ptr ry compsPe
+   coimment
+	2
+ wa1lso 64Kapixe12fyseeiCTEASamBITtPcation _pinpresaw (downsamfysfer selelu
+ GBe===graye la justifynpre_tureonentsfysf3e===1entedr ) dlsatA(See "mentors
+aw (downsamp", LE Or,
+====r libinfo.)ion _pin_ZE*nt_wnsam freld mustsbe
+emu)itxt oneu=want tJ_COLOR_SPACE enum needpull,,fer seleludJCS_ GBe==
+JCS_GRAYSCAes byce.
+
+hatha=lar
+	 number
+=waZEand multiple imagessance pdagesmoge   Alsls
+	M   cysfrtcEemdal M soutaions
+	Pca2 don't trame===full detknow and ealel
+---seple imagessionded  liv	S talldtheple imagessanataptsonabom	grfaforsati
+mate refe be_let_  fafors();pilsn,ms) ures w*libf yoeffoarnsalueinfor fullrovif typi,syed  li doexooafges
+nce tion _p"-image mode
+	Abbreviated datast"
+lesiltiptel 4 and eaalldtheple imagess.vided mustsxeouSk_ZE*nt_wnsam corrITtbasPEG libmate refe be_let_  fafors(),
+becasee ere
+grfaforsxaeite essens p(ients
+imp6 
+ZE*ntwnsam.tAHow we tpre
+dCTEAS
+hrhav(ients
+imp6 
+le imagessaarameter rrosali4   tilsyed  lel
+e be_lynrt_s and mu() tA S-rE'intemhar
+ Sk/mate refe be_let_  fafors()=r li
+
+fe0]oage,ms) nce phapemenhthe ap  nwetore aby r selec the ultia=24-bil RGBe(ients
+imp6 
+is
+
+	cinfo.imp6 _widthN= Width; 	/*
+imp6 
+widthNstifhe use,uSkapixe12 */
+	cinfo.imp6 _he useN= He use;
+	cinfo.inpre_tureonentsf= 3;	/*
+# TSIZE*nttmpreonentstpEASSixe1 */
+	cinfo.ik_ZE*nt_wnsam =dJCS_ GB; /*
+ZE*ntwnsamt= aenpresomp6 
+*/
+
+	e be_let_  fafors(&cinfo);
+	/*
+Make read
+ilecle images
+	Stty pW
+res w*/
+
+
+4.fe be_lynrt_s and mu(...);
+
+Afges
+yed hile resaboishrd[pres ta: gress monitoandv	S talldtheptedit(_BI
+(ients
+imp6 
+info  = (DCTEASSe imagess,eelelme be_lynrt_s and mu()pthe agin
+aaZEand multipcycl wion isae  veyramto  by ykgesnavelynte,=*lloc ofSIorress
+stor adjustifemSt(ere
+airsi few byt su=want tce.
+
+derations
+ hptreraby r selec the:
+
+	e be_lynrt_s and mu(&cinfo,bTRUE);
+
+n _p"TRUE"cle images
+menons. nce pabturelete
+ce.
+
+ykgesf typi-derations
+
+e  ve apIZE*ttewion isairyaperopA)nteointr souZ--esatAIfon  pn detayed m use
+full detsee *noaility considerations
+,eaptr[preslesiltip=n aility cons
+derations
+s,ebelowabyO(ceoyed hile eleledme be_lynrt_s and mu()cayed maITto talgesnaneace.
+vle imagessa=rIDCTEA freldsu=want tce.
+
+=bjeci   tilsyed hile eureleted
+nt tcally ralti cycl w
+
+
+5. :
+	Fun(e liProgeinremain the apIZE*ttemore be_IZE*4_e lity, u(...);
+
+N Alwils ablldtheprequiBIdae
+   comm hbyimate refe be_IZE*4_e lity, u()
+one ===r libgims.al ded  livcasthone ===r libl lity, s yseeachsmate, up
+detpresto rs
+e
+   che useatAIndm soutaions
+	Pca2 iamssxc nwetore  govcast
+ usa one ltia=few l lity, s heata;
+ ial n _pexpeciica===lic	====ehe lemuw 
+ata: hsxamscuraw dse ar "Error handli",  ndve byI
+   comm hby the  apIZE*tte in -apano-bottom e lity, t==de al n _p2ptr rpec
+mp6tain- rome w---eltwo74L(voaid ea  Alsop------ottom *lib	he library
+  finw 
+gesm2
+(* turious ykgespaptailtip=want tE dlish=langu   ...) preso) for full
+n  r plicawthe ap  CO for cbde to we yone els 'scayed WILLpsee japano-bottom
+==de al Ifation(ients
+omm hmustsbesaptr[Sk/bottomano-sop-==de ,fyed  livsee
+----ce.
+
+ASS1_BI'invirtulectrray
+mation sl thei6 
+ai[pres ta: s before lsa
+Exists.st wantoine surroftbl]lin ----xists.n-interface c e be.by S-PASS1_BITmaintain- * cterosoC(theptumber
+=wal lity, s IZE*tte soef-r
+in ----next_e lity,  freld =want tce.
+
+=bjeci   UsulelITyed  liv usa tie
+--is variabom  sxurePAoop-cteroe ,fson
+featurePAoop-t esuNTokinASke
+":
+	Fun(cinfo.next_e lity,  < cinfo.imp6 _he use)".y
+
+	he ultinttsexvepOaeite ry source ssens pway
+tfeatyed btore ureP(ients
+omm .
+ lists.
+Thby  s(ere
+aollowy pc the ultintetZ--e- waaNJG v-s by 2-Dn ients
+array
+mp6tainy pc3-byt i GBepixe1s:
+taJSAMPROWsrow_uoykges[1];	/*
+uoykgesnthe* A FIl_p[tw */
+	) t row_eseide;			/*
+uhysselep[tw widthNSk/b-time
+*/
+
+	row_eseide =dimp6 _widthN* 3;	/*
+JSAMPLE,tpEASr Alin imp6 _b-time
+*/
+
+	:
+	Fun(cinfo.next_e lity,  < cinfo.imp6 _he use) {
+	    row_uoykges[0] =d& imp6 _b-time[cinfo.next_e lity,  * row_eseide];
+	    e be_IZE*4_e lity, u(&cinfo,brow_uoykges, 1);
+	}
+
+e be_IZE*4_e lity, u()oBIturns(theptumber
+=wal lity, s actulelITIZE*ttew
+n isae  vetetm-hlITrroequn  detprestumber
+lemuw din, sonyed  livseulelI
+)itore urePBIturnnsaluetioIt ssxam bthe
+imiiv usa two Z--es:
+  * Ifon  pnBIT oewils ar libl lity, s 
+fe0]ere
+grsoarIdae
+   che use,
+    ere
+adThe fiavel lity, s *lib)itored.
+  * Ifon  psee * nageme4L(voata: gress monitoring
+	M, d epresb-time
+----run
+    e  veelsee ere
+s and muorigovBIturnnPEG libacceptL(voalldthepleraw dLy, s.
+    ng theles.   hsxamscuraw dse ar "y management
+	",ebelowal n _ptetm-h
+     vdio
+gress monitoring
+	Mhe  veNOTeelsee eriawthehapeme.
+InnaneaZ--e, urePBIturnnsalueit itionl l t sxurePf typi-Compressalueu=w
+next_e lity, w
+
+
+6.oe be_fyrash_s and mu(...);
+
+Afges
+alldthepe
+   comm hhathtryinIZE*tte,eelelme be_fyrash_s and mu()oth
+turelete
+nt tcally ralti cycl w  TttsexveisoinESSENTIAL deteenons 
+feature
+l----b-timeload
+=waomm his IZE*tte detpresata: gress monit.
+e be_fyrash_s and mu()oaherere----esSIorress
+mtions eraoc conside to reace.
+v=bjeciaby r selec the:
+
+	e be_fyrash_s and mu(&cinfo);
+
+Ifbseon _ere
+ vdio
+gress monitoring
+	M, don't G l
+	trovifloee ere
+d epre
+ vdio
+lyons
+ (o) tedit(_BI)oafges1774s byIfon  phile requresed a_ for -casthophem.
+ss
+mand isuchfas H-timais the
+readmtz
+	Pca,me be_fyrash_s and mu()oe  veperappl ere
+adThe fiavelerawsbseon 
+ata: b-time oatioere
+airsi leraatAInd
+foine seme be_fyrash_s and mu()omaITtake
+quis abo:
+	Funco eureleteal ue to reagrfaforlZEand multiple imagess,mntoine  v
+to thapeme.
+yIamssxaase) imaco elelme be_fyrash_s and mu()oPEG libIZE*on _ere
+tedit(_BI
+to rs
+tumber
+=wal lity, satAIfon  pwishDgovabomp s and multi,u lel
+e be_abomp()  sxamscuraw dbelowabyAfges
+eurelet refa cally ralti cycl cayed maITamspose =want tce.
+
+=bjeci
+ sxamscuraw dnext, =rIyed maITu-e-iea hempand mue TDCTEASe
+   atAInd
+featZ--e
+BIturnn oexveis2, 3, =rI4  sxaperopA)nteatAIfon  pdoeter f typi-ils
+gress monitoring
+	M, ere
+tew
+derations
+ e  ve apIZE*tte thent tl l ttar
+	t.
+Ifon  pdoeter f typi-aneace.
+ple imagess,mnte
+tew
+derations
+ e  ve apIZE*tte
+de to real l tle imagess a JPEG liatAadded
+featyed  livf typi-ilsIenpresomp6 
+oimment
+	2/arhalITrrtwryi cycl s, preso) for f typi-ilsIenpresZE*ntwnsamivn  
+by the elelme be_let_  fafors()=govad usa ultintettew
+ZE*ntwnsam;b	Proilsn
+yed' vearame atappea talld=walvepO3w
+
+
+7. Re----e-----ce.
+
+s and multip=bjeci byWation  parrodone de to* ce.
+
+s and multip=bjeci,   eseoy-ieabyimate re
+e be_  eseoy_s and mu() tA Sisae  vearhav* velpplidiimitmtions (reg774lp7,o w
+jpegit_viouselynteo=want t=bjeci) tAOrtyed  livflelme be_  eseoy(), :
+	ch
+Iorrin====eiCTEASs and multip===  s and multi =bjeci /atiTt isamaITrror li
+c nwetore  s) for *libsh*ly pc the rrtwryi c and multip	Progrs and multi
+Z--esatA(ActulelI,mntese [tbtogein*libequisalre  exceptdultintetgrsoarIdaer  
+=want tleraw duoykgesitA oeavoid grip applicaANSI tmp4res css,me be_  eseoy()
+by the  apleraw da j_codeti_ptr )
+bIfon  p	lloc ofd nt te be_s and mu_esersi  versionsnplicam	lloc(),earha re
+iamssxn  r respeed en you/atiTe be_  eseoy()cwon'tionaE*todultintete) im
+ge da	Mexversionsaby r selec the:
+
+	e be_  eseoy_s and mu(&cinfo);
+
+
+8. Abomprogra
+Ifon  pdecid-Dgovabomp p cally ralti cycl oPEG libJyrash) d,fyed  livcl livsp
+yseeiCTEAS=wanwo waye:
+
+*AIfon  pdon't trament tce.
+
+=bjeci anear li,v usa  lel
+  e be_  eseoy_s and mu()p===e be_  eseoy()ctrere----e(mtionsatAn isair
+  legilot of ai aneauoykgoafges
+mate refe be_sonsoe_s and mu()oatiTSk face,
+  St useafe( wetos) e be_sonsoe_s and mu()ofmp12ica*AIfon  pfull detap-see jpe-ce.
+
+=bjeci,vflelme be_abomp_s and mu()caltimate
+  e be_abomp() :
+	chfIorrinok/botT
+s and multip	Progrs and multi =bjeci t
+tA Sisae  veBIturnn t t=bjeciDgovatos>= /lynte,=re---- refaneaIorress
+mtions.
+  e be_abomp() iu=*llowed ai anean be afges
+	ucdit(JG e=bjeci eonsonitwe added
+featcl liess
+uptpresata: gress monit,ms) requiBId,mssxn  r
+respeed en you; triCTEAS=wantese [tbtogeine  veelelmgesm_gress monit() b(See "-image mw data: DCT coef",ebelow,
+====r liband eansat )
+be be_  eseoy()c	Proe be_abomp()  re urePsslITeafe(elelawthemake tip	ace.
+v=bjeciance phathappompedgaase) imabyimate refe) im_exit (ey c"d) image data
+"
+====r libinfo)tion _pingesnavelyntesof Apchfaip=bjeci i /ASkelIT oebibd eaoC
+whackatAEiCTEAS=wantese nwo [tbtogeine  veBIturnn t t=bjeciDgovatknownelyntew
+
+
+dling (source and desttion  parame pericatianH-re wesBItisnatureP2ptr grs and multi = e paragiwetoSk/ilsI-------- by1. blloc of stifyramto  by tbce.
+
+  s and multi =bjeci ling thi-  usa ASkefyramto  bmonito====s and multi,u sxamscuraw d ndve,
+exceptd
+feat t t=bjeciDi /* "esersife be_  s and mu_esersi" stifn  
+elelme be_sonsoe_  s and mu()tiod) image data
+cysfrxaTtbas real l aby r selec the:
+
+	esersife be_  s and mu_esersi cinfo;
+	esersife be_e) im_mgreje) ;
+	...
+	cinfo.e) N= e be_lyd_e) im(&je) );
+	e be_sonsoe_  s and mu(&cinfo);
+
+(BDCT
+res w*l]lin ----569= and iwesusulelITsee variabom na i "cinfo"
+===
+botT
+s and multip	Progrs and multi =bjeci t)by
+2. mentofymprescients
+=want tcally raw data: (esiva fromm.l
+A4mit_viouslud rt tonw ,tureP2ptr +DCTSIZEaptr- cally raw data: plicaa "ata:
+(ients" 	PouleatA S-PASS1_BITSkd
+y   /=n-Pata: cients
+rPoule :
+	chfknow2/  A
+dataptr[plicaa  vdio
+lyons
+al ded  livsee n  r d a cients
+rPoule o) for full
+detdoexomagh) daels ,  sxamscuraw dLE Or byIfon  psee jpeglyntd774 cients
+rPoulecayed mustsopeomprescients
+ vdio
+lyons
+
+PEG lige datA r selec the ultinttsexvepONTokinASke:
+taFILEN*binfrom;
+	...
+	s) ((infromN= fopeo(fromna ica"rb")) == NULL) {
+	    fpA) tf(At arrju" li'tsopeom%s\n", fromna i);
+	    exit(1);
+	}
+	e be_lydio_src(&cinfo,binfrom);
+
+wS-re urePA----ty,  ikvok Thjpeglyntd774 cients
+rPoule byWARNING:biamssxc ltselen
+featurePbs mfeaturey raw data: bexaptr[unchtypidt
+Oomnon-Unix syxvemThjpeglydio
+ASS1_BIT aITcerappl newty,  translailtip=r
+DCTEAwi-e-corruptdbs mfeaomm itA oexecure7,onsi2 behiliprcayed maITtrame hesee
+* "b" read
+i detJopeom(ainby  as ndve), =rIsee set	Por()/=== TDCTEAS[tbtoge go
+c eans p vdio
+lyons
+ Sk/bs mfea	Poral See ce be.cp	Proge be.cp====ZEemance 
+hathtryinftbl]lso IorresserineasyxvemT.vided maITter f typi-ilsIgta: cients
+rrtwryi cate refe be_aptr_hptrer()o	Pr
+e be_fyrash_  s and mu()tioIfon  pwishDgovaptr[D eere th= ace.
+
+y
+   so=lic
+* A FIl_pcients
+ead cayed by the appea tnt te be_aptr_hptrer()oth
+e be_fyrash_  s and mu() Aequrtcehde td eareyramto  b) daeiCTEAS
+reace.
+v=bjeci ltintetgta: cients
+rPoule;sntoinit_ventstb-time oaenpresata: plic
+PEL(voamsc774idt
+y
+3. C* vee be_aptr_hptrer()otheobtain e
+   cinfo by r selec the ultinttsexvephi-  usa
+
+	e be_aptr_hptrer(&cinfo,bTRUE);
+
+n isae  veBItr[preslients
+omm tions
+ hptrern
+You sh,
+uptphent t aginny prywant tcally raw data: eropesitAOomBIturn,dthepe
+   coimment
+	2/*= (DCTEA
+info hile tryinrtoext Skant tce.
+
+=bjeci    S-P-interface cmaITwishDgo
+c nsforlsg thinfopliclti PEG libed data(voams and multiple imagessi
+
+M libturelex  the ointedit(_BITif
+  * A nageme4L(voata: (ients
+isoplicaatiTSk 
+featZ--e-e be_aptr_hptrer()
+    maITBIturnnPEG libi phathaptr[Dlldthephptrernomm itASee "y management
+	",
+    belowal n _ptetm-hp vdio
+lients
+ring
+	Mhe  veNOTeelsee eriawthehapeme.
+  * Aility consice.
+
+plicaw*lib oebibcondit(emeatiTey commelesiltip=n
+    aility considerations
+satASyntd774 taions
+	Pca2 nce pda-hpsslITSk
+    Skgesf typi-ce.
+
+plicawarameter rromp6
+ernnside to roine semeiCTEA byIamssxCesmorsibS-Dgovssop--rlsg thuoykgoo) for  usa fullame hefinddd eans 
+e
+   coimment
+	2/*= (DCTEA hptrerninfo ultia=ce.
+
+plicatAInd
+featZ--e,
+flelme be_  eseoy()ication  parrodone de tojpe-ce.
+
+=bjeci,vltimate
+e be_abomp() govBIturnniiDgovatos>= /lynte PEG libed data(voa
+tew
+dera
+cients
+	Proaptr) da TDCTEAShptreraby
+4.fSeoule imagesW
+====  s and multi.
+be be_aptr_hptrer()osetryaperopA)nteogrfaforlams and multiple imagessu---e ess
+jpegitopesti su=want te
+   c(inbf yoeffoar, St- ca*ntwnsam).tAHow we ivn  
+maITwe veIull detalgesnntese grfaforsatEG lib aginny pintetgrs and multi.
+rary lists.,mntongrfaforliawtheitoduts
+eG veZE*nttd epresflicaa ZE*nt ar calIfon  pfull ZE*ntm-inxt d epresyed mustsasko====ittioOCTEA-read
+ifu*llowans 
+BIturnicae
+   c oebibe la r[DCTS*llowavariouselenam/qun you  radeoff / oebi
+	Specimdal "ams and multiple images
+	Special ",ebelow,
+g+3));  tmp12icaIfationgrfaforsa*lib	heropA)nte,eterh) daaramerrodone -rlsg thesepte added
+feata versfaforlsaluein*libseeabyieachsmatedthee be_aptr_hptrer()alIfon  presee * grs and multi =bjeci,fyed  liter expeci n  r le images
+	Stty pW
+ oebibcoeserv r[Dcro7,ocycl s, asfyed  liv====s and multi.ided mustsxeourewrext le images
+salueineachs;
+ ia
+b
+5. e be_lynrt_  s and mu(...);
+yO(ceotheple imageslsaluein*libs
+	Psfaceons, elelme be_lynrt_  s and mu() go
+ agintgrs and multi.ion isae  veyramto  by ykgesnavelynte,=*lloc ofSIorress
+mtions, stifpoele e ultiBIturnL(voata: by r selec the i-  usa
+
+	e be_lynrt_  s and mu(&cinfo);
+
+Ifbn  phile requresed a_ for -casthophem.
+ss
+mand isuchfas 2-casthco*nt
+qunt tz
+	Pca,me be_lynrt_  s and mu() e  vedoe we yrh) daaramamerrG libaera
+d eprese surrginatAInd
+foine seme be_lynrt_  s and mu() maITtake quis abo:
+	Fu
+co eureleteal ue to* A FIl_-e liP(ncationASesage
+)bce.
+
+ead i	Progrfafor
+ams and multiple imagess,mntoine  v to thapeme;me be_lynrt_  s and mu() e  v
+BIturnnquicklsa
+yAfges
+
+foine te, ere
+ainaved epreso
+   coimment
+	2,uSkd
+y ) dainearequresed
+e la FI,a*lib	vaioabom Skant tce.
+
+=bjeci;beret itionlSpecimd ZE*ntm-i,ms)
+ZE*ntm-inxt d epreshathtryinrequresed   UseJG e=relds ind
+y  
+
+	d epre_width		imp6 
+widthNstifhe use,uainb la r
+	d epre_he use
+	d e_ZE*nt_tureonents	# TSIZE*nttmpreonentstii = e_ZE*nt_wnsam
+	d epre_tureonents	# TSIZE*nttmpreonentstBIturnicapEASSixe1
+	ZE*ntm-i		tionlSpecimd ZE*ntm-i,ms)aine
+	actule_tumber_of_ZE*nts		tumber
+=waentre thiinZE*ntm-i
+
+d epre_tureonentset i1
+(* tE*ntm-isondex)icatioqunt tzy pc t*nts;IDCTEAwi-e-it
+equn s d e_ZE*nt_tureonentstioIt ssxtheptumber
+=waJSAMPLENsaluein
+feate  vebi
+emStticapEASSixe1oSk/ilsI- epresarrays by r selelITyed e  v trame he*lloc ofSata: b-timeawthehn 5 ilsIentur) dae
+   .ided e  vetrame= epre_widthN*bd epre_tureonentseJSAMPLE,tpEASe lity,  inxn  r
+d epresb-time, stifasto rs
+=wa= epre_he useal lity, s I  ve apBIturnicte adde:ms) for *libseon _ere
+ce.
+
+ASS1_BI'inykgesnaveme library.  re he*lloc of
+ata: b-timeaw(ainge becdoes),fereompresary.  r'4mitatoZE* requiBIsd
+featyed
+requrestlar
+	 b-timeaw*rrG li*/mate refe be_lynrt_  s and mu()wion isairya
+ yotFunctickyt(L(ceoilsI= epre_XXXe=relds *libter aetm-hlITsali4 ereoal dedve sumake eremTsali4 byimate refe be_matc_= epre_oimment
+	2()oafges
+	Stty p(ns 
+BIlevull Se imagesW
+(x la FI,ad epresew (downsam, stifqunt tz
+	Pcahflag)w
+
+
+6.o:
+	Fun(e liProgeinremain the apaptrmore be_aptr_e lity, u(...);
+
+N Alyed  livaptr[pres ms and muw de
+   comm hbyimate refe be_aptr_e lity, u()
+one ===r libgims.al Ateeachsmate, for cass in ----m-ximum number
+=wae lity, u
+the apaptr (ie,mthephp useh= an  r Iorress
+b-time);fe be_aptr_e lity, u()
+e  veBIturnnuptphenteatrineaty, satATrePBIturnnsalueit itionnumber
+=waty, u
+actulelITaptratATreP===lic	=want tBIturnicaomm hhsxamscuraw dse ar "Erro
+ handli",  ndve   Don't G l
+	troteatgraye la c = (ZE*nttce.
+ine  veBIturn
+am bthe
+im mm hppplics!byI
+   comm histBIturnicain -apano-bottom e lity, t==de al Ifbn  pmustswils 
+d eans ptmp6 [Sk/bottomano-sop-==de ,fyed  livsee_ere
+ce.
+
+ASS1_BI'invirtule
+trray
+mation sl thei6 
+ai[pres ta: s before lsa  Exists.st wantoine surr
+ftbl]lin ----xists.n-interface cde be.by S-PASS1_BITmaintain- * cterosoC(theptumber
+=wal lity, s BIturnicasoef-r
+in ----= epre_e lity,  freld =want tce.
+
+=bjeci   UsulelITyed  liv usa tie
+--is variabom  sxurePAoop-cteroe ,fson
+featurePAoop-t esuNTokinASke
+":
+	Fun(cinfo.= epre_e lity,  < cinfo.= epre_he use)"al (added
+feature-t es
+by the NOTe apagainseso
+   _he use,uselp7,on  parwe tsee s la FIatATre
+imp6 _he useNfreld t itionhp useh= a----=riginaveune la r[e
+   .)
+TrePBIturnnsaluei	lwayeIequn s trePf typi-Compressalueu=w-= epre_e lity, ra
+Ifon  pdon't see * nageme4L(voata: cients,biamssxeafe( he*muul tnce 
+e be_aptr_e lity, u()Eaptr- ry
+------one e lity, tpEASelel,   tilsns 
+bottom =want te
+   chathtryinreachicte Ifon  psee * b-time
+lar
+	Mh
+fe0]oae e lity, ,biamssxNOTeeafe( he*muul tnce 
+e be_aptr_e lity, u()Eead12fyi   (TreP
+Trhe
+iDOSctions 
+	PcaoBIturns(sslITo
+ ew l lity, s pEASelel, nhematges
+  Allar
+	 * b-time
+for cass.)ioSobn  pmust
+	lwayeI*4];
+  TaPAoop-tfeatZ-d12fe be_aptr_e lity, u()Eappea edlITs tilsns 
+wholePe
+   chathtryinreadw
+
+
+7. e be_fyrash_  s and mu(...);
+
+Afges
+alldthepe
+   comm hhathtryinread,eelelme be_fyrash_  s and mu() go
+turelete
+nt tgrs and multi eycl w  TttseelseesSIorress
+mtions eraoc cons
+de tojpe-ce.
+
+=bjeci the apap----edaby r selec the:
+
+	e be_fyrash_  s and mu(&cinfo);
+
+Ifbseon _ere
+ vdio
+lients
+ring
+	M, don't G l
+	trovifloee ere
+cients
+ vdio
+tions
+ o) tedit(_BI.
+yIamssxaase) imaco elelme be_fyrash_  s and mu() rrG libaptr) dajpe corrITt
+to rs
+tumber
+=wal lity, satAIfon  pwishDgovabomp grs and multi,u lel
+e be_abomp()  sxamscuraw dbelowabyAfges
+eurelet refa grs and multi eycl cayed maITamspose =want tce.
+
+=bjecicas
+amscuraw dnext, =rIyed maITu-e-iea hegrs and mue TDCTEASe
+   atAInd
+featZ--e
+BIturnn oexveis2 =rI3  sxaperopA)nteatAIfon  pdoeter f typi-ilsr ients
+ring
+	M, ntettext
+imp6 
+wi ve apBItr[plica real l t ients.
+
+
+8. Re----e-----ce.
+
+  s and multi =bjeci byWation  parrodone de to* ce.
+
+grs and multi =bjeci,f  eseoy-ieabyimate re
+e be_  eseoy_  s and mu() ===e be_  eseoy()ion S-Pft_viouseamscuraltip=w
+  eseoy) dap4and multip=bjeci /*cute thS-re uoo by r selec the:
+
+	e be_  eseoy_  s and mu(&cinfo);
+
+
+9. Abomprogra
+ded  li abomp p grs and multi eycl abyimate refe be_  eseoy_  s and mu() ==be be_  eseoy()cifon  pdon't trament tce.
+
+=bjeci anear li,v==be be_abomp_  s and mu() ===e be_abomp() ifon  pfull detapsee_ere
+=bjeci b S-Pft_viouseamscuraltip=w abomp) dap4and multipcycl s/*cute thS-re uoo by
+nation managers)
+	I/O suspension
+	Progressive JPt */
+
+   ac
+tion  parame pericatiarame pericatianAaions
+	Pca2 seon _ere
+ce.
+
+ASS1_BI by the O suspenthephptrernead ie been *m
+theobtain grsoar
+	Pca2 TSIomm htr  2/*= ([tbtogeitioBEG libikd
+y ) d
+e been *m, O suspensyxvemphptrer2 nce pdafy, thea----------tr  dafs FILEN	Pr
+s by_titAOomANSI-mp6appl refsyxvemT,uSkd
+y ) da< vdio.h>soinry before ;ess
+olrernUnix syxvemTcayed maITtrame<syx/er  sih>s hegrfy, ts by_ticaIfation-interface ctramsanatapfesntheindiv)dun  2ptr +DCTSIZEe) ima thes, alsh
+yrsuspenje) im.hs hegrfy, tshoee symbo12icae been *m hadiBITtbasSkd
+y   /ere
+ail s/jmp6aig.hNstifjr licfg.htioI) for *li
+in-tmte refere
+ce.
+
+hptrernead fuSk/* AyxvempdiBITtons, yed e  v full de
+in-tmte/* vei  r plica: e been *m, je) im.h,/jmp6aig.h,fjr licfg.htby S-Pr souZ nwetore  way
+theO suspenthepce.
+
+s d  ykgovn  r execu*abom present
+iawtheitele e a +DCTSIZEead i("+DCe be.a", ltia=corrIspee ) dana i oomnon-Unix
+richogei)
+	Proapuft as  y tai n  r rogroeseptioIfon  psee sslIThalf =want 
+ASS1_BIT(sslITs and multip===sslITgrs and multi),bsslIT teatruchfs d  e  vebi
+O susper[plica reaASS1_BI,uselp7,on  r rogrerni /  pelp7,lITrrain-damp6 d b S-Pxecute dhmakeead fubuihe lDCe be.aTautarytselelIT(ey cin-tmte.txt) byWaad iyed  livbuihe ere
+ce.
+
+ASS1_BI atha=sh*lidPASS1_BITSfation:
+	calyrSke,
+for iwesdon't rnd basirs ametify ion S-Pseour cbde tosh*lidPASS1_Be thi	N
+fea
+*t rome uoykgoyed' veprebaboypnBIT oeApplyitus abotew
+ 
+apE*0]=want t had parde td earep4res ) dajpe cate refaaions
+	Pca2ion Seatgene thlITdoesn't Iorr
+becasee ere
+le images
+	sersifgrsoar
+	Pca2 usulelITf typi-de toeachstew
+ 
+apE*0atAIndDCTEASwo74s,nd it had pa's APIhi	N*ter*mguar
+roew dbs mfe
+  CO for cbDcro7,o 
+apE*0s;iwessslIT BIT oeeenons  ients-s d    CO forn youin(Indhogds use,uSt m use hile tryinrmargesnthehide ere
+le images
+	sersiso=lic
+*aions
+	Pca2 *l]linttoduts
+astoip=w acdit(ap 
+EX(1.4min-tptratAToodLE Oyn A,
+how we t)byOn rome syxvemThn  r -interface cmaITtrame hexeouupo* A gnavege da	Me oeeenons
+nce pvempoTSIZEead s *libdeletedTSfationpresentois	Coterruptedwion isairyr so
+c ltselens) for *libdn MS-DOS *l]lsee ere
+jmtidos.ceme library.  rebackeeed;
+St e  ve BIT oesenbvextte ademe librultinempnsion
+	Pandd
+featwnsamte  veNOTerr
+frrameeutarytselelIal See ce be.cp=== e be.cp====aasexists. A gnavege da	M.
+yIammaITrrowo7 touoykgy p(Dutd
+feat t tc libce.
+
++DCTSIZEdoesxter actulelI
+requiBIhjpeglydio
+ASS1_BI:bsslIT tongrfaforlsients/gress monitoring
+	Me/*Pr
+e) image da	M tramei al ded  livsee_ere
+ASS1_BITSkaa  vdio-lp7,oenvironons 
+ifon  preplac tshoee rPoules *l]lsee jmtinobs.ce(=== TDCTEASme library.  re=w
+n  r d a dItisnng)al M r 
+info  nd eans pl rimum Ayxvemp+DCTSIZEapquiBIics o
+maITrroftbl]lin jO suspe.htby
+ADVANCED FEATURES692)7 *atttttttttty
+
+	Compressedle images
+	Special Pt */
+
+   ac
+tion  parame perica
+
+n isalesiltipgrec lb  /* veere
+=ead
+ilecle imagessfyed  livxeoufnttce.
+
+s and multi,uathwe ve sxureP" slper" [tbtogeinitations, he*muistdSk/ilis
+taskatAPtopes
+	Stty p(Df rome ue imagessfrequiBIsd  tmp1w dse arlyntdy prywant tce.
+
+lyntd774;oifon  pdon't know wce pable images
+ysfapp, St usbest
+to tthemp7,ode toit!l See REFERENCESdSk/ilsI code for c ====coykgess th
+m r 
+info  nd eace.
+.
+yIa us
+ goo]lideaaco elelme be_let_  fafors()=airsi,( wetos) for clane hexeo
+alldtheple imagess;n
+feateayhn  r  the i- m r 
+ASkelIT oeIorrede tofuionsnce.
+v had piIsd
+feathile adThe fiavele imagessionrary real l taptson, wesBIs ameti
+n  psee *  slperS[tbtoge wS-re oge i /itations,uSkapapuft as  phenwiddata
+
+cinfo =relds amBITtba.by S-P slperS[tbtoges *li:
+be be_let_  fafors (j_s and mu_ptr cinfo)
+	n isa[tbtoge setryallace.
+ple imagessanataptsonabom	grfafors,ntion 
+	sslIT tonenpresomp6 'ssaw (downsamf(freld tk_ZE*nt_wnsam, :
+	chfmust
+	alBItrITrroxeouSk cinfo)al Maneataions
+	Pca2 e  vesslITtrame hesee
+	t isa[tbtoge stifperhapsme be_let_qun you() bye be_let_ZE*ntwnsamt(j_s and mu_ptr cinfo,tJ_COLOR_SPACE ca*ntwnsam)orSeosant tce.
+
+or c'- ca*ntwnsamf(freld e be_s *nt_wnsam)  sxsentofiic,
+	andv	S s DCTEASZE*nt-wnsam-aeite ell Se imagesW
+aperopA)ntelIal See
+	"mentorssaw (downsams",ebelow,
+rrG libseon _eri.al A=lar
+	 number
+=w
+	le imagess,mSkd
+y ) dai veper-tureonentple imagess,m*libseeabyiilis
+	[tbtoge; ifon  pfull detnwiddaeeindiv)dun  le imagessfyed by the elel
+	e be_let_ca*ntwnsam() rrG libaaCTEAS
+ratoafges.
+be be_  fafor_ZE*ntwnsamt(j_s and mu_ptr cinfo)orSepecis atoaperopA)nteoce.
+
+s *ntwnsamt---e ess cinfo->tk_ZE*nt_wnsam,
+	andvZ-d12fe be_let_ca*ntwnsam()wion isairyactulelIT* nab[tbtoge =w
+	e be_let_  fafors()tioIt usbrokei = e Sk/maee n  pfull detf typi
+	eusat t tc *ntwnsam-aeite ell ce.
+ple imagess bye be_let_qun you (j_s and mu_ptr cinfo,tykgoqun you,
+rool livG lce_---ety, morCeedpersisoce.
+pqunt tz
+	PcahtabomsoaperopA)nteoultintetindic ofd
+	qun you 	Stty pion S-Pqun you salueit iexnd muw dssens p0..100nb la 
+	[Is ameti oatio569=(ce be're"-qun you" sde chfseesSt isa[tbtoge) b	added
+feature-rxaTt m-ip refplicaqun you salues thenabomsomaITf typi
+	Sk fuionsn569=re----esSathr libi /Aearnica nd eaDCTpqunt tz
+	Pca b	IfationG lce_---ety, ble images
+ysfTRUE,fereompresqunt tz
+	Pcahtabom
+	entre thalibtundpeainw dphent trtypi-1..255oultieG vece.
+p---ety, 
+	ZECO forn youitAInd
+feP
+Trhe
+iDOSctions 
+	Pca,mntoinsslITmakerya
+	am bthe
+ceoultiqun you 	Stty psebelow 25justify te btsilvelITit_vents
+	 ney Am	ll/low qun you ead s plicaPEL(vogene ttedwion sn569=grs  ar
+	tseelpabom	ofbaptr) dajpe non----ety, bead s gene ttedthea-ow qun you
+		Stty psecatioG lce_---ety, btseFALSE, presDCTEASgrs  ars maITter be bye be_let_ty, ar_qun you (j_s and mu_ptr cinfo,tykgob la _faceon,
+			
+rool livG lce_---ety, morS l t sxe be_let_qun you() exceptd
+feat t tgene ttedttabomsoaBIhjpe
+		ists. tabomsogiwetoSk/ilsIce.CxsentalesiltipK.1,_ for MSi oatioere
+		entofiicae la cfaceon (:
+	chfysfexnd muw datha=peramntp6 ;n
+fus
+	b la _faceon = 100nree oduts itionlent'retaboms)atAadded
+featlar
+	M
+	b la cfaceonsogiwea-owetiqun youwion isaentreauoykgoisopliJG e=or
+	ZE6appl refphent tAdorroP soSc lpeaDCTpZ nwettt
+	2,upreswesdoTter
+	[Is ameti ty, arse la FI atha=plir-tisnbom	qun you 	 la cDCTEAwi-e b	G lce_---ety, bagainbtundpeains trePf anutedttabomaentre thdet1..255 byykgoe be_qun you_e la FI (ykgoqun youmorCee 
+aitha=salueu=n ----569-[Is ameti oaqun you 	 la cgovatty, ar
+	b la FI peramntp6 atAadded
+featt isa[tbtoge maITf typie===govaeay
+	Sk fuionsnre----esSatiT569=maITf oosf thead=eaT* n la FI maghodd
+fea
+	Zli'tsbefexnd muw datha=e rele n laar_ for MSi r,	Com:
+	chfc--e----
+	lBIiise =wantisa[tbtoge c *lapseitioCileat sees.
+be be_  fafor_qtabomso(j_s and mu_ptr cinfo,trool livG lce_---ety, morSeourefaforlqunt tz
+	Pcahtabomsode toty, arsq_b la _faceon[] salues
+	(ey cbelow) bye be_adT_qunt _taboma(j_s and mu_ptr cinfo,tykgo:
+	ch_tbl,
+		      tundp unwritxt ykgo*---ic_tabom,
+		      ykgob la _faceon,trool livG lce_---ety, morbllows atoarbitTSIZEqunt tz
+	Pcahtabomwthe ap onsoedwio:
+	ch_tbl
+	Skdic of. :
+	chftabom slo ttheead1wio---ic_tabomauoykgsDgovatotrray
+	sf 64 unwritxt ykgsogiwetoSk/tetm-hparray
+==de al n _selsaluein*li
+	 for MSi oatiob la _faceon/100n	Proilsneelistw dphent trtypi-1..65535
+	(imaco 1..255oifoG lce_---ety, btseTRUE) b	CAUTION:epA)imaco +DCTSIZE 
+apE*0]6a,me be_adT_qunt _tabomaexpeciic
+	tion---ichtabomwthe apgiwetoSk/ce.
+pzigzagt==de al Ifbn  ptrame h
+	wils aZEemance pIorrinde toeiCTEAS=lrernaryneweti 
+apE*0s =wantis
+	[tbtogecayed mustscheck_ere
+ASS1_BIT 
+apE*0]numberal Somagh) daASke
+	"#i ace.
+_LIB_VERSION >= 61" t itiono use-t es bye be_l rele_ionASesag*0](j_s and mu_ptr cinfo)orGene ttes p grfaforls livxc lpeaultiIZE*on _ationASesage
+-ce.
+
+plica
+	n isat itionoIs ameti oamaghoddTSIZonsonn _ationASesage
+
+ead c
+	selp7,on  pfull detmake a custom e li Aequrtcetioded mustseenons 
+fea
+	tionce.
+
+s *ntownsamfysfseeacorrITtbasPEG libmate refntisa[tbtoge by
+
+	CompressedSe imagesW
+(cinfo =relds)eO suspe:
+
+rool livaZE*h_s deb	IfaTRUE,fsee *ZE*hmagicaZEerogra	IfaFALSE, see H-timais throgra
+ykgoblock_s byorSeouDCTpblockts byal A veN plica1lso 16w*libforsibS-ra	Drfaforliaw8 (---ety, bepplic) b	Lar
+	Mhsalueinitoduts
+h usEASs and multic
+	Am	ll	Mhsalueinitoduts
+h usEASqun youworbn-rxaTt DCTpst   cysfiorsibS-Dde to1nary2worue to reagrfaforlqun you TSI75i	Progrfafor Lul rmage qtabom
+	 reaDCT+Qunt tz
+	Pcahst   cysflorslp7,oultisalueu1 b	added
+featsaluein=CTEAS
+rato8frequiBI a SmargS la celpabom	grs  ar,
+	) ttodutsside to569=ce.
+
+8al Setty p(ere
+block_s byble images
+=or
+	ZECompressedIorrinde to 
+apE*0]8cp	ProLE Or byJ_DCT_METHOD dct_maghodorSepecis tion-lgoZE*hmoplicaultintetDCTpsteptioChoices *li:
+		JDCT_ISLOW: slowupresa
+
+Trnteointeges
+algoZE*hm
+		JDCT_IFAST:cfasoe ,flp7,oa
+
+Trnteointeges
+maghodor	JDCT_FLOAT:cflosonn -uoykgomaghodor	JDCT_DEFAULT:cgrfafor maghodd(tetm-hlITJDCT_ISLOW)or	JDCT_FASTEST:cfasoesr maghodd(tetm-hlITJDCT_IFAST)
+	n e FLOAT maghoddi,o 
+aiobl usely=r liba
+
+Trnteo
+fe0]ere
+ISLOW maghod,
+	presmaITgiweaam bthe
+imr efor
+u=n am bthe
+imrichogei dumwthev_BIon 
+	rtbl]off behiliprtion _pingeges
+maghodinby the giwea real l tapefor
+
+	ssai verichogeiitAOomrichogei de tosu before lscfaso FPmhardw*li,/---
+	flosonn -uoykgomaghodsmaITaherebea reafasoesrwion sn5FAST maghoddi,
+	ZE6si araboyplp7,oa
+
+Trnteo
+fe0]ere
+=CTEAS
+wo; St- u-e-isTter
+	[Is ametiedTSfah uslqun you i- * ct6
+ernal 2DCT_DEFAULT/*Pr
+	JDCT_FASTESTw*libmDcro7 mp6aigurabom	byieachsin-tmtesonitwe unwritxt ykgob la _num,ob la _denom
+	S la cthepe
+   ctioere
+arasiltipb la _num/b la _denom   Drfaforlia
+	1/1, ltino s la FIatACTrhe
+ilI,mntenry comped n la FI r
+	Pcin*li
+	M/N de to* veN plica1lso 16, wS-re Mat itiongress monitoDCTps by,
+	:
+	chfysf8ctiogrfafor (ey cblock_s byble images
+ ndve) b	( S-PASS1_BITrewrgnS*lloww ====*rbitTSIZEn la FI r
+	Pcinpresntia
+	isTter/ASkelIT oebibOSctions  r[DCean be soitw)byJ_COLOR_SPACE e be_s *nt_wnsam
+ykgonum_tureonents
+	n e ce.
+
+s *ntownsamf = (ZErrIspee ) danumber
+=waZEanonents;Tey 
+	"mentorssaw (downsams",ebelow,
+====r libinfo.  WonoIs ametintion 
+	e be_let_ca*ntwnsam() ifon  pfull detf typi-ils-e byJ_COLOR_TRANSFORMsaw (d_transappl
+	Ikgesnaveaw (dotransappllidet tfi r,	wils s LSEn
+You s o) tonzerh
+	(requiBIsd  s  arode toie 
+aseeaw (dotransappllry comp,linttodutsr
+	de to569=ce.
+
+9) b	Twolsaluein*libcTrhe
+ilIfiorsibS-: JCT_NONEN	Pr JCT_SUBTRACT_GREEN.orSeou--is valueu====lorslp7,o GBe-interface c*rrG li*/mate re
+	e be_let_ca*ntwnsam(),ebecasee entropyhtabomwemu)itme
+imii
+	e be_let_ca*ntwnsam() aeite ryonsaw (d_transappl.
+
+rool livreadmtze_s dy pr	TRUEeelseesStrePf and muorigovf anutevreadmaveH-timais throghtabomsb	G lcthepe
+   wion isarequiBIsdaasextravcasthowe tpreaomm hanc
+	tiorEG libmostus
+ goo]lda-hpsfownsamf = (;
+ ial n _pdrfaforlia
+	FALSE, :
+	chftel 4 trePf and muorigovsee jpeglecute dh===  fafor
+	H-timaistabomsatAIndm souZ--esvreadmavetabomsosile sslITo=few peramnt
+	sf or c s bybZECO ext detprepdrfaforltabomsatAadded
+featwreomprisair
+	TRUE,fn  ptrameter/xecutypH-timaistaboms eata v, stifanyon  pdo
+	Aecutypwi ve apowe IZE*ttew
+ unwritxt ykgorelynrt_ykgesval
+ykgorelynrt_yk_roww
+	TofemSt(relynrtn
+You sh Skant tce.
+
+ead caseeaoneu=want se tonzerh.orSeourelynrt_ykgesvale hexentofympresrxaTt ykgesvaleSkaMCUcblocks.orSeourelynrt_yk_rowwe hexentofympresykgesvaleSkaMCUcroww   (If
+	[Ilynrt_yk_rowweisTter/0,fereomrelynrt_ykgesvaleysfseeaafges
+nce
+	imp6 
+widthNSkaMCUsmssxc anuted.)ioDrfaforsa*libzerhd(temrelynrts) b	One(relynrtn
+You s pEASMCUcrowmssxoftte 
+ goo]lchoice b	aOTE:]ere
+=we hptr	ofbaplynrtn
+You sh Ss
+h usEASSkagraye la cce.
+v	plicawtfe0]iinZE*ntnsion
+	PanddMUCH
+h usEASSkaionASesage
+
+ce.
+ira	Ifan  psee relynrtscayed maITfull detsee lar
+	Mhykgesvalh Skantoee
+	Z--esa
+
+tundp e be_l li_info * l li_info
+ykgonum_l liw
+	Biogrfafor, l li_infomssxNULL;sntoinelseesStrePf and muorigovwils ab
+	A FIl_-e liPAequrtmto =ce.
+
+plicatAIfTter/NULL, l li_infomuoykgsDgo
+	anparray
+=wal liegrfy,i	PcaoBIedr s =walengthNnum_l liwatATre
+	f and muorie  ve hyinIZE*y tbce.
+
+or c hili p(Dae e lin====eachse li
+	grfy,i	PcaoBIedr wion isairyplica oesene tte tonykgesl lv dh==
+	lBnASesage
+
+ce.
+nsion
+atA S-PASS1_BITchecksd
+feat t te lintrray
+	grfy, tha=salisice.
+
+e li Aequrtcetio(e be_l rele_ionASesag*0] onsoew
+	* naitabom s liegrfy,i	Pcaoarray
+====cBnASesage
+
+ce.
+.)ion isair
+	amscuraw dfurCTEASse ar "PBnASesage
+
+ce.
+nry comp".
+
+rool livdo_fmagy_down	istsy pr	IfaTRUE,fsee amBITtoDCTps la FI de toDCTps by >f8c==== own	istsy pr	=waZhlicaaZEanonentsra	IfaFALSE, see sslITDCTps by <=f8candv	 rele nele  ofSaown	istsy pra	DrfaforliawTRUEra	rarybetges
+e
+   cstabn you/intrfor MS tgene ttg*0] 4and multipcycl s
+	iamssxCapuftabomwtfeatt isavalueumatchesStrePf rrIspee ) d
+	ao_fmagy_up	istsy p salueitntgrs and multi.a
+ykgosmoerh) d_faceona	Ifanon-zerh,T tonenpresomp6 eysfsmoerhed;pils salueiby the  ap1
+=or
+	l rimavelmoerh) dlso 100
+====r-ximum lmoerh) datAC nsforljcsists.
+Tb	G lc  tmp12]=want tlmoerh) dlalgoZE*hmal n _pdrfaforlia zerh.o
+rool livIZE*4_JFIF_hptrerr	IfaTRUE,ftbcFIF APP0n
+You s os emSttic. me be_let_  fafors()=anc
+	e be_let_ca*ntwnsam() seou--is TRUEes)aibcFIF-lego =ce.
+
+aw (downsam
+	(ie,mYCbCre===graye la )eysfsepecimd,IDCTEAwi-e-FALSE.o
+UINT8bcFIF_maj(d_ 
+apE*0
+UINT8bcFIF_min(d_ 
+apE*0
+	n e  
+apE*0]number the apIZE*tte ykgovnt tcFIF 
+You s.
+	e be_let_  fafors()eyramto  bysStreP 
+apE*0]co 1.01 (maj(d=min(d=1) b	Yed by the xeouSt]co 1.02 (maj(d=1,_ in(d=2)os) for clane hewils 
+	aneacFIF 1.02 exttesnitoriou sh.o
+UINT8bdtesnty_uram
+UINT16 X_dtesnty
+UINT16 Y_dtesnty
+	n e d molutg*0]infopliclti the apIZE*tte ykgovnt tcFIF 
+You s;
+	ter/plicaDCTEAwi-e  bdtesnty_urammmaITrro0
+====unknown,
+	1c==== ots/inch, lti2c==== ots/cmal n _pdrfaforlsaluein*lib0,1,1
+	Skdic o refsqu*libfixe12 agernknownel byao
+rool livIZE*4_Adorr_
+You sr	IfaTRUE,ftntAdorroAPP14n
+You s os emSttic. me be_let_  fafors()=anc
+	e be_let_ca*ntwnsam() seou--is TRUEes)ace.
+
+s *ntownsamf GB, CMYK,
+	ntoYCCKeysfsepecimd,IDCTEAwi-e-FALSE.ioIt ssxgene thlITa ba]lidea
+	thexeoubotT
+IZE*4_JFIF_hptrercandvIZE*4_Adorr_
+You satAIndface,
+	for crebaboypby thei'tsf typi-ilsIgrfaforlsStty pseeata veatiTt e
+	grfaforlbehilipr
+menons. nce pnt tce.
+
+or c'- ca*ntownsamfe surr
+	[Is gn byoatioere
+  s  ar byJQUANT_TBL * qunt _tbl_ptrs[NUM_QUANT_TBLS]
+	Poykgess th cas before lqunt tz
+	Pcahtaboms,(Dae pEAStabom slo ,
+	ntoNULL o) toStabom hsxa finw  ultia=slo    UsulelITnt se by the
+	rroxeouvia oneu=want t ndveP slperS[tbtoges;me be_adT_qunt _tabom()
+	isTgene th
+meoughs hegrfy, taneaqunt tz
+	Pcahtabomal n _pDCTEA
+	[tbtogeine  vexeouupotabom slo t0
+====lul rmage qun you  = (;abom
+	slo t1c====Zhlic rmage.a
+ykgoq_b la _faceon[NUM_QUANT_TBLS]
+	Ly, arsqunt tz
+	Pcahs la FI faceonso(peramntp6 ,eyramto  byd 100)b	G lcsee de toe be_  fafor_qtaboms() b	See r sde ch.cp	Proce be.cp====aasexists. agers)
+	 b	added
+feature-q_b la _faceon[] =relds *libureP"ty, ar"pb la s, sonyed
+	hile th ca6 
+ai[plicaplir-a finw  em.
+sssuvia e be_qun you_e la FI() b	H-re ssxaasexists. s d  e
+	chfc rrIspee s th ce bec-qun you 90,70:
+
+		e be_let_  fafors(cinfo);
+
+		/*
+Seoulul rmage qun you 90. */
+		cinfo->q_b la _faceon[0] =de be_qun you_e la FI(90);
+		/*
+SeouZhlic rmage qun you 70. */
+		cinfo->q_b la _faceon[1] =de be_qun you_e la FI(70);
+
+		e be_  fafor_qtaboms(cinfo,tG lce_---ety, m;
+
+	CAUTION:eded mustsaherexeou1x1eApplistsy p ====e before lnele  of
+	ZE*ntiqun you 	Special ,t(L(ceoilsIdrfaforlsalue/plicabyt had par	isT2x2:
+
+		cinfo->s an_info[0].v_list_faceon = 1;
+		cinfo->s an_info[0].h_list_faceon = 1;
+
+JHUFF_TBL * dc_huff_tbl_ptrs[NUM_HUFF_TBLS]
+JHUFF_TBL * ac_huff_tbl_ptrs[NUM_HUFF_TBLS]
+	Poykgess th H-timais throghtaboms,(Dae pEAStabom slo , ntoNULL o)
+	teStabom hsxa finw  ultia=slo    Slo s 0n	Pro1 *libead1nside to re
+	ce.
+nrists. tabomsobyte be_let_  fafors()tioIfbn  ptrame he*lloc of
+	r libgabom sversionss,me be_*lloc_huff_tabom()mmaITrrou-edab	added
+featreadmaveH-timaistabomsoe surrof anutedt====aasomp6 
+	by
+	Stty p(Deadmtze_s dy p,u sxamscuraw d ndve;pilsrc'- 	Spdom
+	aneatrame hemp7,ode toitatioy p(n  r d a H-timaistabomsa
+by S-Pactulecoimment
+	2/ywant tce.
+
+e
+   c feate  vebipIZE*tte thent tead i	re
+giwetotioere
+aollowy pc=reldsal n _selarrof anutedt=lica reaenpresomp6 
+oimment
+	2/	ProilslZEand multiple imagessobyte be_lynrt_s and mu()al ded  li
+ahereelelme be_satc_e be_ imment
+	2()otheobtain ils saluein
+feate  veapefor
+=lica rea
+Trhe
+iDle images
+	Stty psw  TttseelnTrrou-eJG es) for *libtBIon 
+theiickT* n la FI  ttg*n
+feate  ve
+	trfloee eo p grwrext tar
+	tel byao
+JDIMENSION e be_Iidth		Actulecoimment
+	2/ywad epreso
+   .
+JDIMENSION e be_he use
+
+
+Per-tureonentple imagessm*libstoext Skant tesersi cinfo.s an_info[i]
+=or
+tureonentpnumber iatAadded
+feattureonentseS-re apfesnthetureonentse=want 
+ce.
+
+s *ntownsam,N*ter*mtre
+cients
+e
+   cs *ntownsamal A=naitaboy lar
+	
+s an_info[]oarray
+iu=*lloc ofd byte be_let_  fafors();so) for f oosf ter
+govsee jpat [tbtogecaSt usuptphen  pnhe*lloc ofSnt t rray.a
+ykgotureonent_id
+	n e one-byt iidet tfi raZEemanhe apapedr xt Skant tce.
+
+or c ===
+	t isatureonentionrary realyntd774 aw (downsams, wesBIs ametinyed
+	l lv oilsIdrfaforlsalueu=*lone.a
+ykgoh_list_faceon
+ykgov_list_faceonb	Horizp6tal/	Pro 
+aiselenlistsy p =aceonsoultintetZureonent;fmust
+	bi-1..4oa
+
+o74L(vogovnt tce.
+
+lyntd774atAadded
+featlar
+	M 	istsy pr	=aceonsoSkdic of *   usEA-d molutg*0]Zureonent;fmaneaueots. find
+	t isabehilipr
+quis aunykguisivial n _pdrfaforlsaluein*lib2,2 ===
+	lul rmage tureonentse	Pro1,1c====Zhlic rmage tureonents, exceptb	G lcgraye la cwS-re 1,1ciryplic.a
+ykgoqunt _tbl_no
+	Qunt tz
+	Pcahtabomwnumber ====s anonentionn _pdrfaforlsalueair
+	0
+====lul rmage tureonentse	Pro1c====Zhlic rmage tureonents.a
+ykgodc_tbl_no
+ykgoac_tbl_no
+	DCe	ProAC entropyh throghtabomwnumbersal n _pdrfaforlsaluein*li
+	0
+====lul rmage tureonentse	Pro1c====Zhlic rmage tureonents.a
+ykgotureonent_index
+	Mustsequn  dtetZureonent'inykdex]iinZEan_info[]tio(Baginny piii
+	re----e(v6,StrePf and muoriASS1_BITe  vea  ve hifuSk/*utarytselelI;
+	for don't hile tht)by
+ams and multiple images
+	Special Pt */
+
+   ac
+tion  parame pericatiy
+ams and multiple images
+	Special eysfsomewce p	 releAS
+ratos and multi
+le images
+	Special ,t(L(ceoalld=want tce.
+
+ekgesnavele imagessm*li
+apedr xt Skant tcients
+ead e	Proarameter rrolecute dhtioere
+-interface .
+(Uelp7,on  p*libIorress
+de to*ility consision
+	PCom:
+	chfc--e-ey 
+"Aility considerations
+s",ebelowa)ioDrZEand multiple imagessoca6trol
+jpegiostcondit(L(voaoneu=ncthepe
+   c hegrliwe titTSkaa ===lic	naitabom
+ultintet-interface 'ryplial Manea=want tle imagessoca6trolelenam/qun you
+ radeoff 	PCom:
+	chffasoe  grs and multi maITrroobtainedtheant tlrits
+=w
+agiooexr-qun you e
+   wion ongrfaforsa	Speciant t  usEsrlqun you (slowEsr)
+condit(L(v.by S-Paollowy pc=relds Skant tce.
+
+=bjecim*libseeabyie be_aptr_hptrer()o	Pr
+maITrrou-eJG egovnt t-interface ciinZ oosa(voams and multiple imagess:o
+JDIMENSION imp6 _Iidth			WidthNstifhe usea=waomp6 
+JDIMENSION imp6 _he use
+ykgonum_tureonents			Number
+=waZE*nttmpreonentsyJ_COLOR_SPACE e be_s *nt_wnsam		C *ntwnsamt=waomp6 
+rool livsaw_cFIF_maou s			TRUEes)aibcFIF APP0n
+You s w sxseek
+  UINT8bcFIF_maj(d_ 
+apE*0		V
+apE*0]infopliclti =licacFIF 
+You s
+  UINT8bcFIF_min(d_ 
+apE*0
+  UINT8bdtesnty_uram			R molutg*0]ata: plicacFIF 
+You s
+  UINT16 X_dtesnty
+  UINT16 Y_dtesnty
+rool livsaw_Adorr_
+You s		TRUEes)aintAdorroAPP14n
+You s w sxseek
+  UINT8bAdorr_transappl			C *ntotransappll the ulicaAdorro
+You s
+
+n e ce.
+
+s *ntownsam,useapptunntelI,eysfsomerh) dl=w a gup7,o(L(ceoilsIce.
+vlyntd774 itopesEdoesxter *4];
+  TaPway
+theapedr ei al Ikaioasilc-Pr sousion
+
+adS-re uovnt tcFIF ntoAdorroZ nwettt
+	2,u	Proilsl  s  arode veaps gn byTnt se
+corrITtbaitASee "mentorssaw (downsams",ebelow,
+====r libinfo.
+by S-Pams and multiple imagessunce pdagesmy, tshon---ichitopesti su=want 
+BIturnicae
+   c*li:
+bJ_COLOR_SPACE = e_ZE*nt_wnsam
+	O epresew (downsam. me be_aptr_hptrer()osetryanyaperopA)nteogrfafor
+	b--e ess e be_s *nt_wnsam;-tr selelITiate  vebip GBe lcgraye la .
+	n e -interface c livf typi-ilysfareld theapqurestd epresokaa am bthe
+i
+	ZE*ntwnsam. mrary lists.,mxeouSt]co JCS_GRAYSCALEa oeseatgraye la 
+	d epresflicaa ZE*nt ar ca  (TrisairypliJG e=orPft_viewy p:tgraye la 
+	d epresysfaasoe  
+ratoeG veZE*ntt(L(ceoilsIZE*nttmpreonentstarameter
+	bi-condit(ema)ioadded
+featter a veporsibS-Dca*ntownsamftransapplin*li
+	cTrhe
+ilIfOSctions  r;ayed maITtrame heextte  jdca*nt.c ifon  pfull li
+	unusule ca6 
+asnitwe unwritxt ykgob la _num,ob la _denom
+	S la cthepe
+   ctioere
+arasiltipb la _num/b la _denom   CTrhe
+ilI,
+	 reary comped n la FI r
+	Pcin*li M/N de to* veM plica1lso 16, wS-re
+	Net itionlients
+DCTps by, :
+	chfysf8c=orP---ety, bce.
+.  (TreP had par	rewrgnS*lloww ====*rbitTSIZEn la FI r
+	PcinpresntiaeisTter/ASkelI
+	thebibOSctions  r[DCean be soitw)ion onsaluein*libyramto  byd by
+	e be_aptr_hptrer() de tojpe-lients
+DCTps by. mrary---ety, bce.
+
+	t isaysf8/8tioIfbn  pf typie=slIT tonb la _numlsaluea:
+	Funl lvy pr	ere
+=CTEASunchtypid,fereomprisxsentofiisintetDCTps la r[s by  oebi
+	acute dh=kant tgiwetoSkpre. mrary---ety, bce.
+sntiaeisTequisalre 
+	theM/8En la FI,t(L(ceoilsIlients
+DCTps byc=orP---ety, bce.
+aysf8 b	Sm	ll	Mhn la FI r
+	PcinCesmot A gnofi li lscfasoEASgrs   refsL(ceb	Gewetifixe12 aramerrocondit(emestifas	 releASIDCTpmaghoddelnTrrou-edao
+rool livqunt tze_ca*ntwr	IfaxeouTRUE,fZE*ntm-inxt d eprese  vebipgrliwe ic. mDrfaforliawFALSE,
+	m liess
+
+feateG v-ZE*nttd eprese  vebipgrliwe ic.by S-Ptext
+threeple imagessm*libBIlevull sslITSfvqunt tze_ca*ntwliawTRUEra
+ykgodrwrext_tumber_of_ZE*nts
+	M-ximum number
+=waca*ntwlgovsee Skagene ttgn _at had pa-lecute dhco*nt
+	m-is(tS-Pactulecnumber
+=waca*ntwlistBIturnicain a am bthe
+ifareld)ra	Drfaforl256tioIgnoext wreompres-interface clecute s St- d a ZE*nttm-iao
+rool livtwo_cast_qunt tzer	IfaTRUE,ftntextravcasthowe tpreaomp6 eysfmaemanhe	Speciaa custom co*nt
+	m-isG lcthepe
+   wion isausulelITNTokinaPAotybetges
+
+fe0]ere
+=ne-s by-v	plts-a veZE*ntm-is
+featiryplicaDCTEAwi-e  bDrfaforliawTRUErioIgnoext
+	:
+eompres-interface clecute s St- d a ZE*nttm-iao
+J_DITHER_MODE amCTEA_m deb	Sepecis ZE*nttamCTEA FI maghoditASy comped saluein*li:
+		JDITHER_NONE	teSamCTEA FI:cfaso,o 
+aio-ow qun you
+		JDITHER_ORDERED	==de nsidmCTEA:
+mand  ofSlenam stifqun you
+		JDITHER_FS	Floyd-SteinbergidmCTEA:
+slow,
+h uslqun youa	DrfaforliawJDITHER_FS.  (Atbcoesen , ntde nsidmCTEAois	CSctions  r
+	sslITSkant tc FIl_-cast,
+lyntd774-ZE*ntm-isc--etioI) for *sko===
+	==de nsidmCTEA wreompwo_cast_qunt tzeliawTRUEe lccation  pAecuty
+	anpexttsnaveaw (dom-i,myed' veseatF-SSamCTEA FIt)byWatioqunt tze_ca*ntwliawTRUE,StrePtar
+	teaw (dom-i hsxa ec lb dhtioere
+text
+nwo =reldsal tE*ntm-isosfseeanheNULL byie be_aptr_hptrer()    S-P-interface ve suAecutypaeaw (dom-i by
+	Stty p(tE*ntm-isnon-NULL andv	S ty p
+actule_tumber_of_ZE*nts uovnt tm-iss by. mOCTEAwi-e,me be_lynrt_  s and mu()
+	Specitha=eaitabom aw (dom-i andv	S s ttese nwo =relds St	Spf.
+[ISctions 
+	PcaoBIlyrSsilti:theacoesen , anpexttsnavoypbecute dhco*ntm-isos
+sslITocceptedt====3-tureonentpd epresew (downsams.]o
+JSAMPARRAYhco*ntm-i
+	n e aw (dom-i,mree esen w datha=2-DSSixe1oarray
+=wad e_ZE*nt_tureonents
+	[twse	Proactule_tumber_of_ZE*nts ZE*umiwatAIgnoext ifTter/qunt tzy p b	CAUTION:eiwant tce.
+
+ASS1_BITconsoew St- d a ZE*ntm-i,m realyorp6 
+	coykgeme hebyiilisNfreld t iap----ed byie be_fyrash_  s and mu()torCepyoilsIZE*ntm-issomewc-re els =airsi,(ifon  pfull detsile itra
+ykgoactule_tumber_of_ZE*nts
+	n e number
+=waca*ntwlinoilsIZE*nttm-iao
+AdThe fiaveams and multiple imagessunce ppres-interface cmaITxeouSksuspe:
+
+J_DCT_METHOD dct_maghodorSepecis tion-lgoZE*hmoplicaultintetDCTpsteptioChoices *lim realima
+	asxa ec lb dh ndveP====s and multi.i
+rool livdo_fmagy_up	istsy pr	IfaTRUE,fsee amBITtoDCTps la FI de toDCTps by >f8c====up	istsy pr	=waZhlicaaZEanonentsra	IfaFALSE, see sslITDCTps by <=f8candv	 rele nele  ofSup	istsy pra	DrfaforliawTRUEra	rarybetges
+e
+   cstabn you/intrfor MS tgene ttg*0] 4and multipcycl s
+	iamssxCapuftabomwtfeatt isavalueumatchesStrePf rrIspee ) d
+	ao_fmagy_aown	istsy p salueitnts and multi.i
+rool livdo_block_smoerh) dr	IfaTRUE,fekgesblocktsmoerh) dlis/*cute cain earoypbt   soTSIoes dy pr	lBnASesage
+
+ce.
+nsion
+;so) FALSE, no    DrfaforliawTRUErioEaroyr	lBnASesagcahst   sTNTok "fuzzy" de tosmoerh) d, "blocky" de td era	In[DCeaZ--e, blocktsmoerh) dlc---esSthebib*cute caafges
+nce=airsi=few
+	AC cas before s *limknownetheeG vea
+
+Trncy, soniamssxBIlevull sslI
+	:
+eomseon _b-time o-e
+   cmthe ultilBnASesage
+
+y
+   s.i
+rool livenabom_1cast_qunt 
+rool livenabom_exttsnav_qunt 
+rool livenabom_2cast_qunt 
+	n _selarroA gnofi li psslITSk_b-time o-e
+   cmthe, :
+	chfysr	rewc lb dhin et- d a lesiltipbelowabyy S-Pd epreso
+   coimment
+	2larrogiwetotioere
+aollowy pc=reldsal n _selarr
+f anutedt=lica reacients
+e
+   coimment
+	2/	Proilslams and multiple imagess
+byte be_lynrt_  s and mu()wioded  li ahereelelme be_satc_= epre_oimment
+	2()
+theobtain ils saluein
+feate  veapefor =lica rea
+Trhe
+iDle images
+	Stty psw
+TttseelnTrrou-eJG es) for *libtBIon  theiickT* n la FI  ttg*n
+feate  ve
+	t
+floee eo p grwrext tar
+	tel byaioIt usahereimpoTtakgoo) for *libseon _ere
+ce.
+
+ASS1_BI'inme library.  re he*lloc ofPd epresb-time
+wnsam,ubecasee yed
+arroAy colica oeapqurestsuchfb-timeaw*rrG li*/e be_lynrt_  s and mu()wo
+JDIMENSION d epre_width		Actulecoimment
+	2/ywad epreso
+   .
+JDIMENSION d epre_he use
+intpd e_ZE*nt_tureonents	Number
+=waZE*nttmpreonentstii = e_ZE*nt_wnsam.
+intpd epre_tureonents		Number
+=waZE*nttmpreonentstBIturnicteykgorec_= eb-t_he use		R s ametiedThe usea=wae lity, tb-time.byWatioqunt tzy p(tE*nts,bd epre_tureonentsetse1, Skdic o ref* A FIl_IZE*nttm-i
+ykdex]pEASSixe1. mOCTEAwi-efy tequn s d e_ZE*nt_tureonentstio S-Pd epresarrays
+*libBIquiBIdSthebib= epre_widthN*bd epre_tureonentseJSAMPLE,twide.a
+rec_= eb-t_he useat itionoIs ameti oam rimum he usea(inbl lity, s)u=want 
+b-time
+castIdSthee be_aptr_e lity, u()tioI) shon--time
+ysfsm	ll	M,/---
+ASS1_BITe  vest  v fork,upresn be e  vebipIaesed dumwtheuntedit(_BIbaera
+cepy) datAIndhogh-qun you mthes, rec_= eb-t_he useat i	lwayeI1,upressome
+fasoe ,flowet-qun you mthesmxeouSt]co lar
+	Mhsaluein(tr selelIT2]co 4)alIfon  parrogoon  theasko====*   us-lenam condit(L(vomthe, yed maITathwe v
+go uovnt tseour cb=wahonoe FI  ec_= eb-t_he useasoe sxuoe voicaomm hcepy) da
+(AnPd epresb-time
+lar
+	Mh
+fe0] ec_= eb-t_he useaty, s t iOK,upreswon't
+*4];
+  TanearE Ororsslenam imp4];ions howe tpreathe uset)by
+mentorssaw (downsamsPt */
+
+   ac
+tion  pa
+
+n e ce.
+
+lyntd774 St	Spf t i"aw (dobty,d"i	Progoesn't xentofymaneau yoeffoar
+ew (downsam. mIt ssxcustomaBIT oeca6 
+ai[ZE*nttamm htovattul rmage/Zhlic rmage
+ew (downsamsPEG libm and mulFI,t(L(ceoiliinCesmots gonsoe==s and multi.tATre
+exiso refce.
+
+or c ekgesf typie===lic	nyntd774s xentofymYCbCre===GRAYSCALE
+ata: (cFIF  
+apE*0]1),=GRAYSCALE,f GB, YCbCr, CMYK, ntoYCCKe(Adorr), ntoBG_ GB
+ntoBG_YCC (big gamresew (downsams, cFIF  
+apE*0]2). mrarysentorsstaions
+	Pca2
+suchfas rfor sentt th
+y
+   s, DCTEASZE*ntownsamsdelnTrrou-ed,
+presammmustsrroue arlyoodd
+featwuchfplicawe  vebipunpoTtabS-ra
+n e ce.
+
+ASS1_BITclnTge da	vnt tm souZ mmonsaw (dwnsamfea6 
+asnitin(na ilI
+ GBe<=>mYCbCre	ProCMYKe<=>mYCCK)tioIt  li ahereda-hpde toata: o)aintrnknown
+ew (downsam,
+cast) dlit
+throughsde td eaca6 
+asnitwtAIfon  pda-hpexttesnvelI
+de tointrnusule ca (downsam,
+yed  liv---ilITextte  tS-PASS1_BITtheun arlyntd
+adThe fiaveZE*ntownsamsdstifperappllaperopA)nteoea6 
+asnitira
+F===s and multi,a reacients
+ata:'- ca*ntownsamfisxsentofiid byi=reld
+tk_ZE*nt_wnsamwion isairytransapplxt detprepce.
+
+or c'- ca*ntownsamfgiwet
+byte be_ZE*nt_wnsamwioe be_let_  fafors()=f oosftha=aptsonabom	ce.
+
+s *nt
+wnsamfaeite i p(Da tk_ZE*nt_wnsam, presyed  livowe ride erisabyimate re
+e be_let_ca*ntwnsam()wioOwaZEuree n  pmusts	Speciaa ry comped transapplface .
+jcca*nt.c cTrhe
+ilIfry compsoere
+aollowy pctransapplface s:
+	 GBe=>mYCbCr
+	 GBe=>mGRAYSCALE
+	 GBe=>mBG_YCC
+	YCbCre=>mGRAYSCALE
+	YCbCre=>mBG_YCC
+	CMYKe=>mYCCK
+plu itionnu ve Bansappli:mGRAYSCALEe=>mGRAYSCALE,f GBe=>m GB,
+BG_ GBe=>mBG_ GB, YCbCre=>mYCbCr,oBG_YCC =>mBG_YCC, CMYK =>mCMYK,
+YCCKe=>mYCCK,u	ProUNKNOWNe=>mUNKNOWN.by S-Par c ekgesf typie===lic	nyntd774s (cFIF 	ProAdorr) xentofymAPPtoriou sh
+nce pSkdic of ilsIZE*nttwnsamt=waprepce.
+
+or c. mIt ssximpoTtakgo oeeenons
+nce pv _selarroIZE*tte corrITtba, ntoomStticaiftprepce.
+
+or c'- ca*ntownsam
+isTter/oneu=want to, s ry comped bympresykgesf typienyntd774s.
+e be_let_ca*ntwnsam()ne  vexeouilslZEand multiple imagessotheO suspenntoomSt
+jpegAPPtoriou shhitopesly, sonloFI athiamssxtn 5 ilsItru to*id eans pce.
+
+s  (downsam. mrary lists.,mo) for *libIZE*on _rome Bandica3-tureonentps *nt
+wnsamfde td eaca6 
+asnit, don't  BIT oefake d eans pASS1_BITby
+	Stty p
+tk_ZE*nt_wnsamNstifj be_ZE*nt_wnsam]co JCS_YCbCr; see JCS_UNKNOWN.bYed maITfull detIZE*y tngAPPtoriou sh= an  r d a dItisnngotheOdet tfy
+ilsIZE*ntwnsam]atiTsee "mentorssriou sh",ebelowabyWatiotn 5 ileat t tc *ntownsamfisxUNKNOWN,nd it had pane  vedrfaforltontion 
+tul rmage-qun you ZEand multiple imagesso====* veZE*ntttureonentstioYed maI
+we vefull detf typi-ils-eele imagessionSee  reacients
+cthe ult
+e be_let_ca*ntwnsam()	PComjcle im.c,
+====  tmp12ra
+F===grs and multi,uprepce.
+
+or c'- ca*ntownsamfisogiwetoSk/j be_ZE*nt_wnsam,
+	Proilisairytransapplxt detprepd epresew (downsam = e_ZE*nt_wnsam.
+e be_aptr_hptrer'- 	Stty p(Df j be_ZE*nt_wnsam]elnTrrorete dh=kaiftprepor c
+ZE6applsothecFIF ntoAdorroZ nwettt
+	2,upresDCTEAwi-efy tisTteybetges
+
+fe0]a
+gup7,wtAIfon  pknow prepce.
+
+or c'- ca*ntownsamf====s
+aiain,syed  livowe ride
+e be_aptr_hptrer'- gup7,oby
+	Stty p(e be_ZE*nt_wnsamwioe be_aptr_hptrer alsh
+	Specitha=drfaforld epresew (downsam b--e ess (ots gup7,oof) e be_s *nt_wnsam;
+seeao e_ZE*nt_wnsamotheowe ride erisal Again,syed musts	Speciaa ry comped
+transapplface .  jdca*nt.c cTrhe
+ilIfry comps
+	YCbCre=>m GB
+	YCbCre=>mGRAYSCALE
+	BG_YCC =>m GB
+	BG_YCC =>mGRAYSCALE
+	 GBe=>mGRAYSCALE
+	GRAYSCALEe=>m GB
+	YCCK =>mCMYK
+athwe ve sxurePnu ve Bansappli.  (SL(ceoGRAYSCALE=> GBei /itations,uli
+ainterface c livG lceagraye la cce.
+sotheNTok ASkesew (doce.
+soiftil sslI
+fullsothege da	voneuc--et)by S-Ptwo-cast ZE*ntiqunt tzer,ojqunt 2.c,
+isxsentoo  byd thege da	v GBeaera
+(iatee usesxamstmageW
+aperopA)ntelIf==== GBeca*ntw)wioded' vetrame hemodtfy
+ilsIZEhe ifon  pfull detu-e-iea====non- GBe  epresew (downsams.ioadded
+fea
+jqunt 2.cairyplica oem-is
+oyanyapeterface -becute dhco*ntm-isathwe ve sxult
+urePnetm-hptwo-cast ZE*ntm-issSpecial econdit(ra
+CAUTION:eityapeeassunce pAdorroPhotoshop	wils s ie 
+aonsideraoSk/CMYK ce.
+
+plica: 0mree esen s 100% ogrocowe p6 ,eaaCTEAS
+rato0% ogroa,on  'daexpeciw
+Tttset i	rguaboy * b-piiioPhotoshop,upresifbn  ptrame heIorrede toPhotoshop
+CMYK sion
+	Pyed e  v hile th da-hpde toitTSkan  r -interface .  Won liter
+"fix"e hifuSk/ns pASS1_BITby
+ie 
+aoy p(ere
+deraodury p(ere
+CMYK<=>YCCK
+ Bansappl,ubecasee nce pIothe  aptk DCTEAStaions
+	Pca2, no aboy Ghostuc lpe.
+Photoshop	 
+asnitinpA)imaco 3.0tIZE*y EPSfplicawca6tain refce.
+-enZEheroCMYK
+deraoSk/ realima ie 
+aons-YCCK ree esen face cplicaSk_bar
+
+ce.
+nsion
+,upre
+ rearyrrtbl] refP soSc lpeaZEhe perapplryanyi6 
+asnit seon _ere
+PSfomp6 
+opesatprtioI amotn 5 ileatPhotoshop	3.0tI  v fris aunyk 
+aonsiYCCKeyn
+EPS/ce.
+nsion
+,uandvI  vesmit_ere
+PS-levelyi6 
+asnittio(B eans paera
+pol*ZE*ycplicaSk_bar
+
+ce.
+nsion
+vI  veter f typi-Sk_3.0w)ioInoeiCTEASZ--e,
+nt tce.
+
+ASS1_BITmustster yk 
+ao(ere
+deraoSt	Spf, ntoels =Ghostuc lpepIothe
+BItr[ils-eeEPSfplicawL(corrITtbai
+
+
+E) image daon 
+   ac
+tion  pa
+
+W
+eompresdrfaforle) image da	M iryplic,maneae) imadagecticai6si aans pce.
+
+[tbtogeine  vecasee aemp7,   c herrocoykgemecahstrerr,
+aollowed bymexit()woded  li Aecutypn  r d a e) image daon S[tbtoges theowe ride erisabehilipr
+	Proiooca6troleilsItreatons hofanonfatal/warny pseend trats/grb-pimp7,   s.y S-Par c  lists..caillu t ttes nt tm souZ mmonsa--e, :
+	chfysfthegev oils
+ainterface cregainbtuntroleafges
+aa e) imaaaCTEAS
+ratoexitL(v.by S-Pce.
+
+ASS1_BITn we 	wils s anearp7,   camBITtba;eityalwayeIgoes ntrough
+nt te) image daon S[tbtogeswion reepclastI2/ywamp7,   sm*libBIs gn byo:
+  * Fatal/e) ims:/ns pASS1_BIT literbtuntinum.
+  * Warny ps:/ns pASS1_BIT libtuntinum,upresnre
+deraoSs corrupt, stifa
+    damp6 dPd epreso
+   cysflSkelIT oeapefor.
+  * Trats/infoplicltirssrp7,   s.l n _selcome de toa trats levelyi6dic o re
+    thepe
+poTtakamt=wapreprp7,   ;syed  livca6troleilsIwe bosyou TSIils
+    presentobymadeusaon _ere
+r-ximum trats levely feate  vebipamsplayic.byYed maI,(ifon  pfish,v	 relypreplac tshe entir
+
+ce.
+ne) image daon SrPoule
+(je) im.c) de ton  r d a ZEhe.l How we ,syed  liv voicaZEhe dunterface cby
+sslITreplacon _rome =waprep[tbtoges aeite i p(Da shon-ehilipr
+n  ptramw
+Tttset i	cs anlished bymmate refe be_lyd_e) im()  sxusule,upresnreivowe rid re
+rome =waprepmaghoddcoykgess Sk/ reae be_e) im_mgs
+	sersi,u sxillu t tted by
+ lists..cao
+Alld=want te) image daon S[tbtoges de veapsege
+
+adcoykges detprepce.
+
+=bjeci
+(a j_s amon_ptr :
+	chfuoykgsDgoveiCTEASa e be_s and mu_esersi ===*be be_  s and mu_esersi;sifbn  ptrame hete vef
+	ch,-t es thepes_  s and mupr
+areld)rion isaesersi Skd
+y   /adcoykges detprepe) imaary.  reesersi SkoSt	
+"e) "i=reld. mrrequrtmly, custom e) image da	M [tbtoges de vetrame he*cdit(
+adThe fiavederao:
+	chfysfterbknownethent tce.
+
+ASS1_BITary realyntd774 e) im
+ge da	M.io S-Pr souZ nwetore  way
+thedooilisairytofemb dheiCTEASns pce.
+
+=bjecimary reae be_e) im_mgs
+	sersiain a lar
+	M 	versions 
+feattu6tain(
+adThe fiave=relds;snreiva--aon _ere
+castIdScoykges itations acdit(athent 
+adThe fiave=reldsal Again,ssee  lists..ca====oneuway
+thedooi al (Baginny p
+de to569= 
+apE*0]6b,uprere ssxaherea voicacoykges "clore _dera"ain each
+ce.
+
+=bjeci, :
+	chft e -interface c livahereuee eo findoretconsidera.y S-P+DCTSIZEdoesxter touchfslore _deraeeata vt)by S-Pindiv)dun  maghodin
+featyed m useafish theowe ride *li:
+be) im_exit](j_s amon_ptr cinfo)orRpsege
+soca6trole====* fatal/e) imatAInfopliclti su before Dgo
+	sene tte prepe) imaap7,   chas tryinrtoext Skacinfo->e) ; elel
+	d epre_mp7,   c heamsplayoi al Ca6trolemustsNOTeBIturnethent tc	ll	M;
+	sene telITntisa[tbtoge de veexit()maryloFIjmp()osomewc-re.
+	nr selelITn  pfothe owe ride erisa[tbtoge  oeseatridd=want texit()
+	grfaforlbehilipratAadded
+feato) for funtinum condit(L(v,fyed by the
+	cl livuptprepce.
+
+=bjeci de toe be_aboTt()marye be_  	veou() byd epre_mp7,   c(j_s amon_ptr cinfo)orActulecd epreso)ainypce.
+
+mp7,   wioOwe ride erisanhe	Sndsrp7,   s
+	somewc-re =CTEAS
+ratostrerratAadded
+featt isamaghodddoesxter know
+	how poesene tte aemp7,   ,psslITwS-re uov	Sndsitra
+foplic_mp7,   c(j_s amon_ptr cinfo, f tr * b-timemorCeedpersisoa=aptdabomae) imaap7,   clyrSn _bauw dssens pe) imainfo
+	rtoext Skacinfo->e) rion isamaghoddi,oc	ll	d bymd epre_mp7,   . mrew
+	taions
+	Pca2 by the trame heowe ride erisamaghoditAOne(porsibS-
+	retsonc==== oon _roairytofCSctions  dynamic sde chy p(Df e) imaap7,   
+	ltypu   .
+
+emSt_mp7,   c(j_s amon_ptr cinfo, ykgomsg_level)a	Drcid  e
+eCTEAS===nogo oeemit_a/warny p ntotraceprp7,   ;sif ro,
+	Z-l s d epre_mp7,   . m S-Prainbretsonc====owe rid re erisamaghod
+	w the  apto  ndrl ss/warny ps. mmsg_levelairy-1c====warny ps,
+	0
+*l]lsisG lctraceprp7,   (ra
+OslITe) im_exit()o	Pr emSt_mp7,   ()o	libmateedt=lica rearrestdftprepce.
+
+ASS1_BI;pils =CTEAS
+won*libyrttsnavedetprepe) image da	M.by S-Pactulecmp7,   c extsm*libstoext Skaanparray
+=walyrSn so:
+	chfysfcoykgeme h
+tioere
+areld e) ->e be_mp7,   _tabomal n _pmp7,   sm*libnumberedt=lica0e h
+e) ->last_e be_mp7,   justify tis ttese ZEhe numbersd
+feat*libsext Skant 
+ce.
+
+ASS1_BITcEhe.l ded   the replac tshe mp7,   c extsm(fimainstmage, de t
+mp7,   smSkaFhe
+che===Geplin) bymm typon _ere
+rp7,   c abomauoykgeral See
+je) im.haultintetdrfaforltextsal CAUTION:eerisanabS-Dde ve lr souZ
+aiainly
+f typie===growm=licaoneuASS1_BIT 
+apE*0]detpreptext.
+yIa maITrrou-eJG e====aas-interface cto  dd et- d a mp7,   c extsm
+feat*li
+ge da	d bympreslima mef tyismal n _pe) image da	M ry compsoa lesotif" dd-on"
+rp7,   c abomaultintysfcurcolial nhegrfy, tan  ddcahtabom,exeouilsluoykger
+e) -> ddca_mp7,   _tabom/	Proilslrp7,   cnumbersde) ->airsi_ ddca_mp7,   o	Pr
+e) ->last_ ddca_mp7,   tioIfbn  ptumber tS-Paddcahmp7,   smbaginny pieat1000
+ntoro,Tn  pfon't hile theIorBIT*id eaZE6aterts de tojpe-ASS1_BI'inbuilt-in
+rp7,   s.l See  reacists. taions
+	Pca2 ce be/de bec====aasexists. agersy p
+addcahmp7,   sm(tS-Paddcahmp7,   sm*liba finw  Skacde) im.h) byActulecinvorface c=want te) image da	M iryaoneuvia mDcro7 a finw  Skaje) im.h:
+	ERREXITn(...)	G lcfatal/e) ims
+	WARNMSn(...)	G lccorrupt-derao:arny ps
+	TRACEMSn(...)	G lctracepstifynfoplicltirssrp7,   s.
+n _selmDcro7 stoexoilslrp7,   cZEhe stifanyoadThe fiavele imagessoykgovnt 
+e) image da	M rsersi,unreivinvoke prepe) im_exit()maryemSt_mp7,   ()omaghodiy S-Pvariantse=waeachsmDcro *libeorev_BIon cnumbersdo)aidThe fiavele imagessiy S-PadThe fiavele imagesso*libyrs
+aonsiykgovnt tgene ttedtrp7,   crsy p
+lyntd774 itykgf()o===lic	ZEhe(ra
+See je) im.hastifje) im.coultieGrCTEAS  tmp12ra
+
+
+	Comprensideraoge daon S(cients
+	Progress monitoary.  rs)Pt */
+
+   ac
+tion  parame pericati ac
+tion  parame pericatiy
+ S-Pce.
+
+ZEand multipASS1_BITste ryits
+ZEand munsideraotovat"gress monit
+ary.  r"SrPouleal n _pdrfaforlgress monitoary.  r eusatwils s nre
+deraotova
+me librb-time
+imaco aostrio tions
+, presyed  liv*4];
+  Tn  r d a ary.  re h
+doosomerh) dlels .l SimilarlI,mntenams and multipASS1_BIT ll s at"cients
+ary.  r"Stheobtain ils ZEand munsidera;syed  liv*4];
+  Tn  r d a cients
+ary.  r ifon  pfull dre
+deraotovcome =licasomewc-re =CTEAS
+ratoanme lib
+b-time
+imaaostrio tions
+.
+yInubotT
+Z--es,
+ZEand munsideraoi /itadit(emesrb-timeloadtheaasn be:/ns 
+gress monitontoroents
+ary.  r itations aeIorreb-time,u	ProilslASS1_BITinvokes
+ere
+r-y.  r sslITwS-a shon--time
+ysfead1nsiaryemptiic. m(ded   the grfy, ta
+=ne-f tractme
+--time
+eo f lceaere
+r-y.  r thebibOnvokedn====eachsbyt ,upre
+ re pIothe  eaaaCTEASy,  before w)ion on--time'- 	 by 	ProLorface carr
+f 6trola	d bympresr-y.  r,eter ryoilslASS1_BI. mrary lists.,milslrp lib
+roents
+ary.  r eusatmakes shon--time
+coykges 	ProLengthNuoykgodetprepdriginal
+deraoSk/rp libatAIndntoinelee jpeg--time-reloadtitadidons e  vebipOnvoked
+sslITSfvntenams and muimaaa c=wwant tendd=want tderations
+, :
+	chfIothe
+Skdic of *a e) ineoustderations
+.by S-PIorreb-time hsxa finw  asaanparray
+=waderatyp-PcOCTET, :
+	chfysfsene telI
+"f tr"iary"unwritxt f tr"itAOomamrichogeTwS-re f tr ysfterbrxaTtlIT8 bSt	
+wide,syed mustsgrfy, tcOCTETdatha=widettamm htyp-P	Proilsnemodtfyans paera
+cients
+	Progress monitoaPoule(athenBansc lb ans pIorrearraysiykgov8-bStaunyts
+sspexttsnavelyorp6  byA
+deraodress monitoary.  r esersi cu6tain(/adcoykges  = (ZEuntsgrfy,on _ere
+text
+byt idetIZE*y in ils Iorreb-time 	Proilslremain reffreepwnsam:
+
+	cOCTETd*ptext_= epre_byt ;  /* =>mtext
+byt idetIZE*y in b-time */
+		 by_tffree_yk_b-time;      /* #
+=wabyt iwnsamsdremain refin b-time */
+y S-P+DCTSIZEincrions suilsluoykger
+	Progrcrions suilslZEuntsuntil jpeg--time
+ysfead1ns. m S-Pray.  r'syempty_= epre_b-time maghodsmusts eseouilsluoykger
+ = (ZEunt. m S-Pray.  reisTexpeciicT oeapmember tS-P--time'- 	ynrty pieddrit(
+aProiotal/	 by Skaioiv of =relds terbtisnbomwtheilslASS1_BI.byA
+deraodress monitoary.  r itations threepmaghodi:a
+ykit_dress monito(j_s and mu_ptr cinfo)orIramto  byodress monitwion isairyc	ll	d byme be_lynrt_s and mu()
+	biG libanyoderaoi /actulelITwZE*ttew mIt mustsyramto  by
+	text_= epre_byt 
+	Profree_yk_b-timew mfree_yk_b-timemmustsrr
+	Skamto  byd co aoposyoge
+
+salue.
+
+empty_= epre_b-time (j_s and mu_ptr cinfo)orn isairyc	ll	d wS-aever tS-P--timechas ead1nsi(free_yk_b-time
+	retchesSzerh)atAIndnr seleStaions
+	Pca2, ot Ay the IZE*y d eans 
+	*entir
+* b-time (see jpegllv dhlynrtneddrit(
+	Prob-time
+length;
+	SgnoexuilslZTrhe
+iDlynt. agetext_= epre_byt 
+	Profree_yk_b-time).
+	n ens eseouilsluoykger &lZEuntstheilsllynrtno) shon--time,=anc
+	BIturneTRUEeskdic o refileat t t--timechas tryindumpedab	free_yk_b-timemmustsrrfseeanheaoposyoge
+
+salueTwS-a TRUEess
+	BIturnns. mA FALSEeBIturneAy the sslITrrou-edTwS-a I/O susptesnitoysr	rewiBIdS(ntoinopesatL(vomthe hsxamscuraw din ils text
+lesilti) bygesm_dress monito(j_s and mu_ptr cinfo)orTesmy,nteogress monitoatiTc	ll	d byme be_fyrash_s and mu()eafges
+ael
+	deraoges tryinwZE*ttew mIndm soutaions
+	Pca2, erisamustsflushasty
+	deraoremain refin  t t--time   UseheiCTEAStext_= epre_byt 
+==
+	free_yk_b-timemth dagesmy, thow muchfderaoi /in  t t--time bygesm_dress monit()eysfNOTec	ll	d byme be_aboTt()marye be_  	veou() ioIfbn  
+full dre
+dress monitoary.  r thebibcl lie]lsisdury p(anpabomp,lyed mustsgooi 
+yEureepf.
+yYed de ve lso trameZEemanheconsoeSa e be_dress monit_mgs
+	sersi,ua  veSkoSt	
+maghoddcoykgessjustifyrs
+ao/adcoykges detprep	sersiaindetprep"gres"i=reld
+=w
+prepce.
+
+s and multip=bjeciw  TttseelnTrroaoneuin-ty, tSkan  r seesisZEhe if
+yEuflSke,upresit uscrebaboypcl lies det*4];
+  TaPnele  ofS[tbtoge similare h
+ reae be_strio_dres()marye be_mem_dres()m[tbtoges =want tlecute dhgress monit
+ary.  r2ra
+DrZEand multiproents
+ary.  rs
+aollow/adca telelTrewrgn,upreswe tosome
+adThe fiave=rammishestio S-Proents
+ary.  r esersi cu6tain(/adcoykges  = (ZEunt
+grfy,on _eremtext
+byt idetBItr[=lica reaIorreb-time 	Proilslnumber
+=wabyt s
+remain re:
+
+	tundp cOCTETd*ptext_Skpre_byt ; /* =>mtext
+byt idetBItr[=licab-time */
+		 by_tfbyt s_yk_b-time;         /* #
+=wabyt sdremain refin b-time */
+y S-P+DCTSIZEincrions suilsluoykger
+	Progrcrions suilslZEuntsuntil jpeg--time
+ysfemptiic. m S-Pray.  r'sya  v_Skpre_b-time maghodsmusts eseouilsluoykger=anc
+ZEunt. mIndm soutaions
+	Pca2, ers
+ary.  r musts emember tS-P--time'- 	ynrty p
+eddrit(
+	Proiotal/	 by Skaioiv of =relds terbtisnbomwtheilslASS1_BI.byA
+deraoroents
+ary.  r itations fge
+
+maghodi:a
+ykit_roents
+(j_  s and mu_ptr cinfo)orIramto  byoroentswion isairyc	ll	d byme be_aptr_hptrer() biG libany
+	deraoi /actulelITaptr   UnASkesykit_dress monit()	PCa maITl lv 
+	byt s_yk_b-timefseeanhe0a(inb:
+	chfc--e-aya  v_Skpre_b-time()=fael
+	I  ves
+
+Tr immed)ntelI) bya  v_Skpre_b-time (j_  s and mu_ptr cinfo)orn isairyc	ll	d wS-aever byt s_yk_b-timefges retchedbzerhd	Pror li
+	deraoi /fullic. mIndnr seleStaions
+	Pca2, ot Ay the BItr[=leshfdera
+	Sktheilslb-time (Sgnoeon _eremZTrhe
+iDlynt. agetext_Skpre_byt =anc
+	byt s_yk_b-time),s eseouilsluoykger &lZEuntstheilsllynrtno) sho
+	b-time,u	ProBIturneTRUEeskdic o refileat t t--timechas tryinreloadedab	It ysfterbtedit(_BIbeo fill jpeg--time entir
+ba, nnlIT oeobtain at
+	l lsr/oneur libbyt . mbyt s_yk_b-timefMUSTsrrfseeanheaoposyoge
+
+salue
+	Sf TRUEess BIturnns. mA FALSEeBIturneAy the sslITrrou-edTwS-a I/O
+	Aesptesnitoys rewiBIdS(ntoinmthe hsxamscuraw din ils text
+lesilti) byskip_Skpre_ata: (j_  s and mu_ptr cinfo,nloFI num_byt s)orSkip num_byt saIor to=wadera.ion on--timedcoykges  = (ZEuntsby the
+	rroadvmagee owe  num_byt saenpresbyt s,s efillon _eremb-time 	s
+	teede wion isairyplica oeskip owe  aopotrtmto oy lar
+	 amEunts=w
+	unykgese-aon _ata: (suchfas tngAPPtoriou s)atAIndrome taions
+	Pca2
+	ammmaITrroporsibS-D oeoeadmtze away
+tlslready p(Df ilsllkippnsidera,
+	b-esit usterbtl arsileatbeon _rmnrtnisaIor tomuchfseour c; lar
+	
+	lkipso*libuns amon. mbyt s_yk_b-timefmaITrrozerhde creturnab	AozerhdeAStegaoge
+
+skip ZEuntsby the  aptonsoe datha=no-op.a
+resync_to_aplynrtn(j_  s and mu_ptr cinfo,nykgodrwrext)orn isa[tbtoge iryc	ll	d sslITwS-a shonams and muimahas eailica oefind
+	abaplynrtn(RSTn)n
+You s wc-re =ge iryexpeciicw mItinmissnitoys go
+	findoa=eaitabom uoykgo====apefma(voams and multi. mrarym so
+	taions
+	Pca2, wesBIs ametin
+featyed eusatsee jpegdrfaforlresyncr	lBndidons,me be_apsync_to_aplynrt() ioHow we ,so) for *libabS-D oeback
+	updin ils enpresderaorions
+, or ifon  phile a-pA)imi knowlicgeT*id er	ere
+lSkelITlorface c=waaplynrtn
+You sh, yed maITbibabS-D oedeybetges.orRpad
+tlslread_aplynrt_
+You s()o	Pr e be_apsync_to_aplynrt()m[tbtoges
+	Sk jd
+You sac ifon  prh) kon  'daASkestofCSctions  n  r d a resyncr	lBndidons bygesm_roents
+(j_  s and mu_ptr cinfo)orTesmy,nteoroents
+atiTc	ll	d byme be_fyrash_  s and mu()eafges
+ael
+	deraoges tryinaptr   Oftte 
+ no-op.a
+rarybotT
+a  v_Skpre_b-time()=andv	kip_Skpre_ata:()	Ptrere ssxnotwuchfrh) dras tngEOFcreturnaioI) shonendd=want tor c his tryinaptched, ers
+[tbtoge his
+a=f oits
+=woexitL(vuvia ERREXIT()maryyrs
+aoy p =ake
+deraoSktheilslb-time.
+Indm souZ--es,
+gene ttgn _atwarny p mp7,   o	Pryyrs
+aoy p a =ake
+EOIo
+You s
+t itionbesouZ uree o)aiconitoatiTntoinde ve llow prepams and muima oeo epre
+how we omuchf=want to
+   cysftrereal IkaiaghologseleSZ--es,
+prepams and muim
+maITsw llow prepEOIostifagainbdemansiderao... eusatkeep feed) dlit
+=ake
+EOIs.
+ederatrc.caillu t ttes nt toIs ameti oae) imaaecowe ylbehiliprabygesm_roents()eysfNOTec	ll	d byme be_aboTt()marye be_  	veou() ioIfbn  /full
+ rearoents
+ary.  r thebibcl lie]lsisdury p(anpabomp,lyed mustsgooi  yEureepf.
+yYed de ve lso trameZEemanheconsoeSa e be_roents_mgs
+	sersi,ua  veSkoSt	amaghod
+coykgessjustifyrs
+ao/adcoykges detprep	sersiaindetprep"trc"i=reld
+=wtprepce.
+
+ams and multip=bjeciw  TttseelnTrroaoneuin-ty, tSkan  r seesisZEhe ifbn  
+lSke,upresit uscrebaboypcl lies det*4];
+  TaPnele  ofS[tbtoge similare h sho
+e be_strio_trc()marye be_mem_trc()m[tbtoges =want tlecute dhroents
+ary.  rs.a
+raryr libinfopliclti,
+ZEnsforlilslrp lib=andv	trio tients
+	Progress monit
+ary.  r2 Skajderatrc.ca	Pr ederadst.cao
+
+I/O susptesnit
+   ac
+tion  pa
+
+Some taions
+	Pca2 trame hesee jpegce.
+
+ASS1_BITaryanyi6crions rssrp lib-to-
+me libra  tEA:
+wS-a shonZEand munsiderao--time
+ysfead1nsiaryemptiic,
+preITfull
+ca6troleioeBIturnethent ttbtme
+loop,uaaCTEAS
+ratoexpeci refileat t t--timec li
+rroemptiic imaaeloadedswe tin ils deraoroents/dress monitoary.  r eub[tbtoge.y S-P+DCTSIZEry compsoeri2 arameryoitatioy p(ato"I/O susptesnit"cmthe, :
+	chfw 
+grec lb aiomprisxsesilti.by S-PI/O susptesnitomthe hsxter aaianacea:xterh) dlis/gue  kge dh nd eans 
+r-ximum amEunts=wan be spns  in[DCeaoneuc-llwtheilslASS1_BI, soniamI  veter
+elimy,nteorIspeese-n be crebtio2 Skac FIl_-threadedstaions
+	Pca2 ioIfbn  
+aramegue  kge dhrIspeesean be, wessuggesouyed "bite jpeg--d1nt"i	ProCSctions 
+a=aptl rfor -ratress
+capabn you.by hesee I/O susptesnit,
+ZEopesatLitoys teede ybetwe-a shonZate ref-interface v	Proilslaeraoroents
+imadaess monitoary.  r;Pyed e  v alwayeIaramea custom
+roents/dress monitoary.  r. m(P----e(BItr[ilsPft_vioustlesiltipifon  philen't
+alBItryw)ion on---ichideacysftreat t tempty_= epre_b-time()marya  v_Skpre_b-time()m[tbtogeoi /a no-op,srpr
+baeBIturn refFALSEetheO dic of
+nce pSt his aoneuterh) d   Uptipree re eris, jpegce.
+
+ASS1_BITsuspteds
+opesatLito	ProBIturnrytofCtryc	ll	M.io S-Pryrrtbl] ref-interface cis
+respeesibomaultiemptyy p nto efillon _eremIorreb-time PEG libmallon _ere
+ce.
+
+ASS1_BITagain.
+
+
+	Comprelti susptesnit:a
+F===s and multi susptesnit,
+see antempty_= epre_b-time()m[tbtoge  pat [Iturnr
+FALSE;-tr selelITiate  veter dhd	Pyrh) dlels .l Ttoinde vecasee ncr
+f and muima oeBIturnethent tc	ll	M(Df j be_IZE*y_e lity, u(), de tojpe-BIturn
+salueitndic o refileatter a vent tlecute dhr lity, uphile tryinocceptediy S-Painterface cmusatmakeyr libroomdin ils d epresb-time,madeusa ils d epre
+--timedcoykges/ZEuntsaperopA)ntelI,u	Proilsneelelme be_IZE*y_e lity, u()
+again,scoykgi(vogovnt tairsi=uns nsfm dhr lity, abyWatiof lceca oesuspted,StrePf and muorie  vebacktrackanheaoZ nwetore  stopp) druoykgo(usulelITilsllynrtno) shonZTrhe
+iDMCU);Tiate  veresene tte rome = epre
+derao:
+ens esynrtic. m S-rEG li,u	l td ghtempty_= epre_b-time()moinonly
+f	ll	d wS-a shon--time
+ysfead1ns,fyed by thefNOTeIZE*y d eans  entir
+
+--time
+afges
+a susptesnit.  WZE*y dslIT tonderaouptpheshonZTrhe
+iDposyoge c=w
+text_= epre_byt /free_yk_b-timew mTtonderaobeyotin
+featuoykgoe  vebi
+resene ttecaafges
+apefmpilti.byBecasee o) shon-acktrackSn _behilipr, a good-s byPd epresb-time
+iryessrtmto 
+====e beforecy;Pyed don't full dre
+f and muima oesuspted o)ttew m(Ika=ace,uli
+owe lIfrm	llt--timec  theflItr[iheO fyra*y loopL(v,fs)aibA FIl_IMCUbBIquiBId
+r libamm htratoIothe fitTSkailslb-time.)  WonBIs ametinao--time
+o)ait l lsr
+s we tl Kbyt stioYed maIpfull detyrs
+ao/expteriteZEemanheeenonsn
+featyed don't
+elelme be_IZE*y_e lity, u()=unlp7,otrere ssxa=aptsonabom	amEunts=wawnsamfin
+ils d epresb-time;tii =CTEASIords, flushashon--time
+PEG libtBIon  thef and mu
+r libamm .by S-Pf and muimadoesxter  llow susptesnito:
+	Funy tis tBIon  theIZE*y ce.
+
+riou shheat t t-aginny piePr endd=want tor crion isamaansftrea:
+  * Aat t t-aginny pi=w a s and multip=pesatLit	Ptrere mustsrrfend ghtfree
+    wnsamfin ils d epresb-timefthegn 5 ilsIhptrer riou shh(tr selelIT600mary    wombyt s)    S-PoIs ameti oab-timefstzeliawbig
+	Mh
+fe0]prisx	PywaI, so
+    this hsxter aairebtioTaryloFI athyed bynrtnde tointemptyt--time   How we ,
+    this BIlyrSsilti m useacatchhyed ifon  pyrs
+ao/lar
+	 sentorssriou sh,twuch
+    atha=cFIF thumbnaih
+y
+   ,fde td eaflushon _eremb-time 	fgesw774s.
+  * Wation  pelelme be_fyrash_s and mu()	Ptrere mustsrrfend ghtwnsamfin ils
+    d epresb-timeftheemit_anyt--timensiderao	Proilslfinal
+EOIo
+You satAIndnts
+    ZTrhe
+iDiSctions 
+	Pca,philw a dozetotites by thefsu befmaultintys,upre
+    ultisafetI'insakeywesBIs ametineenon refileatit l lsrt100otites *liberee
+    PEG libmallon _e be_fyrash_s and mu().byA
+r libA gnofi li pBIlyrSsilti ysftreate be_fyrash_s and mu()e literbsusptedw
+Tttsemaansfyed  literbsee susptesnito:i tomuor -casthopesatL(vomthe2, na ilI
+Hu bmaa ZEheeoeadmtzatLito	Prorfor MS -s livo epre    Soee mthesmIZE*y nts
+wgn  tor c dury p(e be_fyrash_s and mu()	P:
+	chfwe vec
+aiainlyeapefor in
+--time
+owe ruew m(added
+featt isaBIlyrSsilti acute s nnlIT oes and multi,
+ter dms and multi. mTrepams and muimary compsoenpresAesptesnitoynoalld=wayts
+spesatL(vomthe2t)byDrZEand multiprusptesnit:a
+F===drZEand multiprusptesnit,
+see a
+a  v_Skpre_b-time()=[tbtoge  pat 	 rely
+BIturnryFALSEe(except perhaps dury p(e) imaaecowe y,u sxamscuraw dbelow)w
+Tttsede vecasee ncrpams and muima oeBIturnetheCtryc	ll	Mnde tointtndic o on
+
+featwusptesnitohis s
+
+Trre wion isaclnTgeppyinogo==uedclac s:
+  * e be_aptr_hptrer():te  vereturnece.
+_SUSPENDED.
+  * e be_lynrt_  s and mu():te  vereturneFALSE, aaCTEAS
+ratoCtryusule TRUEra  * e be_aptr_e lity, u():te  vereturneilslnumber
+=war lity, upalBItry
+	tuSctiteca(porsibSy 0)ra  * e be_fyrash_  s and mu():te  vereturneFALSE, aaCTEAS
+ratoCtryusule TRUEra S-Pryrrtbl] ref-interface cmusts es gn byTnt seSZ--es,
+loadtr libamm hinde
+ils enpresb-time,u	ProBIpeeat t tca vttAIndntsfc--e-Df j be_aptr_e lity, u(),
+i6crions [ilsPfastIdScoykgessPfast_anytr lity, upwucdit(eG vITaptr 
+
+Justsas de tos and multi,uprepams and muimae  vetr selelITbacktrackanhea
+Z nwetore  aplynrtnuoykgoPEG libsuspted) d   Watiof  v_Skpre_b-time()=is
+f	ll	d,etext_Skpre_byt /byt s_yk_b-timefuoykgodetprepZTrhe
+iDaplynrtnuoykg,
+:
+	chfysfwS-re urepams and muimae  vebacktrackanheo) FALSEess BIturnns.
+Ttonderaobeyotin
+featuosyoge cmustsNOTebipamsc774icaiftn  pAespted;Tiatarams
+thebibre-BItr[upcaoBIlfmpilti. mIndm souiSctions 
+	Pcas,myed' vetrame heshofl
+ ris
+deraodownethent tlynrtno) n  r Iorreb-time 	Proilsn
+loadtr libamm h	fges
+i al Again,serisabehilipramaansftreaTaPnewe tl-Kbyt PIorreb-time hsxessrtmto 
+====amse
+iDperapplmage;ieGrCTEAm li,uyed by thefloadth=aptsonabom	amEunts=w
+tewnderaobeG libapefma(voams and multi. m(Ifbn  /loaded,twaa, nnlIToneutew
+byt Peachsn be artbl],syed   the Iasoeth=LOTe=waZycl st)by S-P	kip_Skpre_ata:()aroents
+ary.  r [tbtoge BIquiBIsxsentoo fc-libinea
+wusptesnitosse
+ariowion isa[tbtogeoi /NOTeg  kgeroilslabn you/ oesuspted ts 
+grs and muim;TiatclnTgrcrions mbyt s_yk_b-timef oezerh,upresnotr liaioI) sho
+apquresedv	kipxamstmage exceeds tion-mEunts=waomm hcTrhe
+ilIfOn ils enpre
+b-time,uilsn
+	kip_Skpre_ata:()amusts	S mbyt s_yk_b-timef oezerhu	ProBIedr ett 
+adThe fiave	kipxamstmage somewc-re els . mTrepams and muimae  veimmed)ntelI
+elelmf  v_Skpre_b-time()	P:
+	chfAy the BIturneFALSE, :
+	chfwe vecasee a
+wusptesnitoreturnaio S-Pryrrtbl] ref-interface cmustsilsn
+arran  c heamsc774
+nt toIs 74icanumber
+=wabyt sobeG libitbapefm sTNTadon _eremenpresb-time.
+(Ye2, erisarewrgnSisa[aCTEASbartque,upresitv voics
+ZEanlexitIfOn ils faryr li
+Z mmonsa--efwS-re a=non-suspted) daroents
+ary.  r iryplict)byI) shonenpresderaohis tryinexhaseted,twesBIs ametin
+featyed emit_a/warny p
+stifyrs
+ao/dummy
+EOIo
+You ss eusatatha=non-suspted) daderaoroents
+ary.  r
+Iothe dow  TttseelnTrroge da	d eiCTEASSk/ realyrrtbl] ref-interface clogsemarywe tin f  v_Skpre_b-time();pils latges
+euscrebaboypr lib  before wioI)ya  v_Skpre_b-time()mknowsfileattetr libamm hithavaihabom,eiatclnTseouils
+coykges/ZEuntsdet*oykgodeta/dummy
+EOIo
+You s 	Proilsn
+BIturneTRUEeeusatat
+ td ghtSt hie BItr[r libamm hin a=non-suspted) darituailti.by S-Pams and muimadoesxter  tgempi/ oesuspted we tin lyntd774 ce.
+
+mYou ss;
+instItr[iate  vebacktrackanheilsllynrtno) shon
+You s 	Proree ocp7,otre wgn  
+riou sPtext
+t be   He(ceoilsIenpresb-time mustsrrflar
+	 end ghtthegn 5 ils
+loFIrestsyntd774 riou sPOn ils fr crioSyntd774 ce.
+
+mYou ss by the tetm-hlI
+terbrxcramea fewnhbl]rameryt soeachs(DHThtaboms *lim r selelITils loFIres)raWonBIs ametinat l lsrta 2Ksb-time ultilerapplmage=aptsons, :
+	chfysfmuch
+lar
+	Mh
+fe0]DCeaZorrITt riou sPOsflSkelIT oebm. mraryrebustnit(
+	gainse
+demp6 dPriou sPLengthNZEunth, yed maITfish theyrs
+ao/adt es Skan  r
+ainterface cultintetelee jpeat t tenpresb-time is
+ZEanletelIf=G veatinyel
+ reaoes dmechas susptededswe td eaZE6efma(voanyoderaoatiTDCTEAwi-e,TSfvntis
+rituailtieamd s
+
+Tr,eiatw theflItr[ihelivendlp7,oloop. m( S-P+DCTSIZEcln't
+*4];
+  TerisanrestsL(ceoSt his nohideace
+eCTEAS"shon--time
+ysfeG v", or
+ewetoe
+eCTEAStrere ssxa=fixed-s byPenpresb-time.)by S-Pinpresb-time w the trame herrf64K[ihelllow ====arbitTSIZECOM ntoAPPn
+riou sh,tpresnreselarroge da	d sentoo ly:
+preITarroeiCTEASllv dhindet*lloc ofd
+me lib, or lkippnsiover bybmallon _	kip_Skpre_ata:()ttAIndntsfapplxASZ--e,
+Aesptesnitoys ge da	d corrITtba, stifyrpils latges
+a--e, ilsPftebtioT=w
+--time
+owe rue
+eusclac mecahskip_Skpre_ata:'s by theessjusryexplainw  andve.
+added
+feato) for *4];
+  Tn  r d a arou sPge daon S[tbtoge ====lar
+	 riou sh,
+yed by thefZE6eidetthow poeda-hpde to--time
+owe flowabyMfor MS -b-timefmay.  ons :
+yInurome taions
+	Pca2ny tis drwreabS-D oestoexoilslZEand munsideraoin a linked
+liestdftb-time 	apts,asoe sxuoe voicaomm hcepy) da  TttseelnTrroge da	d by
+hili p(empty_= epre_b-time()marof  v_Skpre_b-time()=seouilsluoykger=anc(ZEunt
+ oeBIimen(ceoilsItext
+avaihabomsb-time;tFALSEess BIturnns sslITSfvtetr li
+b-timeaw*libavaihabomal Al td ghtseema(voypbtra use===w774,uprere ssxa
+pitfa veSkoprisx	peroach: shon-acktrackd
+feats
+
+Trs wS-a FALSEess BIturnns
+  the -ack updinihelivearliert--time   rary lists.,mwatiof  v_Skpre_b-time()
+iryc	ll	d,eshonZTrhe
+iDpoykger &lZEuntsSkdic of ilsI-acktrackdaplynrtnuoykg.
+SL(ceof  v_Skpre_b-time()=e  vexeouilslcoykges  = (ZEunts oeBIimeodeta/tew
+b-time,uilsdaplynrtnuosyoge cmustsbegllv dhlomewc-re els . mSy colioa lesoti
+c-llwthef  v_Skpre_b-time()=s
+
+Trs Sk/ realima ASS1_BIT ll , stifno
+adThe fiaveenpresderaoithavaihabom,eshef  v_Skpre_b-timecmusts eturneFALSE.yI) shonce.
+
+ASS1_BIThis not roveroilslcoykges/ZEunts===w774 Sk/ reaZTrhe
+i
+b-time,uilsn
+*ilslZErrITt aplynrtnuoykgot itionllv dhuosyoge cSk/ reapA)im
+b-time*. mPA)imab-timeawmaITbibamsc774icasslITofges
+nce=ASS1_BITplynblishes
+a aplynrtnuoykgowe tin a latert--time   Similardremarks/*cutIf====d epresonde
+a=f ainbdftb-times.
+y S-P+DCTSIZEde vetrwe  atgempi/ oe-acktrackdowe  ao	kip_Skpre_ata:()a ll ,
+so_anytrkippnsideraeelnTrropepline
+ilIfamsc774ictioYed st  v hile th da-h
+de tojpe-c--e-Df rkippon cnot-yel-apsege
+sidera, how we .
+yIa'sfmuchv	 relere hesee sslITobA FIl_Ib-time;twatiof  v_Skpre_b-time()=is
+f	ll	d,erove_anytuns nsfm dhata: (beyotin
+fonZTrhe
+iDpoykger/ZEunt)odowneth
+ t t-aginny pi=w erisab-time 	Proilsn
+loadttewnderaoindetprepremain ref--time
+wnsamwion isa	peroach BIquiBIsxa little[r libamm hcepy) dupresis fary---ime
+ oeseatriuset
+
+
+PBnASesage
+
+ce.
+nry compPt */
+
+   ac
+tion  parame
+
+PBnASesage
+
+ce.
+naptrran   itionltoext deraoindeta leries =war lis =w
+i6criaeon _qun youatAIndrituailtisfwS-re a=ce.
+
+or c erytransmStticaDcro7sxa
+slow s amunns
+	Pca2nlink,ha=drs dmecelnTsene tte aelow-qun you o
+   cwe y
+quicktIf=lica reaairsi=r li,uilsn
+gradulelITimp4];i urepamsplayic_qun youtat
+r libA lis *libBIsege
+saio S-Pfinal
+o
+   cafges
+aelbA lis *libZEanlete=is
+Odet tcavedetpraeso)aieresfoar (sequrtmoo )=ce.
+
+or c =want tlima qun you
+	Stty p. mPAnASesage
+
+ce.
+nsion
+ *libo)tte sliuselIfrm	llEAS
+ratoequivale
+i
+sequrtmoo 
+ce.
+nsion
+,upreoilslcorsibn you/=way6crions rssamsplayois nt tmain
+retsonc====seon _lBnASesage
+
+ce.
+.by S-PIJG enZEherP+DCTSIZEsene ttes_lBnASesage
+
+ce.
+nsion
+vIlsn
+giwetoa
+wuitabom "s livuc lpe"sgrfy,on _how poedivi aans pderaoindetA lis.
+Consoce c=walBnASesage
+
+ce.
+nsion
+voinoCTEAwi-eytransparekgodetprepenZEher.
+PBnASesage
+
+ce.
+nplicawclivaherebe(BItr[iransparekgly ryoilsldrs dmecASS1_BI.bIfvntenams ] ref-interface c	 relypus  itionASS1_BITarya finw  andve,eia
+de veapsege
+
+adfinal
+drs dmd
+o
+   cwe td eaanyttndic o on jpeat t tor c wat
+lBnASesage
+wioOwaZEuree,oprisx	peroachadoesxter  llow y6crions rssamsplay.y heperapplly6crions rssamsplay,=aas-interface cneeds to see ncrpams dme
+ASS1_BI'in"--timens-o
+   "cmthe, inb:
+	chfitbapsege
+soa
+drs dmd
+o
+   
+rfor MS 
+t bes.
+yEachadmsplayic_s livBIquiBIsxand eaasfmuchvIorreth daZEhe ssxa=fG vece.
+
+o
+   c=want tlima s by,esheilsldrs dmecmustsbegfai lIffaso inbrelface cto ts 
+gmm htransmSmultip tte inbdrdere hemakeyy6crions rssamsplayou-eJG    How we ,
+y tis porsibS-D oe	kipxamsplayon _eremem   o	Pry	 relyp dd  t tencoma(vobSt	
+theilsldrs dme'- ca  before t--time   n isairyfaso becasee sslITHu bmaa
+ams ] refaramerroaone,eter IDCT, upcistsL(v,faw (dwnsamfea6 
+asnit, etc.y S-PIJG drs dmecASS1_BI  llows tion-interface cto sde ch dynamiclelITbetwe-a
+amsplayon _eremem   o	Pry	 relyp bsorbon _eremencoma(vobSt	. mA itopesly
+s dmd
+-interface c livautomaticlelITadapteilslnumber
+=waamsplayopastI2/th
+wuiteilsln be avaihaboms sxurePo
+   cysfBIsege
+saioAlro,Tadfinal
+  uset-qun you amsplayoZycl eelnTrropepapplxt =lica rea--timensiderao	fges
+prependd=want tor c is retched.
+
+PBnASesage
+
+s and multi:by heconsoeSa lBnASesage
+
+ce.
+nsion (imaaorfor MS -s livsequrtmoo 
+ce.
+nsion),
+xeouilsls li_info cinfoi=reld
+det*oykgodetanparray
+=walclnTgruc lpeossjusti
+perappllZEand multip sxusuleatAInstItr[=waZeedpersia(von  r d a cclnTlies,
+yed  livca vent te be_l rele_lBnASesagit()ehelp r [tbtoge nheconsoeSa
+oIs ameti oalBnASesagitvsequrtge;it isamaghoddby the  applicabI  ll
+taions
+	Pca2njpeatdon't full doeseatOnvolvw din ils tStty-gZE*ty
+=w
+lBnASesage
+ s livsequrtamfaewrgn. m(Ifbn  /full doe*4];
+  Tpliroca6trole=w
+s livsequrtamh, yed maITfish thebErrow preps livuc lpelready p(cthe ulune
+Sk rdsde ch.c,
+son
+featyed  livBIadps livuc lpelplicaweusatASkesee be'st)bWatios li_info hsxter NULL,StrePf and multipASS1_BITe  vextoexoDCT'sidera
+indeta b-time 	aray
+ sxe be_IZE*y_e lity, u()=iryc	ll	d,eandvI  veemit_all
+preprequresedv	 lis dury p(e be_fyrash_s and mu()   n isaimute s 
+fea
+rfor MS -s livo epre  literbbibconsoe dde toa suspted) daderaogress monit
+ary.  r,t(L(ceoe be_fyrash_s and mu()edoesxter ry comp susptesnit.  We
+by the  lso tdded
+featt -Pf and muimacTrhe
+ilIff lcesTHu bmaaeoeadmtzatLit
+mthe Ilsn
+consoy p a lBnASesage
+
+ce.
+nsion,ubecasee ncegdrfaforlHu bmaa
+taboms *limunwuitabom ultilBnASesage
+
+plica.
+
+PBnASesage
+
+ams and multi:byWatio--timens-o
+   omthe hsxter plic,milsldrs dmecASS1_BIte  vereadthlld=w
+aorfor -s livor c dury p(e be_lynrt_  s and mu(),
+son
+featiatclnT*4];
+  Ta
+final
+drs dmd
+o
+   . m(H-re "rfor -s li"amaansfeiCTEASlBnASesage
+
+im
+mfor -s livsequrtmoo w)ion isamakes rfor -s livor csytransparekgodetpre
+ams ] ref-interface  ioHow we ,sexi-aon _taions
+	Pca2njpeatplicasuspted) d
+enpresde to 
+apE*0]5d=want tIJG +DCTSIZEde vetrame herrfmodtfiame hecheck
+====* wusptesnitoreturn =licae be_lynrt_  s and mu().by heperapplly6crions rssamsplay,=aas-interface cmusatsee jpegASS1_BI'i
+--timens-o
+   omthe   n isairygrec lb  din ils text
+lesiltit
+
+
+B-timens-o
+   omthePt */
+
+   ac
+tion  p
+yInub-timens-o
+   omthe,nd it had panxtoexsuilslunrtylelITdrs dmd
+o
+   cinea
+ca  before t--time, =lica:
+	chfitbelnTrroreadPd eaasfmanytt besTarya wrextw
+Tttsemthe hsx r selelITplicafimaincrions rssamsplayo=walBnASesage
+
+ce.
+nsion
+,
+presitvelnTrrou-edTwe toinypce.
+
+or c. mEachas livof a lBnASesage
+
+ce.
+nsion
+adTs[r libamm h(r liba tmp1)odetprep--timensio
+   . mTion-interface c li
+amsplayoin
+lockesep de tojpe-roents
+sion (ineaamsplayopasteperoenpresA li),
+imaitwclivahlow y6prescondit(L(va oeo erue
+amsplayopondit(L(v. mByamak) d
+enpres	Progmsplayopondit(L(v rue
+enaeite rtmly, y tis porsibS-Dultinte
+ainterface cto  daptelBnASesage
+
+gmsplayodeta wide ran  c=waomm htransmSmulti
+ ttes.by S-P---ichca6trole=low ====b-timens-o
+   oams ] refis
+
+	e be_sonsoe_  s and mu()
+	xeouderaoroents
+	e be_aptr_hptrer()
+	xeouowe pll=drZEand multiple imagess
+	cinfo.b-timens_o
+   o=eTRUE;	/*s	Specia--timens-o
+   omthe */
+	e be_lynrt_  s and mu()
+	G lc(eachso epre past) {
+	    adeusa o epre drZEand multiple imagessTSfvBIquiBId
+	    e be_lynrt_o epre()		/*s	ynrtnettewno epre past */
+	    ulti(aelbA lity, upSkoS
+   ) {
+	        e be_aptr_e lity, u()
+	        gmsplayoe lity, u
+	    }
+	    e be_fyrash_o epre()	/*stesmy,nteoo epre past */
+	}
+	e be_fyrash_  s and mu()
+	e be_  	veou_  s and mu()
+
+Tttsedtfimeaw=licaor] r panun--timensidms ] refin jpeat t re ssxanPadThe fiav
+levela=waloopL(v. mTion-interface c li=f ooliohow mDCeao epre paste(athemake
+stifhow poedisplayoeachspast.by S-Pl relestx	peroachapoedisplayon _lBnASesage
+
+S
+   sairytofdo ineaamsplay
+past ====eachss livapeeas refin  t tenpresor c. mIndntoinelee jpegtbtme
+loop
+Z ndiilti ysftr selelI
+	:
+	Fun(! e be_Skpre_ZEanlete(&cinfo))v	Proilsl	ynrt-o epre  lelbAy the BItr
+	e be_lynrt_o epre(&cinfo, finfo.Skpre_s li_number);y S-Plesotifle imagesytofe be_lynrt_o epre()sSkdic ofso:
+	chfs livof ils enpre
+or c erytoebipamsplayic; preps lism*libnumberedt	ynrty piet 1aultintys
+curcolial (ded  li see a
+loop(ZEunt r esnrty piet 1ao) for lSke,upresrsy p
+jpegASS1_BI'ioenpresA li(ZEunt r hsxe--imew)ion onASS1_BI  utomaticlelITBItrs
+gmm his nedit(_BIbeo ZEanlete=each BIquresedv	 li,o	Pr e be_fyrash_o epre()
+advmage(athent  text
+l livoe end-of-o
+   omrou sP(hrtamfSkpre_s li_number
+e  vebipOncrions 	d bympresn be tuntrolearrge
+so-ack eate be_lynrt_o epre())raWe tojpisanrchnique,uderaoithBItr[=lica reaenpresor c sslITos teede justi
+enpres	Proo epre pondit(L(v rue
+en
+lockesep.byAfges
+apadon _eremfinal
+s livaProreachon _eremendd=want tenpresor c,nd i
+--timensio
+   premainthavaihabom;fitbelnTrroreadPadThe fiavet besTby
+BIpe o refilete be_lynrt_o epre()/e be_aptr_e lity, u()/e be_fyrash_o epre()
+sequrtam   rary lists.,maou-eJG enrchnique erytoesee flsr/one-cast ZE*nt
+qunt tzatLito====amsplayopastI2/mahe Ilr c urePo
+   cysfarrgeL(v,faollowed by
+adfinal
+dmsplayopasteseon _ewo-cast qunt tzatLito====  usesr/qun youatATtts
+iryaoneubymm typon _ere
+ASS1_BI le imagessTPEG libtremfinal
+o epre past.
+C typon _le imagessTPEtwe-a pastI2/hsxamscuraw din a tmp1dbelow.
+yInusene tepils lastas livof a lBnASesage
+
+or c  literbbibBIs gn byo as such
+until afges
+y tis aptr,asoe  port-inpre dmsplayopastet itionbesou	peroachaif
+yEuffull sentoo fpondit(L(v On ils friavelest.byWatioaoneude tojpe-y
+   ,fbealyre nheclelme be_fyrash_  s and mu()e oeBI----e
+prep--timensio
+    (imaeusatsee e be_  	veou_  s and mu()).byIfeenpresderaoarrge
+soflsrEAS
+ratoCteelnTrroamsplayic, tion-interface c li
+casee ncegASS1_BI th daZEhe enpresderaoinoadvmagevof wpea's teede ydoe*4]duts
+o epre    Sisairygoneubymmallon _ere [tbtoge e be_s nsfm _Skpre().y S-Preturn salueits inea=want toollow re:
+	ce.
+_REACHED_SOS:    retchedblnTSOSomrou sP(ilsl	ynrtvof a tewnA li)
+	ce.
+_REACHED_EOI:    retchedbilslEOIo
+You s (endd=waS
+   )
+	ce.
+_ROW_COMPLETED:  tuSctitecaready p(Dn_IMCUbBow =waZeand munsidera
+	ce.
+_SCAN_COMPLETED: tuSctitecaready p(lastaMCUbBow =waZTrhe
+iDl li
+	ce.
+_SUSPENDED:      susptededsPEG libmuSctita(voanyo=want tandve
+(ce.
+_SUSPENDEDeelnTs
+
+Tr sslITSfva suspted) daderaoroents
+iryplict)tATtts
+[tbtoge elnTrrof	ll	d aeaanytn be afges
+yramto  bon _ere ce.
+
+=bjeciw mIt
+BItrsurome tdThe fiavederao	ProBIturnryIlsn
+inea=want tSkdic ofdbA gnofi li 
+ewetts s
+
+Trs. m(Ifbf	ll	d afges
+nce=EOIo
+You s is retched,[iate  v
+immed)ntelIereturnece.
+_REACHED_EOIcwe td eaatgempiL(va oeBItr[r libamm .)by S-PASS1_BI'ioo epre pondit(L(v e  v automaticlelITclelme be_s nsfm _Skpre()
+wS-aever tS-Po epre pondit(L(v owe takes shonSkpre; prus,v	 rele
+lockesep
+amsplayoBIquiBIsxnoedirITt  ll s tofe be_s nsfm _Skpre(). mBresby tdTh p
+ ll s tofe be_s nsfm _Skpre(),syed  liv bsorbsderaoinoadvmagevof wpeafis
+beon _amsplayic.   Sisahis 
+wonb-aefits:
+  * ded  li limytnbuildup agernitadit(emederaoinon  r enpresb-time.
+  * ded  li elimy,nteoextra=amsplayopastI2/ryoiayon _atgenace cto ts 
+    synt. agejpegASS1_BI'ioenprespondit(L(v.by S-Pairsi=agejpesenb-aefits sslITrequiBIsxykgessp
+apEss
+cal s to
+e be_s nsfm _Skpre() de ton  r amsplayo=pesatLits stifanyooCTEASlBndit(L(v
+yed maITbib oon al nhe voicaw--aon _Zycl s du-D oebacktrackSn ,sit usbesouto
+clelme be_s nsfm _Skpre()asslITofges
+anhbl]ramentoro tewnryt sohile arrge
+mw
+Tttset iamscuraw deGrCTEASbl]EAS"I/O susptesnit", andve. m(adde:_ere ce.
+
+ASS1_BIT Trhe
+ilIfOsxter thread-safetioYed musatterbtlelme be_s nsfm _Skpre()
+=licaoneuthread[=waZeetroleSfva dtfimee
+iDASS1_BIT[tbtogeoi /Iorry p(Dn ts 
+lima ce.
+
+=bjeci in[DC=CTEAS
+raptr )byWatioenpres	rrge
+soflsr end ghttpeafm libtranToneutewas livithavaihabom
+PEG libyed bynrtnettewno epre past, yed maITas de ve	kipxtS-Po epre past
+ZErrIspeedi(vogovnt ttuSctitecas li.   Sisas
+
+Trs ultiereepo) for *ast
+Zinfo.Skpre_s li_numbers sxurePtar
+	tas livtumber tofe be_lynrt_o epre().y S-Pinpre_s li_numbers=reld
+isxs relypnt tSkdexc=want tl li(ZTrhe
+ilIfbeon 
+s nsfm dhby shonSkpreSlBndit(pratAded  li eenonsn
+featthis hsxup-to-dnt. by
+emptyy p shonSkpreSb-time justsbeG libmallon _e be_lynrt_o epre():=fael
+e be_s nsfm _Skpre()aBIpe oedlITpntil it [Iturnrece.
+_SUSPENDED
+im
+ce.
+_REACHED_EOI.by S-Ptar
+	tas livtumber fastIdStofe be_lynrt_o epre()sSsSllv dhin ts 
+Zinfo.= epre_s li_numbers=reld.ion onASS1_BI'ioo epre pondit(L(v cal s
+e be_s nsfm _Skpre() dS-aever tS-PZTrhe
+iDinpresA li(numbers ProBow we tin
+
+featw livithlp7,otrlivoe equn odetprepZTrhe
+iDo epre A li(numbers ProBow.y Sus,vy6prescondit(L(va li("
+	taahptr"c=want to epre pondit(L(v presis ter
+allowed det"fa vebetind"atAded  li achoee
+ s we tl dtfimee
+iDefimrts by
+manipul o refilisxykgeslock rulm   rary lists.,mo) for *ast/adtar
+	tas li
+numbersgonsoeMh
+fe0]pr-PZTrhe
+iDinpresA li(number,ant to epre pondit(imae  v
+waitsuntil jpeatw livlynrtsxuoe rrge
+sbeG lib*4]duta(voanyo= epre   (nhe voic
+inttnfyra*y loop,xurePtar
+	tas livtumber ithautomaticlelITBIseeanheils last
+s livtumber wS-a shonendd=waS
+    is retched.ion us,vyftn  pAentofy a lar
+	
+tar
+	tas livtumber,nd it had pane  v eusatabsorbsshonentir
+
+enpresor c sti
+ilsn
+perapplllivo epre lest.   Sisairyefimrtge
+lympreslima as dfea
+e be_lynrt_  s and mu()edoesxwation  pdon't 	Specia--timens-o
+   omthet)bWatiofor *ast/adtar
+	tas livtumber equn odetprepZTrhe
+iDinpresA li(number,
+urePo
+   cysfdmsplayic_noeflsrEAS
+ratoprepZTrhe
+iDinpresA li(	rrge
+s.ion o
+final
+corsibn you/erytoe*ast/adtar
+	tas livtumber lp7,otrlivprepZTrhe
+iDinpre
+s livtumber;it isadmsaboms shonSkpre/d epresondeslock  = (Zaus  ition= epre
+pondit(imato s relypamsplayodfeaever it
+=ie ryin urePo
+   c--time, we td e
+waita(vofimainpre   (How we ,sd it had pane  v ter  ccept/adtar
+	tas li
+numberslp7,otrlivony,esheyed  li'te voicaw-ita(vofimatreaairsi=r li )byWatioderaoitharrgeL(veflsrEAS
+ratoprepo epre dmsplayopondit(L(v  li(	dvmage
+urrd ghttpe-y
+   ,fe be_s nsfm _Skpre() de vextoexoderaoSktheilslb-timeed
+o
+   cbeyotin
+fon*oykgoe pI
+	chfnt to epre pondit(L(v is aptr) daderaod e
+again.ioI) shonenpres	rrge
+soflsr end gh	PCa maIT"wrap artbl]"eilslb-timeeth
+ t tuoykgowS-re urepenpresisfm libtranToneuwgn  tA li(	head[=want to epre.bIfvnteno epre pondit(L(v s relyppondieds tird ghtSts dmsplayopastewe td e
+iayon _atgenace cto ts penpre,sd itefimrttseenTon-screenTysftreat t tlower
+pnrtno) shono
+   cysfinea=ryr libs lismbetgesyin qun you 
+ratoprepupper fart.y S-n, wS-a shontext
+o epre A li(i- 	ynrtns,fyed hile a=f oits
+=wowpeaftar
+	t
+s livtumber tofus . mTrepoIs ameti oaf oits
+erytoesee prepZTrhe
+iDinpresA li
+numberseat tatan be, w
+	chfimute s 
+feamyed'vsllkippnsinteno epre s lis
+ZErrIspeedi(vogovnt tinpresA lis 
+feamwer ttuSctitecaIlr c for *4]dit(emets 
+ft_viousto epre s li. mIndntoinwaI, ilsldrs dmecautomaticlelITadaptryits
+Aened detnt tarrgeL(vedera, by rkippon co epre s lishis nedit(_BIbeo keep up
+de tojpe-arrgeL(vedera.byWatioseon _erisxst ttegy,myed' vefull doebealyre nfeatyed perappllldfinal
+o epre past afges
+apsegeon _a vent tdera;soCTEAwi-eyn  r lastadmsplayomaITter
+begfG vequn youtacro7sxnt twgn  tA reen   Setprepr useatbtme
+loopclogsemis
+romerh) dlASkestris:
+	do {
+	    absorbsanyow-ita(voenpresbybmallon _e be_s nsfm _Skpre()
+	    uinal_past = e be_Skpre_ZEanlete(&cinfo);
+	    adeusa o epre drZEand multiple imagessTSfvBIquiBId
+	    e be_lynrt_o epre(&cinfo, finfo.Skpre_s li_number);y	    ...
+	    e be_fyrash_o epre()
+	} :
+	Fun(! uinal_past);yaaCTEAS
+ratoquitta(voasurotip sxe be_Skpre_ZEanlete() [IturnreTRUErtATtts
+trran  ons mmakes itv	 rele
+toesee   uset-qun you ams ] refle imagess
+fimatreaaiiavelest. mBresyftn  pdon't full doesee sentoo fpe imagessTfim
+treaaiiavelest,tprepr usealoopclogsemislASkestris:
+	ulti(;;) {
+	    absorbsanyow-ita(voenpresbybmallon _e be_s nsfm _Skpre()
+	    e be_lynrt_o epre(&cinfo, finfo.Skpre_s li_number);y	    ...
+	    e be_fyrash_o epre()
+	    yft(e be_Skpre_ZEanlete(&cinfo) &&
+	        Zinfo.Skpre_s li_numbers== Zinfo.= epre_s li_number)
+	      baptk;
+	}
+Indntoinelee n  pdon't trame heknowoinoadvmageve
+eCTEASlivo epre lestoys go
+b ans pllsr/one, sonia'sfterbtedit(_BIbeo hile retchedbEOFcPEG libsynrty p
+tremfinal
+o epre past;a[aCTEA,owpeafn  /full doet es Ssoe
+eCTEAStren= epre
+pastewasopepapplxt in lyncude tojpe-final
+onpre s li. m SisaappllagejpegAoop
+e  v avoicaatoextra=o epre lestodS-aever tS-Pdrs dmecithabon (imanearlyhabon)
+eo keep upude tojpe-yncoma(vodera.byWationt tderahtransmSmultipAened isahigh	Pyed m usea-agin a=amsplayopast,
+ilsn
+findotpeafmuchf=roalld=wajpe-fi c his arrge
+m PEG libyed  li(ZEanlete
+ t tuest. m(ded  li dagecatthis bITteron _ere ce.
+_REACHED_EOIcreturnes dm
+=licae be_s nsfm _Skpre(),soe equivale
+ily ryoie-aon _e be_Skpre_ZEanlete() )bIndntoinrituailtieyed maITfish theabomp prepZTrhe
+iDdmsplayopasteandv	tnrtne
+tewnineaseon _ereutewlyharrge
+m infoplicltial nhedo ti, eusatfael
+e be_fyrash_o epre() 	Proilsn
+bynrtnettewnpastewe tfe be_lynrt_o epre().y
+A variull st ttegy
+erytoeabomp 	ProBIbynrtnamsplayoiffm libtranToneuZEanlete
+A li(	rrge
+ssdury p(anpo epre past;atttseelnTrroaageca dhby teron 
+ce.
+_REACHED_SOS [Iturnre	Pr/ary lisy,on _Zinfo.Skpre_s li_numberatATtts
+ideacby the  apeanloyedTwe toZau	Pca,phow we ,s(L(ceont tdmsplayopondit(
+m useaaever geeanheils bottomno) shono
+   cPEG libbeon _abompns,fapefor) d
+ent t tlower pnrtno) shonscreenTbeon _r we tl pastI2/worse 
+ratoprepupper.
+Indm souZ--essit uscrebaboypbesoutoeabomp 	P=o epre lestosslITSfvnt twgn  
+fi c his arrge
+m atiny  /full doe-agin tremfinal
+o epre pasteimmed)ntelI.byWatioapsegeon _derao	cro7sxa s amunns
+	Pcanlink,hwesBIs ametinalwayeIrsy p
+jpegZTrhe
+iDinpresA li(numbersfimatreao epre tar
+	tas livtumber;eSfva
+  uset-qun you aiiavelest erytoebipaone, ot Ay the be 	ynrtns (abompa(voany
+yncomnlete=o epre past) asurotip sxshonendd=waor c is resege
+saioHow we ,
+manyooCTEASst ttegims *limporsibS-   rary lists.,mtion-interface c liy lisy,e
+ t tue imagessTo) shonZTrhe
+iDinpresA li(	Progrcideve
+eCTEASpoedisplayoot im
+ter.ioI) shonA li(ZE6tain(/sslITcirdmaedera, oneur useac oolioter toesee it
+ sxurePtar
+	tas li,oexpeci refileat t tA li(e  vebiprm	lltandvI  vearrge
+
+quicktIal nhe	kipxthent  text
+l li,btlelme be_s nsfm _Skpre()Tpntil it
+[Iturnrece.
+_REACHED_SOS aryce.
+_REACHED_EOI.  Or eusatsee jpegtext
+  uset
+numbers sxurePtar
+	tas livfarye be_lynrt_o epre();upreoileafmaghodddoesn't
+leton  pyrspecatth  text
+l li usce imagessTPEG libgrcidi(vogovdisplayootao
+
+Inub-timens-o
+   omthe,ne be_lynrt_  s and mu()eaever pepapplioenpressti
+iluseaever susptedsaioAas-interface cjpeatplisoenpresAesptesnitowe t
+--timens-o
+   omthecmustsbegnd parecafimawusptesnitoreturns[=lica rese
+[tbtoges:
+*fe be_lynrt_o epre()spepapplioenpressslITSfvn  pBIqures 2-cast qunt tzatLit
+ o	Proilsltar
+	tas livisn't eG vITaptrnyel. m( Stset iamscuraw dbelow.)
+* e be_aptr_e lity, u()jusryalwaye,oBIturnrythslnumber
+=war lity, up
+featia
+ owasoabS-D oe*4]dutsoPEG libsuspted) d 
+* e be_fyrash_o epre()te  vereadthny
+mYou ss oollow rexurePtar
+	tas li,
+ ouptpheshonendd=want tor c imatreaSOSomrou sPileatbeginthaC=CTEASs li.
+ o(BresitvBItrsunohinpresifme be_s nsfm _Skpre()This alBItry retchedbils
+ oendd=want tor c imaaaSOSomrou sPbeyotin
+fontar
+	tao epre s li.)
+* e be_fyrash_  s and mu()te  vereadtuntil jpegendd=waor c,u	Proiluseeln
+  susptedTSfvnt ttedThisi'te lBItry tryinaptched (aseelnTrrotresedvby
+  mallon _e be_Skpre_ZEanlete()).ye be_lynrt_o epre(), e be_fyrash_o epre(),o	Pr e be_fyrash_  s and mu()
+a vereturneTRUEesfvnt yttuSctitecant isPiaske,oFALSEesfvnt ythaca oesuspted.
+Indntsfewettvof a FALSEeBIturn,mtion-interface cmustsloadtr libenpresdera
+	ProBIpeeat t tca vttAAaions
+	Pca2njpeatpli=non-suspted) daderaoroentss teed
+terbchecktprepreturn salues=agejpesen
+rape [tbtogesao
+
+I tis porsibS-D oem type ams ] refle imagessTPEtwe-a o epre paste(ain ts 
+--timens-o
+   omthe   n sldrs dmecASS1_BItZTrhe
+ilIfry compsosslITwe y
+limyt oaf an   i=wale imagess.  ONLY THE FOLLOWINGfle imagesyf an   iare
+allowed afges
+e be_lynrt_  s and mu()eiryc	ll	d:
+*fdct_maghoddelnTrrof an  m PEG libeach c-llwthee be_lynrt_o epre().y  rary lists.,moneuZEthe see a
+alsr/DCTfmaghodd====ea lIfr lis,mm typon y  deta   usetequn youtmaghodd====tremfinal
+s li.
+*fdiCTEA_mthecelnTrrof an  m PEG libeach c-llwthee be_lynrt_o epre();y  owaZEureeatttsehis nohimpactTSfvteesrsy p ZE*nt qunt tzatLit   nr selelI
+ ToneuwEthe see drderemediCTEASfimainamto  paste(,uilsn
+	de ch to
+  Floyd-SteonbergediCTEASfimatreaaiiavelest. mCau	Pca:mm typon _diCTEASmtheP   livcause[r libme librtoebip*lloc ofdhby shonASS1_BI.l Al td ghttion-mEunty  owame librOnvolvw disfterblar
+	 (aar lity, entoro)	PCa maITcasee ncr
+ ainamto  max_me lib_to_see sentoferface cto be exceeded,tw
+	chfindntsfworstP   lseuwEthe apefor in 	P=o e-of-me libraailons b*fdo_block_smoerh) dlelnTrrof an  m PEG libeach c-llwthee be_lynrt_o epre().y  Trisxsetta(vois relevull sslITwS-a ams ] ref- lBnASesage
+
+ce.
+no
+   .y  Dueon _eremairsi=DC-sslITl li,bblock smoerh) dl*4];
+  sxa we yl"fuzzy"gAook
+ ainstItr[=waeremwe yl"blocky"gAooktseenTwe td eait; :
+	chfysfbetgesyseemsxa
+  matgesy=walessfiavetlsrE. mBresblock smoerh) dlisftearlyhalwayeIa win
+  dury p(latertlynge(,uesentoo lyTwS-a ams ] ref- wucdit(ge
+-	peroximatLit
+ oo
+   : smoerh) dlhelprytoehi aans psliusesblockinp7,otrltsoCTEAwi-eyAy ws
+ oupttipAmoerh
+gradietts until jpeglowesouZ   before t-Sts *limsrtm b*fCE*nt qunt tzatLit mthecelnTrrof an  m bl]EASpreprul s drec lb  dbelow.
+tAded * liter*em type PEtwe-a eG v-ZE*nt 	Proqunt tzeroo epre (becasee ncaa
+ ow the  lges
+nce=BIquiBId I/O b-timefstzes),upresyed  li(Z type :
+	ch
+ oqunt tzatLit maghoddiryplictbyWatiogene ttgn _ZE*nt-qunt tzeroo epre,mm typon oqunt tzatLit maghoddirya
+we ylu-eJG eway
+=walde chL(v pEtwe-a   us-Aened stifh us-qun you amsplay.y S-P+DCTSIZE llows n  proem type -mE dlipsoerape qunt tzatLit maghods:
+1. SiFIl_-cast qunt tzatLitodeta fixed ZE*nt cub .y   SSpecifdhby Zinfo.two_past_qunt tze = FALSEe = (Zinfo.ZE*ntmap = NULL.
+2. SiFIl_-cast qunt tzatLitodetaas-interface -lecute dhZE*ntmap.y   SSpecifdhby setta(voZinfo.ZE*ntmap det*oykgodet t tcE*ntmap (ilslsalueiofy   two_past_qunt tze tsetgnoext);u lso seeaZinfo.actun _number_of_aw (dw.
+3. Two-cast qunt tzatLitotheaoZ *ntmap cSoeen sentoferfltIf====shono
+   .y   SSpecifdhby Zinfo.two_past_qunt tze = TRUEe = (Zinfo.ZE*ntmap = NULL.
+  m( Stset itS-Pdrfaforlsetta(vosSpecifdhby e be_aptr_hptrer,upresitvis
+ oscrebaboypNOTeIpeafn  /full fimatreaairsi=lestosfelBnASesage
+
+gmsplay!)y S-se[raghodsosfimefsucdit(ge
+lITbettetequn yout = (lp7,mefsenedaioHow we ,
+dslIT tonairsi=maghoddiryavaihabomsfnt qunt tzL(v On non-RGB ZE*nt wnsamsao
+IMPORTANT:ubecasee ncegdtfimee
+iDqunt tzer[raghodsohile we yldtfimee
+i
+Iorry p-xtoe   prequiBIons s,sd it had panrequiBIsxn  proeSkdic of :
+	ch
+one(s)on  pyrtetin
+oesee PEG libyed  lelme be_lynrt_  s and mu(). m(Ifbwegdtd
+terbrequiBI eris, jpegmax_me lib_to_see setta(vow the be a ZEanlete=fSsilti.)
+Y  pdotthis bITsetta(voinea=ryr libagejpesen
+rape cinfoi=reldrytoeTRUE:
+	enabom_1past_qunt 		Fixed ZE*nt cub oZ *ntmap
+	enabom_extetnal_qunt 		Extetnally-lecute dhZE*ntmap
+	enabom_2past_qunt 		Two-cast customhZE*ntmap
+A ventape -libinamto  b dhFALSEeby e be_aptr_hptrer(). mBre
+e be_lynrt_  s and mu()eautomaticlelITsetreTRUEatreaoge sSpecifdhby ncr
+ZTrhe
+iDtwo_past_qunt tze  = (ZE*ntmap setta(vs,esheyed dslITtrame heseouils
+enabom flags ultianyooCTEASqunt tzatLit maghodstyed planproem type roelater.byAfges
+setta(vont tteabom flags corrITtba eate be_lynrt_  s and mu()e  be, n  
+ li(Z type to_anytteabomdoqunt tzatLit maghoddbITsetta(votwo_past_qunt tze
+ = (ZE*ntmap itopesly justsbeG libmallon _e be_lynrt_o epre()aio S-Pfollow re
+sentoo frul s *cutI:
+1. Yed musatexpteritlITsetoZinfo.ZE*ntmap detNULLTwS-a lde chL(v det1-cast
+ oslti2-cast mthec=licaa dtfimee
+iDmthe,norxwation  pfull dre
+2-cast
+ osqunt tzer[thebibre-Bun doesene tte aetewnZE*ntmap.y2. To
+	de ch toaatoextetnalnZE*ntmap,norxroem type roea dtfimee
+iDextetnal
+ osZE*ntmap dratoIaryplic(Dn ts apA)im past, yed musatfael
+   e be_tew_ZE*ntmap()eafges
+setta(voZinfo.ZE*ntmap.
+NOTE:TSfvn  pfull doesee treslima ZE*ntmap asoIaryplic(in ts apA)im past,
+yed by thefter dhdeiCTEASagejpesen
+ra(vs.l Ttoinde vellv urome neetrivto 
+	de chowe  costsao( S-se[requiBIons ssexi-aubecasee Zinfo.ZE*ntmap e  v alwayeIbi=non-NULL
+afges
+muSctita(voaapA)im o epre past, (L(ceobo tojpe-1-cast  = (2-cast
+qunt tzersxsetsitvdet*oykgodet t im o epre ZE*ntmaps.ion usfyed hile to
+do ineaagejpesen
+won
+ra(vsodetterofy shonASS1_BIotrltsromerh) dlhis f an  m.
+Yup,sit usat-St klugy,mpresit's nedit(_BIbeo doniamntoinwaI ====backw774s
+f anatLbn you.)
+
+added
+featonub-timens-o
+   omthe,nd it had pansene ttes_anytBIquresedvZE*ntmap
+dury p(e be_lynrt_o epre(),oter dury p(e be_lynrt_  s and mu().byWatioseon _ewo-cast qunt tzatLit,fe be_lynrt_o epre()smakes a=lestosver tS-
+--timensio
+   pth datesmy,e jpegteadmumhZE*ntsmap;niamnt-rEG li maITtakeoa
+w gnofi li p-mEunts=wan be, w
+eretsaor] r pilITiatdoesxlittle[Iorr.ion o
+lBnASesaomtnam=== ooktiryc	ll	d dury p(ntoinpast, Sfva finw w mItdiryalso
+imcompants oeBIo  b  
+feato) treslentofeame ar
+	tas livtumber ithgonsoeMh
+fe0
+oe equn odetprepZTrhe
+iDinpresA li(number,ae be_lynrt_o epre()se  v atgempi
+eo ZEnsfm oenpresssPCa makes shoinpast.ioI) yed see a
+suspted) daderaoroents,
+yed trame hecheckt====* FALSEeBIturn =licae be_lynrt_o epre()sbl]EASprese
+Z ndiiltis.ion o
+muSbs monits=wa2-cast qunt tzatLit stifacnot-yel-eG vI-BItr
+tar
+	tas livisatreaoglITclse inb:
+	chfe be_lynrt_o epre()se  v ZEnsfm oenpreao
+
+Aaions
+	Pcaeauthors wSo ry comp --timens-o
+   omthecmaITbibgempiein
+oesee it
+====* vece.
+
+S
+   s,fewetbA FIl_-s livones.l Ttoinde veIorr,upresitvis
+inw before :mnt-rEdisfte trame heconsoeSakoS
+   -s byd ca  before t--timeTfim
+A FIl_-s livS
+   s.l RIquresiref--timens-o
+   omthecfimawuchSakoS
+    Iasoes
+me lib.  Woree,oCteelnTcosttn be canlar
+	 S
+   s,f(L(ceont t--timensideraohas
+thebibswappnsioressrmIZE*tte roea gempod panor c. mI) yed *libZE(cernw  andre
+maxdmumhlerapplmage=canblsety, ece.
+nsion
+,uyed by thefsee P-timens-o
+   
+mthe sslITwS-a jpe-yncoma(voor c sctun lIThis rfor MS 
+A lis.  TttseelnTrr
+tresedvbybmallon _e be_his_rfor MS _e liu()	P:
+	chfwe veBIturn a corrITt
+apefor aeaanytn be afges
+e be_aptr_hptrer() ZEanletesao
+ItdiryalsoeIor toteron _ere pI
+tion  psee e be_s nsfm _Skpre()TroeleiDinpre
+pondit(L(v 
+	taahptrs=wao epre pondit(L(v,uilsdaplfor) dnpattetivof accp7,oth
+ t tca  before t--timeTisoquiti=nonsequrtmoo w mIt usbesoutoesee tresme lib
+ary.  r jme nobs.cTSfvn  pelnT(i.,mo) for hile end ghtBIo ssrmvirtun tmain
+me lib). mI) ter,nat l lsrtmakeylyre nfeatmax_me lib_to_see isxsetsssPh ustat
+porsibS-   I) shonce.
+
+me library.  r harytoesee a gempod panor c,uyed e  v
+crebaboypsee a
+lot
+=waamskhtra bef stifpoltilerapplmage. m( Stse  the -e
+imp4];idTwe toidThe fiaveIorreDn ts ame library.  r,upreswe hilei'tego*tte
+artbl]proeStnyel.)
+yInurome taions
+	Pca2ny tmaITbibZ nwetore  toesee e be_s nsfm _Skpre()T====* v
+y6prescondit(L(v,vy6clud) daapadon _ereminamto  maou ss; 
+featot, yed maI
+fish thetlelme be_s nsfm _Skpre()TinstItr[=wae be_aptr_hptrer() dury p
+lynrtup.l Ttoindorrs,upresnoded
+featyed musatfheckt====ce.
+_REACHED_SOS sti
+ce.
+_REACHED_EOIcreturnes dmsp sxshonequivale
+i[=wae be_aptr_hptrer'- cahe2t
+O(ceont tairsi=SOSomrou sPhis tryinretched,[yed musatfael
+e be_lynrt_  s and mu()ebeG libe be_s nsfm _Skpre() de veZEnsfm or libenpre;
+it' v eusatkeep returnon _ce.
+_REACHED_SOS until n  pdo. mI) yed readth
+taboms-sslITfr c uroinwaI, e be_s nsfm _Skpre() de vereturnece.
+_REACHED_EOI
+we td eaever returnon _ce.
+_REACHED_SOS;fbealyre nhecheckt====ntoinelee.bIfvnttsehippyis,uprepams and muimae  veterbreadthny
+m libenpresuntil n  pfael
+e be_abomp()e oeBIsetsitw mItdiryOK thetlelme be_s nsfm _Skpre()Tewetoe
+enTter
+usiref--timens-o
+   omthe,upresi cjpeatclse it usb--iclelITaTte-op afges
+nce
+inamto  maou ss hile tryinretd:[iate  vejusts eturnece.
+_SUSPENDED.
+
+
+Abbt_vi ofdhderastretmso	Prorfor MS  S
+   sPt */
+
+   ac
+tion  paramet */
+
+   ac
+tion  p
+yAnce.
+
+ZEand multip===drZEand multip=bjeci elnTrroreuse ydoe*4]cp7,orfor MS 
+S
+   s.l Trisxsae
+soa
+rm	lltamEunts=wan beeperoe
+   cPy elimy,nton _ere
+"consoe"o	Pro"  	veou"o=pesatLits,upreoileafisn't ilsdapavelurcoliaagejpe
+fnsouliaioRaCTEA,oreusevof aip=bjeci *4];
+  sxry comp ====*bbt_vi ofdhce.
+
+derastretms.  Objeci reusevclivahere	 relofy pondit(L(v a leries =waS
+   saie
+abA FIl_Ienpressm o epre or c. mTrisxsesiltiyexplainsejpesenfnsoulis.
+yAnce.
+
+fr c tetm-hlI(ZE6tain(/r we tl hbl]rameryt soIor to=waqunt tzatLit
+	ProHu bmaaetaboms. mIndanrituailtiewS-re manyoS
+   sae  vebiprtoext im
+transmStticawe toOdet tcavedaboms,oprisxmayoBInd me
+i[li(	PnoyL(v owe hptr 
+Thonce.
+
+syntd774 nt-rEG li peplipsoeaboms shebibomStticaio S-Pryntd774
+a finwsoerape claste(a=wace.
+
+derastretms:
+  * "Indesf an  "hderastretmsoZE6tainSakoS
+    stifalvedaboms teede ydoedrs dm
+    =shono
+   .io S-selarroprepusule kindd=wace.
+
+or c.
+  * "Abbt_vi ofdho
+   "cderastretmsoZE6tainSakoS
+   ,upreoarromSmul(vosome im
+    alld=wajpe-daboms teede ydoedrs dmoileafi
+   .y  * "Abbt_vi ofdhtabom sentoferface "P(hrtamfor to"taboms-sslI")cderastretms
+    ZE6tainSdslIT abom sentoferface s.y hedaZEhe sn=*bbt_vi ofdhS
+   ,uy tis nedit(_BIbeo loadtts amSmul(vo abom(s)
+Sktheilsldrs dmecbeG lige da  TttseelnTrroaccEanlishedvbybapadon _a lele ite
+ aboms-sslITfr c. mA variull schemetplisoa leries =waS
+   saiepI
+	chfnt tairsi
+o
+   cysfansondesm type (ZEanlete)cderastretm, :
+	Funsubsequrtmvonesiare
+abbt_vi ofdh	ProBIlITonajpe-daboms loadedhby shonairsi=o
+   .ioItdiryassfm d
+
+feato(ceont tdes dmechas readth-dabom,[iate  vpremember tpeaftabom until a
+tewndrfy,oace cultintetlima tabom tumber ithenZEunt rictbyIgot ition-interface caewrgner'- rIspeesibn you/toi=rgyre d eahow poeassociate
+ t tZErrITt daboms we toin=*bbt_vi ofdhS
+   .  W
+	Funabbt_vi ofdhderastretms
+elnTrrou-eJG ein a=close yenvironons ,t t im see isxsveo(voypamscourp6 dPie
+anytrituailtiewS-re deraoexZ type :e tooCTEAStaions
+	Pca2nm usea-a teede .
+Cae
+eatdewrgner.by S-Pce.
+
+ASS1_BIT*4];
+  sxry comp ====apadon _andvIrita(voanyomuSbs monits=w
+ aboms-sslITderastretmso	Pro*bbt_vi ofdhS
+   s. mIndbo toZEand multip nd
+drZEand multip=bjecisjus qunt tzatLit ===Hu bmaaetabomae  vebipr tmpnecafim
+jpegASfen be cfvntenobjeci, unlp7,oy tis owe IZE*tte by aetewntabomadrfy,oace .
+
+
+TheconsoeSabbt_vi ofdhS
+   Tderastretms,uy tis dslITtrdit(_BIbeo te vent 
+s and muimater toeemit_some im alld=wajpe-daboms y tis u(L(v. mEach
+qunt tzatLit stifHu bmaaetabomadpersi(ZE6tain(/adbool lns=reld
+"me
+i_tabom",
+I
+	chftetm-hlI(isxykamto  b dhtoeFALSE.  rary achapabom us dhby shonS
+   ,unt 
+hptrer-Irita(vo*4]cp7,oelipsoepe-dabomeandv	etreme
+i_tabom = TRUEeunlp7,oy tis
+ lBItry TRUErtA(Inftetm-h us   ,untoinprewetts s epreta(vont tlima tabom
+drfy,oace crfor MS 
+t besjusryw the oCTEAwi-eys
+
+Tr becasee ncegcirdma
+s anonetts  r selelITsharropaboms.)ion us,vsetta(vontisaareld
+detTRUEebeG li
+mallon _e be_lynrt_s and mu()te  veprewettoepe-dabome=licabeon _IZE*tte ar
+all.byIfen  pfull doeconsoeSa "lure"o	bbt_vi ofdhS
+   Tor c  E6tainon _noedaboms,
+eusatfael "e be_ly cd mu_taboms(&cinfo, TRUE)" afges
+muedpersia(voa vent 
+taboms. mIfen  pfull doeemit_some presnodfalvedaboms,myed' vetrame heseouils
+Skdi;
+ ule me
+i_tabom =reldrydirITtlI.byTheconsoeSako*bbt_vi ofdhS
+   ,uyed musatahere lelme be_lynrt_s and mu()
+de toa sesotifle imagesy=waFALSE,oter TRUErtAOCTEAwi-eye be_lynrt_s and mu()
+deelmf lce_a vent tme
+i_tabom =reldrytoeFALSE.  ( Stset ia safenynfnsoulioth
+prewetto*bbt_vi ofdhS
+   se=licabeon _consoe daccOdet lelI.)by oeconsoeSa  aboms-sslITfr c, perappllnt tlima le imagesyseoupd
+featyed
+tetm-hlI(w the,upresi stItr[=waZallon _e be_lynrt_s and mu()tandv	o in,pfael
+e be_IZE*y_taboms(&cinfo).l Ttoinde veIZE*ySako*bbt_vi ofdhderastretm
+ E6tainon _sslITSOI, DQTe	Pr/aryDHT riou sh,tandvEOI.  A vent tqunt tzatLit
+	ProHu bmaaetabomsd
+feat*libZTrhe
+ilIfa finw  Sk/ reaZEand multip=bjeci e  v
+ apeaStticaunlp7,o t im me
+i_taboms flagdiryalBItry TRUE,u	Proilenoa vent 
+me
+i_taboms flagsae  vebiprer TRUEr
+yAnlyre-fiBI wayodetconsoeSma chL(v daboms-sslIT	Pro*bbt_vi ofdhS
+   nsion
+
+erytoe*ondiedusryfollows:
+
+	consoeSce.
+
+ZEand multip=bjeci
+	xeouce.
+
+le imagess
+	xeoudress monitbeo taboms-sslITfr c
+	e be_IZE*y_taboms(&cinfo);
+	xeoudress monitbeo S
+   nsion
+	e be_lynrt_s and mu(&cinfo, FALSE);
+	IZE*ySdera...
+	e be_fyrash_s and mu(&cinfo);
+
+SL(ceoshonce.
+
+le imagessT*libnodfalt ric pEtwe-a Irita(voepe-dabome=r c sti
+ilso*bbt_vi ofdhS
+   nsion,ont tlima taboms *limsyre nherrou-edwioOwaZEuree,
+yed  livBIpeeat t te be_lynrt_s and mu()t...oe be_fyrash_s and mu()esequrtam
+manytt besT oe*4]dutsomanyt*bbt_vi ofdhS
+   nsion
+Sma chL(v dpe-dabome=r cr
+yded  liter ry cSesaoo epre o) shonZ anuofdhHu bmaaetabomsde
+enTHu bmaa
+oeadmtzatLit isxsepecifd. m(Ifbn  /c the,unt-rE'dIbi=no wayodetdrs dmoil 
+S
+   ...)ioGene tely,myedpdon't full doexeouoeadmtze_s ] ref= TRUEee
+en
+yed *libtryL(v det*4]dutso*bbt_vi ofdhplica.
+
+Inurome Z--essyed m useafull doec and muSakoS
+    uul(vo abomso:
+	chfare
+ter rtoext Sk/ reataions
+	Pca,upreoarroa finw  Sk/ansondesm type im
+jaboms-sslITfr c BItrabomsby/ reataions
+	Pcaa  TttseelnTrrogoneubymsetta(voup
+a=ce.
+
+drZEand multip=bjeci  oeBItr[treslentoferface csion,ont nhcepy) dunt 
+tabomsoSkthen  r ZEand multip=bjeci   Seibe be_s py_critacal_pa imagess()
+=ltiany lists. owaZEpy) duqunt tzatLitotaboms.
+
+
+Thereadthbbt_vi ofdhS
+   nsion
+,uyed b relyptrame heloadtts aitopesotaboms
+Sktheilsldrs and multip=bjeci PEG libtryL(v detBItr[tres*bbt_vi ofdhS
+   .bIfvntenitopesotaboms *limstoext Sk/ reataions
+	PcaelBnAStm, yed  liveusa
+*lloc of dpe-dabomedpersiso	Prof  v Sk/ reiroca6tetts dirITtlI.  rary lists.,
+ heloadta fixed qunt tzatLitotabomoSktheiabomedlot
+"n":
+
+    yft(Zinfo.qunt _tbl_ptrs[n]s== NULL)
+      Zinfo.qunt _tbl_ptrs[n]s=be be_*lloc_qunt _tabom((j_s amon_ptr) &cinfo);
+  osqunt _ptr = Zinfo.qunt _tbl_ptrs[n];	/*squnt _ptr tseJQUANT_TBL* */
+    ulti(i = 0; i < 64; i++) {
+      /*sQtabom[]airygreiBId qunt tzatLitotabom, inbnsoulalparray
+=rdere*/
+    osqunt _ptr->qunt val[i]s=bQtabom[i];
+  os}
+
+C dmoiheloadta fixed Hu bmaaetabomahsx r selelIT(ultiACetaboma"n"):
+
+    yft(Zinfo.ac_hu b_tbl_ptrs[n]s== NULL)
+      Zinfo.ac_hu b_tbl_ptrs[n]s=be be_*lloc_hu b_tabom((j_s amon_ptr) &cinfo);
+  oshu b_ptr = Zinfo.ac_hu b_tbl_ptrs[n];	/*shu b_ptr tseJHUFF_TBL* */
+    ulti(i = 1; i <= 16; i++) {
+      /*sZEunts[i]sis number
+=waHu bmaaes dmsp=waleng toOt-Sts, i=1..16e*/
+    oshu b_ptr->-Sts[i]s=bZEunts[i];
+  os}
+    ulti(i = 0; i < 256; i++) {
+      /*ssymbols[]airyjpegASsi=ageHu bmaaesymbols, inbs dm-leng to=rdere*/
+    oshu b_ptr->hu bval[i]s=bsymbols[i];
+  os}
+
+(added
+feattryL(v detsetoZinfo.qunt _tbl_ptrs[n]sdet*oykgodirITtlI aeaa
+s nspantsJQUANT_TBL
+=bjeci isxter rafetioI) shonencoma(voor c hippyiame h
+ZE6tainSa qunt tzatLitotabomodrfy,oace ,en  r mlsrEAS
+abomae the 
+	t
+owe IZE*tte!tAInstItr[*lloc of a/Iorry p(
+abomaZEpy  = (ZEpy jpegmasrEAS
+abom
+Sktheitjusry  vust tted andve. mDE*to ultiHu bmaaetaboms, owaZEuree.)byYed m useafull doeBItr[trestaboms flicaa  aboms-sslITfr c, aaCTEAS
+rat
+hard-wieon _eremoSkthen  r taions
+	Pcaa  Tte
+e be_aptr_hptrer() Za veis
+ru before tdoeBItr[a  aboms-sslITfr ctioYed musat*ast/adsesotifle imagesy=w
+FALSEeroeSkdic of 
+featyed do terbrequiBI akoS
+    nherrond me
+i.ion us,vnt 
+tr sele scer piofis
+
+	consoeSce.
+
+drs and multip=bjeci
+	xeouroents
+eo taboms-sslITfr c
+	e be_aptr_hptrer(&cinfo, FALSE);
+	xeouroents
+eo hbbt_vi ofdhS
+   nsion
+	e be_aptr_hptrer(&cinfo, TRUE);
+	xeoudrZEand multiple imagess
+	e be_lynrt_  s and mu(&cinfo);
+	BItr[dera...
+	e be_fyrash_  s and mu(&cinfo);
+
+Inurome Z--es, yed maITfae tdoeBItr[a or c we td eaknowon _I
+eCTEASii(ZE6tain(
+akoS
+    imaeusattaboms. mIndjpeatclse,t*ast/FALSEe = (Zhecktprepreturn salue
+=licae be_aptr_hptrer():[iate  vebe ce.
+_HEADER_OKeSfvakoS
+    Ias ulune,
+ce.
+_HEADER_TABLES_ONLY SfvdslIT abomsmwer tulune. m(Aontirdpreturn salue,
+ce.
+_SUSPENDED,tis porsibS-Dwatioseon _a suspted) daderaoroents
+ary.  r.)badded
+feate be_aptr_hptrer() e  veterbZEanlainSi) yed readthko*bbt_vi ofd
+o
+   cforxwa	chffor hilen't loadedhts amSmul(vo aboms;hts amSmul(v-
+abomaZheck
+s
+
+Trs later, inbe be_lynrt_  s and mu().by
+I tis porsibS-D oeBItr[a leries =waS
+   saflicaa A FIl_Iroents
+sion by
+BIpe o refilete be_aptr_hptrer() ...oe be_fyrash_  s and mu()esequrtam,
+we td eaBI---- re/rITre o refiletce.
+
+=bjeci ltintetderaoroents
+a]du cr
+(Ifbn  /didpreykamto  b ,oanyounrtylef--timeloadtleft Sk/ readeraoroents
+b-time 	at t tendd=waoneuS
+    I the be amscarded,[case refn  proeloseent 
+mtnrtno) shontext
+S
+   .)  W
+tion  psee t isamaghod,mstoext taboms *li
+automaticlelITclrriecafimw774,eshesome i) shono
+   seelnTrroabbt_vi ofdhS
+   s
+
+feataeite  itotabomsaflicaearlieroe
+   s.byIfen  pyrtetin
+oeIZE*ySa leries =waS
+   saieroea A FIl_Idress monitbfr c,
+yed m useafull doemakeya sentoo  b dhderaogress monit
+a]du c jpeatdoesn't
+fvushfnt to epre b-time 	at erm_gress monit()e  be.l Ttoindothe Aened dra(vs
+upubymsome triflon _amEuntwioOwaZEuree,myed'dptrame heremember to uvushfnt 
+b-time 	fges
+nce=llsr/S
+   .  ded  li makeynce=llteroe
+   sTrroabbt_vi ofd
+onesibyopaston _FALSEeroee be_lynrt_s and mu().by
+Sentoo friou shPt */
+
+   ac
+tioy
+Some taions
+	Pca2nmaITtrame hein(eri ltiextracl sentoo fderaoinoiletce.
+
+derastretma  Tte
+ce.
+
+syntd774 *4];
+  sxmrou sPiyp sx"COM" (ZEaons )tand
+"APP0"eilrd ght"APP15" (taions
+	Pca)e oehohe  interface -lentoferodera.bUnfoptunntelI,oprepuseaagejpesenmaou ss isxter rentofeameby/ reasyntd774.
+COMnmaou ss *limfaisly widelITplica oehohe plir-lecute dhtexta  Tte
+cFIFnsion
+foplic renttplisoAPP0nmaou ss de torentofeameinamto  stra(vsodethohe ce tain
+dera.  Adobe taions
+	Pca2nuseaAPP14nmaou ss beginnon _de tojpe-rtra(vt"Adobe"
+=ltimSmcellaneoustdera.  OCTEAaAPPnnmaou ss *limraBIlITseen,upreom use
+ZE6tainSalm souanydra(v.byIfen  pfish thextoexoplir-lecute dhtext,hwesBIs ametinn  psee COMnmaou ss
+	Pronlacc BItraboms7--St ASCIIhtextoinoilema  Newty, eZ nwettLits slibnod
+syntd774 b dhtiooexpeci/toi=rProLF (Unixextyle), CR/LF (DOSextyle), ltiCR
+(Macextyle). mA robusatCOMnrptrer Ay the be abS-D oeZEpe :e torntdicab r pa
+garb   ,uy6clud) danulls,f(L(ceorome taions
+	Pca2nsene tte COMnmaou ss
+ E6tainon _non-ASCIIhjunr.io(Bresn  rs by thefter be ineaagejpem.)byrarylBnAStm-lecute dhdera, see anaAPPnnmaou s,u	Probimsyre nherrgin it we toin
+Odet tfyL(v rtra(vtso 
+featyed  li te vee
+eCTEAStren
+You s is sctun lITn  rs.
+It uscrebaboypbesoutoeavoicase refAPP0noraAPP14nultianyoprivsoeSmaou ssr
+(NOTE:Tprepupcoma(voSPIFF
+syntd774 e  veuseaAPP8 maou ss; wesBIs ametinn  
+teesrseaAPP8 maou ssnultianyoprivsoeSlurcolis,feiCTEA.)byKeep in mindotpeafeafm sou65533eryt soelnTrropresondo ineamaou s,upresyed
+elnThile asfmanytmaou ss *s for lSke.byByPdrfafor,oprepIJ
+
+ZEand multip had pane  v IZE*ySa cFIFnAPP0nmaou sto) tre
+sSpecifdhce.
+
+ZE (dwnsam ithgoaysca c imaYCbCr, ltianaAdobe APP14nmaou saif
+nt tmepecifdhZE (dwnsam ithRGB, CMYK, imaYCCK.  ded  li dmsabom eris, b e
+wepdon't BIs ametinita  Tte
+drZEand multip had pane  v BIs gn by cFIFnand
+Adobe maou ss *ndvI  veseouilshce.
+
+ZE (dwnsam itopesly Ilsn
+ineais ulune.by
+ded  li IZE*ySsentoo friou sheimmed)ntelI oollow rexurePderastretm hptrer by
+Zallon _e be_IZE*y_riou s()eafges
+e be_lynrt_s and mu()tandvPEG libtremfirsi
+c-llwthee be_IZE*y_e lity, u().  W
+tion  pdotthis,Stren
+You ssvapeeaseafges
+nt tSOIo	ProilslcFIFnAPP0n	ProAdobe APP14nmaou ss (o) IZE*tte),upresbeG li
+-llwels . mSentofy tren
+You s iyp fle imagesy*s "ce.
+_COM" ultiCOMnor
+"ce.
+_APP0n+ n" ultiAPPn. m(Actun lI,_e be_IZE*y_riou svI  veleton  pIZE*y
+anytmaou s iyp ,upreswe don't BIs ametinIrita(voanyooCTEASkie ryowamaou s.)brary lists.,mtoeIZE*ySa plir ZEaons  rtra(vt*oykgica oeby ZEaons _text:
+	e be_IZE*y_riou s(cinfo, ce.
+_COM, ZEaons _text,mstrlen(ZEaons _text));
+
+Ifnia'sfterbZ nwetore  toextoexoa vent tmaou s deraoinome libreato(ce,
+yed  livi stItr[ lelme be_IZE*y_r_hptrer() aollowed bycrfor MS 
+cal s to
+e be_IZE*y_r_ryt (). mIfen  pdoniamntoinwaI,sit usn  r rIspeesibn you/to
+ lelme be_IZE*y_r_ryt ()y liTtlI shontumber
+=wat besTgivtioenynce=leng t
+le imagesytofe be_IZE*y_r_hptrer().  ( Stsemaghoddletren  pempty tre
+o epre b-time unrtwayodlrd ghtaamaou s,uwa	chfm usea-a imcompantse
+en
+seon _a suspted) daderaogress monit
+a]du c. mIndanytclse,ti) yed *librsy p
+a suspted) dadress monit,uyed by thefuvushfipsob-time 	fges
+in(eriy p
+anytrentoo friou sh   Seib"I/O susptesnit".)byOr,mo) for *reimeeth lynjpes b  
+f tmaou s ryt esequrtamTn  rself,
+yed  liveusatf im ot Atra useaSktheilslderaogress monit
+a]du c.byIfen  p*libIrita(vocFIFn1.02Dexteesnitomaou ss (thumbnmp1de
+   s),udon't
+=ltgeeanhesetoZinfo.cFIF_minor_v
+apEito= 2tso 
+feat t tens dmece  v IZE*ySnt 
+s rrITt cFIFnv
+apEitotumber inoilslcFIFnhptrer maou s.ion onASS1_BI'iodrfafor
+erytoeIZE*ySv
+apEito1.01,upreoilea'iowrE dlifen  pyr(eri anyt1.02Dexteesnit
+riou sh   (WeuZEthe crebaboyp
+	taawaITfi tfeusatdrfaforL(v det1.02,upreoileli
+plica oe-a brok-a ams ] ss ere pIEthe ZEanlainSandre unrnown minsrmv
+apEit
+numbersal nheredutsof anatLbn you riskssit usrafesatterbtoeIZE*yS1.02Dunlp7,
+yed *libsctun lITseon _1.02Dexteesnits.)byyWatioapadon ,n
+wonraghodsosf ge dlon _sentoo friou she*libsvaihabom:
+1. Yed clivaskyjpegASS1_BI th llv ushonZ 6tetts sf COMn	Pr/aryAPPnnmaou ss
+Sktheme lib,u	Proileno lisy,e_eremoeatyedrslpisyre 	fgesw774s.y2. Yed clivlecutITn  r own [tbtogeodoe*4]cp7,oCOMn	Pr/aryAPPnnmaou ss
+on-ere-flyp sxshoy *limrptr 
+Thonairsi=maghoddiry	 reler tofus ,uesentoo lyTi) yed *librsy p_a suspted) d
+deraoroents;nIrita(voatmaou s pondit(imatpeatcopms we toenpresAesptesnitois
+teeseasy (ZEesndmecepeathippyisto) tres
+You s is lE dEAS
+raton  r tvaihabom
+SkpreSb-time)aioHow we ,ent tmesotifmaghoddeonsere
+some libr(L(ceont t
+You s
+deraotrameter be kept/artbl]pafges
+y 's tryin*4]dit(em.byraryeiCTEASmaghod,myed'dptetm-hlI(setoupomrou sPhi dlon _afges
+mre o refa
+drZEand multip=bjecitandvPEG libZallon _e be_aptr_hptrer(), becasee nce
+riou sh =waSnt risate  ve r selelIT-a teaAStrenhead[=want t=r c stitso e  v
+ ape linfdhby e be_aptr_hptrer.  OtamTn  'vslIbynblishedvaomrou sPhi dlon 
+maghod,miate  vebe plicaultintetASfe[=wantaoudrZEand multip=bjeci
+(potrtmoo lyfmanytderastretms), unlp7,oyed   type ita  Mrou sPhi dlon _is
+datesmy,ed lele itetIf====COMnmaou ss *ndd====eachfAPPnnmaou sbs dm.
+
+
+Thellv ushonZ 6tetts sf sentoo friou sheineme lib,ufael
+	e be_llv _riou ss(cinfo, riou s_s ] ,uleng t_limyt)
+wS-re riou s_s ] airyjpeg
+You s iyp fth llv , ce.
+_COM aryce.
+_APP0+nao( oe rrtype roellv ua vent tmentoo friou sPiyp s,uyed trame heca ventts
+[tbtoge 17
+t besju====COMn	ProAPP0-APP15.)  I) shonencoma(vo
+You s is lE dEA
+
+ratoleng t_limytlderaoryt s,vdslITleng t_limytlryt soI  vebiprlv d;attts
+le imagesy llows n  proeavoicachewa(voupome librI
+tion  pdslITtrame hesee nce
+airsi=fewnryt soof a potrtmoo lyflar
+	 maou s.ioIfen  pfull doellv ua vent 
+dera, setoleng t_limytldoe0xFFFF; 
+featot end ght(L(ceo
+You s leng the*libdslI
+16t-Sts. mAsya sentoo tclse,tsetta(voleng t_limytldoe0nprewetts nfeatmaou s
+iyp f=licabeon _llv dhadfalv.  ( Sagot itiondrfaforlbehavior, inbfsct.)byAfges
+e be_aptr_hptrer() ZEanletes, yed  liv lisy,e_ere sentoo friou sheby
+oollow rexurePcinfo->riou s_ASsi=*oykgisyf ain.ioA vent tmentoo friou ssaie
+nt t=r c speeaseindntoinASsi, inb=rdere=want im ocZTrhe
+ce inoilsl=r c (b e
+omStta(voanyoriou sh =waiyp sxn  /didi'te skt===). mBo tojpe-origiiavedera
+leng to	Proilslllv dhderaoleng to	resBIs rdedd====eachfASsi=ettry;ynce=lltges
+e  veterbexceedoleng t_limytlultintetunrtycularfriou sPiyp a  Ndded
+feattrese
+leng theexclud  
+f tmaou s leng toword, w
+eretsajpe-rtoext BInd me
+iatLit
+we tinuilshce.
+
+or c i6cludms y    (He(ceont t
+Yxdmumhderaoleng tois aptelI
+dslIT65533.)
+yI tis porsibS-D peafedThe fiavesentoo friou she*peeaseindnts
+sion beyotin
+fo
+SOSomrou sPe pI
+	chfe be_aptr_hptrer-rtops;eSfvti, 
+f tmaou s lisate  vebe
+exteed	d dury p(apadon _=want trisat=want t=r c.   Sisairyterbexpecifdh oe-a
+s amon,phow we . mI) yed *libby ri lnome libryed maITfae tdoeBIseouilshleng t
+limytldoezeroT====* vxmrou sPiyp sxafges
+fyrashon _e be_aptr_hptrer,mto
+eenonsn
+featthegmax_me lib_to_see setta(vo liter be exceeded dus
+eo hdThe fi
+=wallteromaou ssr
+
+Thonmaou s lisatremain(/rtoext until n  pfaeloe be_fyrash_  s and munor
+e be_abomp,Pe pI
+	chf*oykgods ame libris urned stifjpegASsi=isxsetsdoeemptyao(e be_  	veoutahereBI----esajpe-rtoe   ,uowaZEuree.)byNdded
+feattregASS1_BI isxykgesno lyTint risaxt Sk/APP0n	ProAPP14nmaou ss;
+i) yed tBI th l	taa
+rm	lltnonzeroTleng tolimytlonajpeee nyp s,utregASS1_BI
+e  vesile
+ily f lce_ilshleng touptpheshonsy,omumhieafulls.io(Bresn   clivlet
+a zeroTleng tolimytldoe*4ewettoepemf=licabeon _llv dhadfalv.)ioA ti, inSa
+16--St environons ,t t t
+Yxdmumhleng tolimytlmaITbibZ nAtra name help7,otrli
+65533ery m*lloc() limytailtis.ioIgot itiorEG libbesatterbtoeassfm d
+feattre
+efimrtge
+hleng tolimytlot eliTtlI Ipeafn  /setsitvdetbm.
+
+
+Ifen  pfull doelecutITn  r own maou s-apadon _[tbtoge,en  pdoniambybmallon 
+e be_let_riou s_pondit(im(). mA maou s pondit(ima[tbtoge musathlv usho
+w gnsouli
+	bool lnse be_riou s_pareer_maghodd(j_  s and mu_ptr cinfo)
+Al td ghttionmaou sbs dmairyterbexpteritlITpasted,uilsdatbtoge  livfitinit
+entcinfo->unaptr_maou s.ioAtoepe-d be cfvmall, 
+f tmaou s itopesohis tryi
+BItr[=lica retderaoroents
+a]du crion onpondit(ima[tbtoge i- rIspeesibomsfnt
+apadon _eremmaou s leng toword stifjpegremainirefle imagesoryt s,vSfvakyaoReturneTRUEeroeSkdic of sucdit(.io(FALSEeAy the be returnic(DnlyTi) yed *li
+seon _a suspted) daderaoroents
+atinit te vs n  proesuspted.  Seib reasyntd774
+maou s pondit(imheinejdmaou s.cT====*peropr)nte s ] refraghodsoi) yed trame h
+see a
+suspted) daderaoroents.)
+yI) yed owe ri aans pdrfaforlAPP0noraAPP14npondit(imh,uy tis uptphen  pro
+BIs gn by cFIFnand Adobe maou ss Sfvn  pfull ZE (dwnsam BIs gn onitbeo ocZTr
+itopesly.  WesBIs ametinZEpy) duand exteed rexurePdrfaforlpondit(imheifvn  
+full doedo 
+fea. m(Aobetgesyideacerytoellv ushosexmrou sPiyp sx====llter
+ lisy,monit
+bybmallon _e be_llv _riou ss(); 
+featmaghodddoesn'tTint rimen
+de tojpe-ASS1_BI'ioown pondit(L(v agejpesenmaou ss.)
+ye be_let_riou s_pondit(im()o	Pr e be_llv _riou ss()oarromutun lITexclu(ge
+Pt *TSfvn  pellld=ge it owe ri asianyopr_vioustc-llwthejpe-otTEA,oultinte
+unrtycularfriou sPiyp orentofeamr
+yAnl rele
+ lists. owaatoextetnalnCOMnpondit(imaelnTrrouluneeinede be.c.
+A ti, seibe betran.cT====*ny lists. owaseon _e be_llv _riou ss.
+
+
+Raw (downsists.d)hS
+   TderaPt */
+
+   ac
+tion  paramet */y
+Some taions
+	Pca2ntrame hesecutITalBItry-downsists.dhS
+   Tderawthejpe-ce.
+
+s and muim,norxroeresege
+ raw downsists.dhderaw=lica retdms and muim.ion o
+ASS1_BI ry compsontoinrequiBIons  by allow rexureP-interface cjoeIZE*ySnt
+apad raw dera, bypaston _shontetm-h nd pondit(L(v ar portpondit(L(v saxps 
+Thonint risam ithdtfimee
+iD=lica retsyntd774 =ge atinisoromeepeathirdere h
+see. mI) yedraSnt risattsemaBIlITonubypaston _ZE*nt c nweapEit,hwesBIs ameti
+
+featyed see treslyntd774 int risam stits relypsetse be_s *nt_wnsam =
+en_s *nt_wnsam (arye be_s *nt_wnsam =to e_s *nt_wnsam f===drZEand multi) 
+Thonme  tyism drec lb  dindntoinsesiltiyis nedit(_BIbdslIT hesecutITnt
+apsege
+ downsists.dhS
+   Tdera,aiepI
+	chfnodfalves anonetts hlv ushotlima
+d beesnits.
+
+
+Thec and munraw dera, yed musatsecutIT retderaoSk/ reaZE (dwnsam nherrou-ed
+inuilshce.
+
+or c (p----eeBItr[tresearlierosesiltiytiySentoo fZE*nt wnsams)
+	Prodownsists.dhthejpe-sistsa(vooiTtimherentofeameinuilshce.
+
+le imagess.
+Yed musatsecutIT retderaoSk/ reafoplic plic(ingesno lyTby/ reace.
+
+ASS1_BI,
+nimalITaTJSAMPIMAGEparray.   Sisairyli(	rray
+=wa*oykgisrytoeewo-d beesnital
+trraye,oeachf=waiyp TJSAMPARRAY. mEach 2-D(	rray
+hohesajpe-salues=f===one
+ZE*nt c anonett. mTrisxspersiurEdisftedit(_BIb(L(ceont ts anonetts *libdf
+dtfimee
+iDstzestioI) shone
+   Td beesnitsT*libnodfacrfor MS 
+=want tMCUDstze,
+yed musatahereptr[tresderaocorrITtba (usulelI,oprtset iaoneubymd pterfac p
+jpegllsr/ZE*umnn	Pr/aryrow)aio S-PderaomustsbegnhdT.dhtheacrfor MS 
+=waa/DCT
+block Sk/each c anonett: 
+featot,oeachfdownsists.dhrow musatfE6tainSa
+rfor MS 
+=wablock_s by salid-sistses,u	Proilerecmustsbegacrfor MS 
+=w
+block_s by sistsehrowsd====eachfc anonett. m(FoAStaions
+	Pca2nwuchSas
+ E6v
+apEito=waamgytal TV S
+   s,ftreslyntd774 i
+   Tstze tseusulelISa
+rfor MS 
+=watresDCTfblock s b ,oso 
+featnreptrd) danned sctun lITrrogone.)by  onpondidurm f===ZEand multip=fnraw derafysfb--iclelITshotlima is notm-h
+ZEand multi, excepeoileafn  pfaeloe be_IZE*y_raw_dera()Tinonlacc =w
+e be_IZE*y_e lity, u().  BeG libmallon _e be_lynrt_s and mu(), yed musatdh
+ t toollow re:
+  * SetoZinfo->raw_dera_in
+detTRUE. m(Ii=isxsetsFALSEeby e be_let_drfafors() )b  osTrisxterofieryjpegASS1_BIotrltsyed e  vobimsycutIon _[aw dera.
+  m Furilerm li,esetoZinfo->do_fancy_downsistsL(v detFALSEesfvn  pfull doesee
+  m apavedownsists.dhdera. m(Ii=isxsetsTRUEeby e be_let_drfafors() )b  * Eenonsne be_s *nt_wnsam is corrITthtiooanbexpterit e be_let_ZE (dwnsam()b  osZa veisgacgooddideaa  Ndded
+feat(L(ceoZE*nt c nweapEitfysfbypasted,
+    yn_s *nt_wnsam is tgnoext, excepeoileafe be_let_drfafors()tplisoel dob  osZ ooliourePdrfaforle be_s *nt_wnsam setta(v.b  * Eenonsnjpe-sistsa(vooiTtimh,oZinfo->s an_info[i].h_sist_oiTtimnand
+    Zinfo->s an_info[i].v_sist_oiTtim, *libZErrITt.  SL(ceont se indic of 
+fe
+  m d beesnitsT=watresderafyed *libbycutIon ,sit uswi-ey heseouilsm
+  m expteritlI, aaCTEAS
+rateassfmon _shonASS1_BI'iodrfaforsT*libIpeafn  /full.byThe*ast/raw derafthejpe-ASS1_BI,pfaeloe be_IZE*y_raw_dera()Tinonlacc =w
+e be_IZE*y_e lity, u().    on
+won[tbtogeseIorres rilarlyhexcepeoilea
+e be_IZE*y_raw_deraTtakesTaTJSAMPIMAGEpderao	rray
+aaCTEAS
+rateJSAMPARRAY.y  onr lity, upZEuntTpastedhtheand returnic(=licae be_IZE*y_raw_deraTis
+meanonsmeinuieplioo) shonZ anonett_de tojpe-lar
+	satv_sist_oiTtim.
+
+e be_IZE*y_raw_dera()sp4]dit(es =ge MCUDrow pesomall, :
+	chfysftoelly
+v_sist_oiTtim*block_s by sistsehrowsdo) eachfc anonett. m  onpastedhnum_ty, u
+salueimustsbegat l lsrtmax_v_sist_oiTtim*block_s by, stifjpegreturn salue
+e  vobim liTtlI sha p-mEunts(ar porsiboymsome rfor MS 
+=watra p-mEunt,aie
+fuiurEdASS1_BIoweapEits).   SisairypersfewetTonajpe-llsr/Z	lltatoepe-bottom
+i) shono
+   ; don't =ltgeeanheptr[yedraderao	sftedit(_BIr
+
+ThonBIquiBId d beesnitsT=watreslecute dhderacelnTrrof anuofdh====each
+s anonettSas
+	Zinfo->s an_info[i].width_in_blocks*block_s by -sistses pesorow
+	Zinfo->s an_info[i].he use_in_blocks*block_s by rowsdikoS
+   
+afges
+e be_lynrt_s and mu()this ykamto  b dhtSoee =reldrtioI) shonsalid-deraPisxsm*llEAS
+ratethis,SytlmustsbegnhdT.dh*peropr)ntelI.  rarysome sistsa(v
+oiTtimheatini
+   Tstzes,u	dThe fiavedummysDCTfblocks -libin(eriedhthemake
+shone
+   Tacrfor MS 
+=want tMCUDd beesnits.ion onASS1_BItconsoe2nwuchSdummy
+blocks itself;Tiatdoesxterbreadtepemf=licayedralecute dhdera.ion orEG libyed
+trametever pad bycr libtrlnTrlock_s by sistsesaioAas lists. maIThelp  orE.
+Assfm d2h2v downsistsL(v =waYCbCr dera, 
+featot
+	Zinfo->s an_info[0].h_sist_oiTtimn= 2		====Y
+	Zinfo->s an_info[0].v_sist_oiTtimn= 2
+	Zinfo->s an_info[1].h_sist_oiTtimn= 1		====Cb
+	Zinfo->s an_info[1].v_sist_oiTtimn= 1
+	Zinfo->s an_info[2].h_sist_oiTtimn= 1		====Cr
+	Zinfo->s an_info[2].v_sist_oiTtimn= 1
+stitsy cosed
+feattregnoma(alne
+   Td beesnitsT(Zinfo->e
+   _widthnand
+Zinfo->e
+   _he use)oarro101x101 pixels.ion on
+e be_lynrt_s and mu()te  v
+f anuofedownsists.d_widthn=o101 *ndvI dth_in_blocksn=o13h====Y,
+downsists.d_widthn=o51 *ndvI dth_in_blocksn=o7u====Cb *ndvCr (	Proilslllmn
+fop trenhe usea=reldr)tioYed musat*aroilslY deraftheat l lsrt13*8n=o104
+ZE*umnheatinrows,ftresCb/Cr deraftheat l lsrt7*8n=o56 ZE*umnheatinrows.ion o
+MCUDhe useaisxmax_v_sist_oiTtimo= 2tDCTfrowsdsheyed musat*ast/at l lsrt16
+r lity, uponbeach c-llwthee be_IZE*y_raw_dera(), :
+	chfysftoellyt16 sctun 
+sistsehrowsdo) Yeatin8oeachf=waCb *ndvCr. mA total =wa7 MCUDrowsT*libneeded,
+sheyed musat*ast/a total =wa7*16 =o112 "r lity, u".ion onAlsr/DCTfblock row
+o) Yederafysfdummy,oso iatdoesn't matgesyIpeafn  /*ast/fimait Sk/ readera
+trraye,opreoilenr lity, upZEuntTmusattotal uptphe112 so 
+featalld=wajpe-Cb
+*ndvCr derafgetrepastedr
+
+O epre Aesptesnitois ry compicawe toraw-deraocoand multi:to) tresdera
+gress monit
+a]du c suspteds,oe be_IZE*y_raw_dera()Tde vereturne0.
+Indntoinclse shotlima deraorowsTmustsbegnhstedhagainSdsttregnextocall.by
+DrZEand multipwe toraw deraoo epre  reloesubypaston _alldportpondit(L(v.
+Yed musatdpavede tojpe-ZE*nt wnsam stitsistsa(vooiTtimhend me
+i[Sk/ re
+encoma(voor c. mI) yedra-interface cdslIThi dl s,f(aI,s2h1vaYCbCr dera,
+yed musatcheckt====*ndd=mp1de cdCTEASZE*nt wnsamsssm oCTEASsistsa(vooiTtimh.y S-P+DCTSIZEe  veterbZEnwearbtoeahdtfimee
+iDZE*nt wnsam ====yed.byTheobtainSraw deraoo epre,esetoZinfo->raw_dera_dre =tTRUEebeG li
+e be_lynrt_  s and mu()e(ii=isxsetsFALSEeby e be_aptr_hptrer()).  Bemsyre nh
+we ofy treattregZE*nt wnsam stitsistsa(vooiTtimhe*libds sxn  /elnThi dl .
+Furilerm li,esetoZinfo->do_fancy_upsistsa(vo=tFALSEesfvn  pfull doegeeaapav
+downsists.dhderaw(ii=isxsetsTRUEeby e be_aptr_hptrer()).
+n on
+faeloe be_aptr_raw_dera()Tinonlacc =woe be_aptr_e lity, u().    o
+drZEand multip*4]cp7,ois dtTEAwi-eyshotlima is usule.
+
+e be_aptr_raw_dera()Treturns =ge MCUDrow pesomall, 	Proilusfyed musat*ast/a
+b-time =waat l lsrtmax_v_sist_oiTtim*block_s bynr lity, up(r lity, pZEunta(v
+t itionlima is ====aaw-deraocoand multi).    onb-time n  /*ast/mustsbeglar
+	
+end ghtdethohe ureP-ctun hderawpluseptrd) dadetDCT-block blunearies. mAsyde t
+ZEand multi, anyttetiBIlITdummysDCTfblocks -libterb*4]dit(emdsheyed trameter
+*lloc of wnsam ====epem,opreoilentotal r lity, pZEunt i6cludms tlema    o
+andvey lists. owaZEanuoiref--timeTd beesnitsT====aaw-deraocoand multitot
+equn lITsalid-f===drZEand multi.
+
+Inpre Aesptesnitois ry compicawe toraw-deraodrZEand multi:to) tresderaoroents
+a]du c suspteds,oe be_aptr_raw_dera()Tde vereturne0.  ded  li aheresee
+--timens-o
+   omthec oeBItr[raw derafy crfor MS 
+nhstes.
+
+
+RptelI[raw dera:sDCTfca  before sPt */
+
+   ac
+tion  paramet */
+
+   y
+I tis porsibS-D oeBItr[srmIZE* ushonZ 6tetts sf ahce.
+
+or c at/raw DCT
+ca  before s.   SisaoiTn you isxmainlyTint ndedd====use inblorslp7,
+transs ] refpEtwe-a dtfimee
+iDce.
+
+or c foplics.  OCTEAaporsibS-Dtaions
+	Pca2
+i6cludmblorslp7,tcooppL(v =waaece.
+
+S
+   ,blorslp7,tretssemboym=waa
+rfor -rtrapa=ryrfor -tr c TIFF/ce.
+
+or c i6roea A FIl_Ice.
+
+derastretm, etc.
+
+ThereadtshonZ 6tetts sf ahce.
+
+or c at/DCTfca  before s,o=pendnts
+sion 	Prodo
+e be_aptr_hptrer() is usule. mBresi stItr[=waZallon _e be_lynrt_  s and mu()
+	Pr e be_aptr_e lity, u(),
+faeloe be_aptr_ca  before s().l Ttoinde vereadtsho
+tetiBIne
+   Ti6roea Aeat=wavirtun tca  before -block trraye,o=ge array
+pes
+c anonett. m  onreturn salueeisgac*oykgisythean(	rray
+=wavirtun -	rray
+drec lptimh. mEach virtun t	rray
+elnTrroaccit(emddirITtlI uton _shonce.
+
+me library.  r usaccit(_virt_b	rray
+maghodd(seibMe library.  ons ,tbelow,
+stifalshereadtspersiurE.txt usamscumultip=fnvirtun t	rray
+hi dlon ).l Or,
+fop l rele
+transs ] reftoeahdtfimee
+iDce.
+
+or c foplic,ftres	rray
+ASsi=eln
+justsbe
+hi demddirITtlI thee be_IZE*y_ca  before s().
+
+Each block Sk/epe-block trraye(ZE6tain(/qunt tzed ca  before tsalues=in
+tetm-hparray
+=rdere(terbce.
+
+zigzag
+=rder).    onblock trraye(ZE6tainbdslI
+DCTfblocks  E6tainon _apavedera; anyttetiBIlI-dummysblocks -dT.dhthef  v dre
+ykgisl lv dhMCUstatoepe-r usea===bottom edgesT=watrese
+   Tare amscarded
+dury p(apadon _stifalibterbstoext Sk/ reablock trraye.  ( S Tstze o) each
+block trrayeelnTrrogatesmy,ed =lica retI dth_in_blocksnstifhe use_in_blocks
+=reldryo) shonZ anonett'- caan_info=ettry.)ion isairyllsheilslderaofoplic
+expecifdhby e be_IZE*y_ca  before s().
+
+W
+tion  pare a=ge uton _shonvirtun t	rrays,pfaeloe be_fyrash_  s and mu()
+treBI----eftres	rray
+rtoe   eand returna retdms and multip=bjeci  oelividl 
+synte; imaeusatfaeloe be_  	veou()Tifen  pdon't trame heresee tres=bjeci 
+yI) yed see a
+suspted) daderaoroents,oe be_aptr_ca  before s()Tde vereturn
+NULLTifuy tis f lcedproesuspted;TaTten-NULLnreturn salueeindic ofs sucdit(fuv
+f antitacaa  Yed trameter trest====* NULLnreturn salueewatioseon _a
+ten-suspted) daderaoroents.o
+ItdiryalsoeporsibS-D oefaeloe be_aptr_ca  before s()beo obtainSaccp7,othtsho
+ams ] s'- ca  before ttrraye(dury p(antetm-h drs dmocyc c i6 P-timens-o
+   
+mthe.   Sisaorammish m usea-a u-eJG efarylBnAS mulveoypamsnlay) duannencoma(v
+S
+    stiftatioap-ens don _it we td ealorsal nhedotthis,Sdrs dmoi6 P-timens-
+o
+   omthecausamscumuedopr_viouslI,opren
+faeloe be_aptr_ca  before s()bafges
+nt tAlsr/e be_fyrash_o epre()scalv.  Tres	rraysoI  vebiptvaihabom ====yed==use
+until n  pfaeloe be_fyrash_  s and mu().by
+TomIZE* ushonZ 6tetts sf ahce.
+
+or c at/DCTfca  before s,oyed musat*4];
+  
+tresDCTfca  before sbstoext Sk/virtun tblock trraye.  ded  li eiCTEAScast
+block trraye(BItr[=licaannenpre ce.
+
+or c by e be_aptr_ca  before s(),nor
+*lloc of virtun t	rrays =lica retce.
+
+ZEand multip=bjecio	Prof  v ilsm
+n  rself. mIndeiCTEASclse,te be_IZE*y_ca  before s()ois rybstituofdh===
+e be_lynrt_s and mu()t	Pr e be_IZE*y_e lity, u().    u itionlequrtamTisb  * ConsoeSZEand multip=bjeci
+  * Setoalves and multiple imagesso	sftedit(_BI
+  * RIqures virtun t	rrays ifuneeded
+  * e be_IZE*y_ca  before s()
+  * e be_fyrash_s and mu()
+  * D 	veout===ap-usevcEand multip=bjeci
+e be_IZE*y_ca  before s()ois nhstedhac*oykgisythean(	rray
+=wavirtun tblock
+trray drec lptimh;ynce=tumber
+=wa	rrays is equn odetZinfo.num_s anonettsr
+
+Thonvirtun t	rrays tramedslIThile tryinrequresxt, terbrea  b d,ebeG li
+e be_IZE*y_ca  before s()ois faelfd. mAnl dp-efimrt =w
+e be_IZE*y_ca  before s()ois toeBIo  b  anytvirtun t	rrays tpeathile tryi
+requresxt =lica retcEand multip=bjeci'same library.  r.ion us,vIlsn
+ibtainon 
+shonvirtun t	rrays =lica retcEand multip=bjeci,uyed by thefu  v ilst	rrays
+afges
+Zallon _e be_IZE*y_ca  before s().l Tteederafysfsctun lITIZE*tte dre
+I
+tion  pfaeloe be_fyrash_s and mu();te be_IZE*y_ca  before s()osslITwZE*ys
+nt t=r c hptrer.
+
+W
+tioIrita(voraw DCTfca  before s,oy tis cersoo ftreattregce.
+
+qunt tzatLit
+taboms *titsistsa(vooiTtimhema cha retIaIT retderaoIas ens dmd, ltinte
+aplfor) dnor c we vebipinsalid.  rarytranss ] ref=licaannexiesirefce.
+
+or c,
+wesBIs ametinseon _e be_s py_critacal_pa imagess().   Sisa[tbtoge ikamto  b s
+a vent ts and multiple imagessodoedrfaforlsalues=(lSkefe be_let_drfafors()),
+tt nhcepieryjpegcritacal infoplicnitbflicaa Aoents
+dms and multip=bjeci.y S-Pdms and multip=bjeci by thefhile justsbetioseame heretr[treseetiBI
+ce.
+
+Snpre or chtioo
+featot,oit Ay the be awaita(voe be_fyrash_  s and mu().bye be_IZE*y_ca  before s()oriousfalvedaboms stoext Sk/ reacEand multip=bjeci
+as tram reftoebeTIZE*tte thejpe-o epre or c (thut,oit asisolSke
+e be_lynrt_s and mu(cinfo, TRUE)).   Sisairyfop lafeny usrak.,mtoeavoic
+emStta(voabbt_vi ofdhce.
+nsion
+Sby accOdet . mI) yed rea lITIull doeemit_ln
+abbt_vi ofdhce.
+nsion,pfaeloe be_ly cd mu_taboms(), ltiseouilshtaboms'
+Skdi;
+ ule me
+i_tabom =lags,fpEtwe-a Zallon _e be_IZE*y_ca  before s()nand
+e be_fyrash_s and mu().by
+PBnAS muomtkamory p
+ac
+tion  paramet */y
+Some taions
+	Pca2nmaITtrame heregainSZ 6trol =lica retce.
+
++DCTSIZEeverymso
+ofgeaa  Tte
+tr sele useaagejpiryfnsoulioisT oe*4]dutsoa
+pescre -aoneubarnor
+oCTEASlBnAS mupamsnlay. m(FoAStnl rele
+ lists., seibce be.cp===de be.c.)
+Al td ghtn  pdongeeaZ 6trol backt=requrtmlITdueon _eretdera-transfe rireflest
+(erete be_aptr_e lity, u arye be_IZE*y_e lity, ualoop), anyt	dThe fiavenhstes
+e  vos
+
+Tr iesndmoe be_fyrash_s and mu arye be_lynrt_  s and mu;htSoee
+[tbtogesemaITtakeya lE d-d be doeexecuof, 	Pron  pdon't geeaZ 6trol back
+until thoy *limgone.y
+ded  li a finwoa
+pBnAS mu-mtkamora[tbtoge :
+	chfwe vebipfaelfd
+pesiodiclelI
+by/ rea+DCTSIZa  Nd gue ikgims *limmahecabd eahow ofgeadntoincl v I  vos
+
+Tr,
+shewe don't BIs ametinyed see ytlultimosee trackL(v ar anydra(volSkeo
+fea.
+Atend me
+ijus cl v I  vos
+
+Trto(ceopesoMCUDrow, r lity, , ltisistsehrow
+g[tbp, :
+	chever uny tis c nwetore  fop trenZTrhe
+i pondit(L(v mthe; so 
+fe
+e dEAStrenS
+   ,unt  lE dEAS
+re-d be pEtwe-a Zalle.  Dueon _eretdera
+transfe rireflest,vdslITonepellld=
+
+Trs pesomall =woe be_aptr_e lity, unor
+e be_IZE*y_e lity, u,oso don't *ast/a lar
+	 tumber
+=wae lity, uneato(ceoif
+n  pfull finwod moluiltiyik/ realBnAS mupcEuntwio(I) yed rea lITtrame heuse
+trenZa lbacktme  tyism fop t be-critacal tasksslSkeomosee trackL(v,bn  /c the
+yr(eri adThe fiavecal s iesndmosome i) shonASS1_BI'ioinn s loops.)by oeIbynblishoa
+pBnAS mu-mtkamoraZa lback,econsoeSa dpersi(e be_pBnAS mu_mgr,
+f  v Sk/ipsopBnAS mu_mtkamoraareld
+de toa *oykgisythen  r Za lbackt[tbtoge,
+andv	etoZinfo->lBnAS muptet*oykgothejpe-spersia  Tte
+Za lbacktwe vebipfaelfd
+I
+tiever Zinfo->lBnAS mupisxten-NULL.  ( Stse*oykgisyisxsetsdoeNULLnby
+e be_consoe_s and mu arye be_consoe_  s and mu;htS-P+DCTSIZEe  veterbZ type
+ieoileliafges.  SoTi) yed *lloc of dynamic
+rtoe   eultintetuBnAS mupspersi,
+makeysyre iate  velile asflE d-tsajpe-ce.
+
+=bjeci does.ioA vorfac p =lica re
+ce.
+
+me library.  r
+de toASfen be JPOOL_PERMANENTce  v IorrenicelI.)  ded
+elnTu-eyshotlima Za lbackt[tbtogeeultibo toZEand multip nd=drZEand multi.
+
+Trete be_pBnAS mu_mgradpersi(ZE6tain(/f  r =reldry:
+	chfarexsetsby/ rea+DCTSIZ:
+	lE d-*ast_ZEunt r;	/*sIorreuny s ZEanlete dindntoin*ast/*/
+	lE d-*ast_limyt;	/*stotal tumber
+=waIorreuny s indntoin*ast/*/
+	int ZEanlete _nhstes;	/*snhstes ZEanlete dso far/*/
+	int total_nhstes;	/*stotal tumber
+=wanhstes expecifdh*/
+Dueon _anyooneflest,v*ast_ZEunt rnencr---esa=lica0 uptphe(terby6clud) d)
+*ast_limyt;ejpe-spepTstze tseusulelISpresnodftedit(_Bilyt1. m  onpast_limyt
+salueimayee type =licaoneflestytheanoCTEA. m  onexpecifdh otal tumber
+=w
+nhstes is indnotal_nhstes, stifjpegtumber
+=wanhstes alBItry ZEanlete dis=in
+ZEanlete _nhstes.    u itionfraclltip=fnIorreZEanlete dmaITbibressmtted as
+		ZEanlete _nhstes + (*ast_ZEunt r/past_limyt)
+		t */
+
+   ac
+tion  paramet */
+
+    paramet */y				notal_nhstes
+tgnoeon _eretoiTtftreattregnhstes maITter be equn o-mEuntsp=fnIorr.
+
+W
+tiodrZEand mul(v,bpast_limyt  li ewetTZ type :e tinSa lest,vbecasee yt
+aeite sSdsttregnumber
+=wae liseinuilshce.
+
+sion,p:
+	chfysi'te lways rnown ie
+adva(cea  Tte
+Z anuofdh=racllti-of-Iorr-aoneumaITjumpTsuddetba (i) shonASS1_BI
+amscov ss Stthis ov sressmtted tregnumber
+=wae lis) ltievtiodrZr---e (ik/ re
+o cosE* uclse).ioIgot iter wi-ey hepre gonsod=mp toena retIorreressmtte.
+
+W
+tiouton _shondms and muim's --timens-o
+   omthe,intetuBnAS mupmtkamoraIorr
+ressmtte is lSkelI therrof anletelI unhelpful, becasee nceP+DCTSIZEhis notIaI
+trernowahow manyto epre nhstes we vebipdemi demd=waSia  CTrhe
+ilI,utregASS1_BI
+	etrenotal_nhstesfb--edSdsttregassfmpace cjreattrerc we vebiponeum libo epre
+nhstto) tresSnpre or chetinhisi'teyet tryinreadd(j be_Snpre_f anlete()oisn't
+TRUE),Spresnoum libo epre nhstes iwant t=r c etinhis tryinreachedvI
+tiotre
+o epre nhsttoupsparifd. m Stsemalisejreattotal_nhstesfde veri-eyas adThe fiav
+o epre nhstes 	resBIquresxt. mI) yed hile atIaIT=waaatesmy,on _shonSnpre or c
+s by, ressmttireflBnAS mupb--edSdsttregfraclltip=fnnt t=r c ilea'iotryinread
+e  veprebaboypbeum libu-eJG etrlnTuton _shonASS1_BI'iosalue.by
+Me library.  ons 
+ac
+tion  paramet 
+
+Troinsesiltiycov ss some koy fasisoabd ea retce.
+
++DCTSIZ's --ilt-ineme lib
+ary.  r.ioFltimolibinfo, p----eeBItr[spersiurE.txt ussesiltiyabd ea retme lib
+ary.  r,  = (ZEnlforejpe-soents
+s dmoifftedit(_BIr
+
+A veme libretifjemcomSIZEor c a vorfactipwe tenynce=lSS1_BI isxaoneuviaotre
+me library.  r.ioIfftedit(_BI, yed  livd ptaceont t"backteti"p=fnnt tme lib
+ary.  rD oeZE6trol a vorfactipn  rselfT(ulti lists., ifen  pdon't Iull d o
+ASS1_BI  heuse m*lloc() 	Profree() aorysome r---ti) 
+
+Some derafysfslloc ofd "pesarye
+ilI" *ndvI  veter be urned until thonce.
+
+=bjeci isx  	veouxt. mM souderafysfslloc ofd "pesnS
+   " atinisourned by
+e be_fyrash_s and mu,oe be_fyrash_  s and mu, arye be_abomp.  ded  li ca vent 
+me library.  r
+n  rselfTthealloc of wpersiurEs ere pI  veautomaticlelITbe
+=le dhadftpeee n bes. m r sele s dmoultintisair
+  ptr = (*cinfo->rem->*lloc_sm*ll) ((j_s amon_ptr) cinfo, ceOOL_IMAGE,Tstze);
+Use JPOOL_PERMANENTcdoegeeartoe   eere pAlsrs asflE d-tsajpe-ce.
+
+=bjeci.
+Use *lloc_lar
+	 i stItr[=wa*lloc_sm*llnultianydra(vobigdEAS
+ratoa=fewnKryt s.y S-r Tare alsoe*lloc_strray stifalloc_b	rray
+[tbtogese
+featautomaticlelI
+--ild 2-D(sistsehltiblock trraye.
+y S-P+DCTSIZ'samy,omumhwnsam BIquiBIons rytoe*ondimuSakoS
+    aeite  itotl 
+S
+    uswidth,Spresnodfok/ipsohe use, becasee nceP+DCTSIZEord r pilytIorrs
+de to"rtrap" --timese
+featareyas e dE-tsajpe-S
+    presjustsa=fewnrowsTh us.
+Some opesttirefm dmsp(e ,n
+wo-nhsttZE*nt qunt tzatLit)brequiBI JG l-o
+   
+--times.  SuchS--timese*libtretted as "virtun t	rrays":bdslIT renZTrhe
+i rtrap
+tramebipineme lib,u	ProiletrisatelnTrrosw*peed d ea oeahjemcomSIZEor c 
+yI) yed see jpe-s relesi=ma library.  r
+backtetid(jma nobs.c),opren
+no
+jemcomSIZEor cs *librs d;avirtun t	rrays arexs relypm*lloc()'t. mI
+   sTrigdEA
+
+ratoma librelnTrrop4]dit(emdDnlyTi) yedrysystIm ry compsovirtun tma lib.y S-PoCTEASma library.  r
+backtetis ry comp jemcomSIZEor cs =wav piou iflavoss
+	ProilusfIorreinemachL(ms we td eavirtun tma lib.  TteyumaITalsoe-a u-eJG eon
+UnixemachL(ms i) yed trame hp*4]cp7,oi
+   sT
+featexceedotvaihabom sw*phwnsam.
+
+W
+tiouton _semcomSIZEor cs,utregASS1_BIpI  vemakeynce=in-ma libr--timese===
+ipsovirtun t	rrays justsbig end ghtdetspay :e tinSa "
+Yxdmumhma lib" setta(v.bYedra-interface cclivlet ntoinASmytlry setta(vo info->rem->max_me lib_to_see
+afges
+mre o refjpe-ce.
+
+=bjeci.  (OwaZEuree,mtrerc oupsp  veaamy,omumhwtze ===
+t onb-times,oso 
+f t
+Yx-ma librsetta(vois efimrtge
+hDnlyTi) y tis bigdEAS
+rat
+t onmy,omumhwnsam needed.)  I) yed *lloc of anytlar
+	 wpersiurEs n  rself,byed
+musatahloc of dpemvPEG libe be_lynrt_s and mu()tarye be_lynrt_  s and mu()Tin
+ordere h hlv ushompcEuntedhagainsatthegmaxSma librASmyt.ioA ti koep in mind
+
+featwnsam slloc ofd de toalloc_sm*ll()ois tgnoext, dsttregassfmpace cjrea
+it ustoo
+rm	llttoebeTIomptoworryL(v abd e; so a r---tiabom safenyoriogin
+Ay the be left I
+tiosetta(vomax_me lib_to_see 
+yI) yed see jpe-jma name.cp===jma dos.cSma library.  r
+backteti,oy tis
+imcompants oeZl lnsuptppe-ce.
+
+=bjeci itopesly doeeenonsn
+featthegsemcomSIZ
+or cs geoudrlete .  ( Stseis esentoo lyTcersoo ffi tfema dos.c, w
+ereotl 
+"semcomSIZEor cs"dmaITbibrxteed	d-ma librsegons r; iwant yfalibterb=le d,
+DOSede verequiBI aereboo tdoeBIcov snnt tme lib.)ion us,vIe tojpes tme lib
+ary.  rs,sit usacgooddideae hp*4]v dE-t w gnslThi dl r ere pI  vetr*phany
+earlyhexitf=licayedralBnAStma  Tte
+hi dl r Ay the ca veeiCTEASe be_abomp()
+arye be_  	veou()Tultianyoartge
+hce.
+
+=bjecis.ioA
+hi dl r t iter neededyde t
+jma nobs.c,u	ProAy then't -a tedit(_BIbfi tfema lisi.cp===jma mac.cpeiCTEA,
+(L(ceont tC=lSS1_BI isxsy cosedhthejakeyc*libdfudrlet) dnor csmmahecde t
+tmpor c().by
+Me librus   
+on  paramet 
+
+Worry p(ma librBIquiBIons rywhr c pesfoplon _ZEand multip===drZEand multi
+aeite  itoe
+   Td beesnits,oe
+   Tcharacleriesicup(ruchSasaZE (dwnsam and
+ce.
+
+l4]cp7,),u	Proopesttirefm dm (taions
+	Pca-mepecifdhopace s).byAs =wav6b,_shondms and muimrBIquiBIs:
+t1. Abd ea24K in moex-or-lp7,-fix	d-wtze dera.ion isav piesTaT-St aeite y p
+  m tip=pesttirefm dm atini
+   Tcharacleriesicup(unrtycularlyTcE*nt vs.
+  m goaysca c),Spresiatdoesn't aeite  itoe
+   Td beesnits.
+ 2. Strapa--timese(=waetze itopomp fiavethejpe-S
+    Iidth)TultiIDCTfand
+    upsistsa(voaplfors.ion onworsatclse f===ZEamDnlyTseamesistsa(vooiTtimh
+    ysoabd ea34nryt so* IidthTinonixelst====* cE*nt S
+   .  Ahgoaysca c o
+   
+  m tilITtramsoabd ea8nryt sopesnnixel ZE*umn.
+ 3. A JG l-o
+    DCTfca  before f--timeTis neededydoedrs dmoacrfor -e lince.
+
+  m or c (y6clud) dalBnAS mulvence.
+s), ltiI
+tiever n  /sepeci P-timens-o
+   
+  m mthe.   SisatakesT2nryt s/ca  before .ioAtoer sele 2x2esistsa(v, ilea'i
+  m 3nryt sopesnnixel ====* cE*nt S
+   .  Worsatclse (1x1esistsa(v)brequiBIi
+  m 6nryt s/nixel.ioFltigoaysca c, orgonsn2nryt s/nixel.
+ 4. nhepesfopl 2-nhsttZE*nt qunt tzatLit,_shondms and muimralsoetramsoa
+  m 128KtZE*nt lookuptpabom stifa JG l-o
+    nixel --timeT(3nryt s/nixel).
+n isxaoesfterbZ unt anyore librelloc ofd by/ reataions
+	Pca,nwuchSas/a
+b-time dethohe urePfa(alno epre  r   .
+y S-Pandveyorgonss arexsalid-f===8--St ce.
+
+deraend ciultip nd=aemachL(mcde t
+32--St ie s.  Flti9--St phe12--St ce.
+
+dera,udoubS-D p Tstze o) jpe-speap
+--timese*nd=qunt tzatLit nixel --time.ion on"fix	d-wtze"tderaoI  vebe
+romeepeatsm*llEASfi tf16--St ie s,olar
+	ASfi tf64--St ie s.  A ti, CMYK
+sm oCTEASunusuleSZE*nt wnsamssde verequiBI dtfimee
+iD-mEuntsp=fnwnsam.
+
+n onJG l-o
+    ca  before ttPronixel --times,vSfvneededyeatall,udoeter
+hlv usoebeTJG ly RAMnrpsOdet ;xn  /elnThive nceP+DCTSIZEsee jemcomSIZ
+or cs i stItr[I
+tiotreh otal me librus   pIEthe exceedotnASmytln  /set.
+(Bresi) yedryOSexy compsovirtun tma lib,sit usprebaboypbetgesytofeusatsee
+jma nobsttProleouilshOSedhejpe-sw*pea(v.)by  ons and muim's ma librBIquiBIons ryarexs rilar, excepeoileafStthis noetram
+f===ZE*nt qunt tzatLit.  A ti, itetramsoa JG l-o
+    DCTfca  before f--time
+i) H-ti li-pabom opacmtzatLit ysoaskfdh===,ievtioi) lBnAS mulvenm dmairyter
+requresxt 
+yI) yed tramemolibdetaihe dinfoplicnitbabd eame librus   pinSa lertycular
+(Ltunonit,uyed  li enabS-D p TMEM_STATS s dmoi6 jma mgr.c.
+
+
+LSS1_BItc anihe-d be cpace sPt */
+
+   ac
+tion  paramet */y
+Agnumber
+=wac anihe-d be cpace se*libsvaihabom bycr dtfyL(v jmolicfg.h.
+
+n onIJ
+
+ZEdenZTrhe
+ilI ry compso8--St phe12--St sistsehderaend ciultipby
+drfy,on _BITS_IN_JSAMPLESas/8, 9, 10, 11, lti12.yNdded
+feata salueelar
+	AS
+rato8 casees JSAMPLESsoebeTlar
+	AS
+ratoaTchar,
+sheit_lfimrt itionlTrhluneL(v aaions
+	Pca'shS
+   Tdera.y  onristsehtaions
+	Pca2nce bep nd=de bepclivlecuomp doep	AS
+rato8--St dera
+tilITf===PPMn	ProGIFnsion foplics; yed musatdmsabom er-PoCTEASsion foplics
+toac aniheoaT9--St phe12--St ce bep===de be.  (y6lynll.txtthis moli
+infoplicnitbabd ea
+fea.)
+Run-d be sepeciltip nd= E6v
+apEito=waaeraend ciultip renZTrhe
+ilI nod
+sy compica nd=maITbib-dT.dhllter.
+Excepelti:t Tte
+transs ] reflertd(j betran) ry compsoa veseotires inSa
+A FIl_Iy6lyn(ce,t(L(ceoit opesttesSdsttreglevtl =woDCTfca  before sband
+terbsistsehsalues.
+(I) yed trame hpi6cludmbato8--St +DCTSIZE nd=ae9--St phe12--St +DCTSIZE===
+ZEand multip===drZEand multipinSa A FIl_Itaions
+	Pca,nn  /c thesprebaboypdo
+ytlry drfy,on _NEED_SHORT_EXTERNAL_NAMESTf===eusatineaagejpehcepier.  ded'd
+hlv usoeaccp7,otpeh8--St 	Proilet9--St phe12--St cepiery=licalele ite
+-interface csoents
+or cs.   Sisairyunteesxt ... i) yed tBI it,hwe'dolSkeo
+o
+heasee
+eCTEASiateorrs!)byNdded
+feattreglyntd774 H-ti liedaboms *libdslIxsalid-f===8--St aeraend ciulti.yI) yed mepecifdhr libtrlnT8--St aeraend ciulti, ce beputes 	ri tmet)c s ] re
+byPdrfafor.ion onH-ti lieens dmectetm-hlI(utes ettropy opacmtzatLit to
+  anuofeusabom eaboms f===h usEASlB ciulti.  OCTEAwi-e,myed'llThive no
+secutITdtfimee
+iDdrfaforlH-ti liedabomstioYed maITalsoefull doelecutITn  r
+own DCTfqunt tzatLit daboms;ejpe-exiesirefqun ity-e llon _ZEdeohis tryi
+devtloped-f===8--St us ,utPronrebaboypdoesn't gtie ite esentoo lyTgoodddaboms
+f===9--St phe12--Str
+
+Thonmaxdmumhnumber
+=wac anonetts (ZE*nt chlinfls)oena rete
+   Tisogatesmy,ed
+byPMAX_COMPONENTS.ion once.
+
+lyntd774  llows uptphe255ac anonetts,upreswe
+expecid
+featfewntaions
+	Pca2nI  vetefdhr libtrlnTf  r orysor
+
+OnemachL(ms we tSunusuleSderaftyp ortzes,uyed maITbib-bS-D oeim*4]ve
+pesfopln(cet===apdutsoma librsnsam by/ weakon _shonv piou ityp drfs=in
+jmolicfg.h. mIndlertycular, dstsome RISC CPUs, sccp7,otht	rrays =wa"by ri"s
+t iquiof wlow; ZEesndmectrady p(ma libraoryspeed bycrakon _JCOEF, INT16,utPr
+UINT16Tbib"ie "t==="unw gnic(ing".ioUINT8diryalsoeacelndid of doebecome ill.bYor *rebaboypdon't Iull dhemake JSAMPLESbipint unlp7,oyed hive lotsp=fnme lib
+doeburn.y
+ded  li apdutso p Tstze o) jpe-+DCTSIZEbItc anihL(v a eav piou icpace al
+funciltis.ionhedotthis,Sune finwoxxx_SUPPORTED symbolso	sftedit(_BIr
+
+ded  li aherellv ua=fewnKEbItterbhavin _sextterhlASmass   sTenynce=lSS1_BI;
+treglyntd774 erhlASmass   tpabom =
+
+Tpieryabd ea5Kb.   Sisairyunrtycularly
+r---tiabom ulti mbedT.dh*peons
+	Pca2nI
+ereotl re'sfteTgooddIaIT opamsnlay 
+aSmass   tanyway.   hedotthis,SBIoov ushonZre o tip=fnnt tmass   tpabomo(e be_std_mass   _tabom[])(=licaeerhlA.c,u	Proalges
+foplic_mass   tphedo
+romedra(vor---tiabom we td eaip.  ded   theso epre tregnumer)c saluee=fnnt 
+mass   tZEdeonumber,oulti lists.. mIfen  pdonthis,Syed  li aherellv ua=  tts.
+r libK bycr dtfyL(v tregTRACEMSn()oricroheinejerhlA.h doeexp	Proioeterra(v;
+n  pdon't trame rsam capabn you anyway,-r use?by
+Pompabn you ZEesndmeaace sPt */
+
+   ac
+tion  paramet 
+
+Thonce.
+
++DCTSIZEhis tryinIZE*tte thebibrxtBIonlITpompable;yshotlimts.
+taions
+	Pca2nce bep nd=de beparexsl uselITlemupso. mTrisxseciltipsumm pizys
+nt tdew gnTgoals indntoinareawio(I) yed ens unt rnanyobugsT
+featcasee nce
+ASS1_BI  hebe lessTpompablebtrlnTis cla bed  orE,hwe'do*perntootc hptry p
+abd ea rem.)by  ons detIorrs finwotipANSI C, C++,utPronre-ANSI Cac anihees,vseon _anytof
+nt tpopularfsystIm i6cludmbsion seoups, stifsome ter-so-popularfds sxtoor
+Seiby6lynll.txttf===ZEnorgonatLit nondidurme.
+y S-Ps dmairyterbaeite e
+iDdsttreg liTtortzesd=wajpe-CSderaftyp s. mAs
+amstribusxt, weemakeynce=assfmpace sT
+fea
+	char	it/at l lsrt8t-Sts e dE
+	by ri	it/at l lsrt16t-Sts e dE
+	int	it/at l lsrt16t-Sts e dE
+	lE d	it/at l lsrt32t-Sts e dE
+( S s Tare t onmy,omumhBIquiBIons ry=wajpe-ANSI Calyntd774.)ioWndmectypmssde v
+Iorrefy, , al td ghtma libraryebe plicay,  before lyTi) char isxmuchSlar
+	A
+
+rato8 -Sts orbby ri isxmuchSbigdEAS
+rato16t-Sts. m S-Ps dmaAy the Iorr
+rqun lITwellSfi tf16- orb32--St ie s.
+
+InSa AystIm I
+ereotl se=assfmpace sTalibterbmed,uyed maITbib-bS-D oemakeynce
+s detIorr bycr dtfyL(v tregtyp drfs=in jmolicfg.h. mHow we ,eyed e  vo*rebaboy
+hlv udtfiycultyTi) yni isxlp7,otrlit16t-Sts e dE,t(L(ceoreimee
+cerytoe*la n
+ykgyabd nt Sk/ reacEdm.
+
+char elnTrroeiCTEASw gnic(===unw gnic, al td ght reacEdm run(/flsrEASiwaat
+unw gnic(char typ oit/avaihabom. mIfechar isxe dEAStrato8 -Sts,eyed e  votram
+doeBIe finwoJOCTETn	Pr/ary*4]v dE-cusaomaderaoroents/gress monit
+ary.  rsmso
+
+featJOCTETnBInd me
+it eliTtlI 8 -Sts owaaeraeotoextetnalnrtoe   .
+
+Thonce.
+
++DCTSIZEitopesoaoesfterbassfm dASCII BInd me
+iatLit
+=wacharaclers.
+Bressome i) shone
+   Tsion I/O
+a]du cs=in ce be/de bepdh hlv uASCII
+aeite e
+cics=in sion-hptrer-aryipulatLit;oso doe2nce be ussepeci_sion_typ ()
+[tbtoge.
+
+Thonce.
+
++DCTSIZEdoesxterbrelITheavilITonont tC=lSS1_BI. mIndlertycular, C
+stdio tseusemdDnlyTbIT retderaoroents/gress monit
+a]du cs=	ProileterhlA
+hi dl r,talld=wa:
+	chfarextaions
+	Pca-d ptaceabom. m(ce be/de bep*limmoli
+heavilITaeite e
+iDdststdio.)iom*lloc 	Profreep renZaelfd
+tilITflica retme lib
+ary.  rD"backteti"pa]du c,dsheyed elnTu-eyahdtfimee
+iDre librelloc oltiby
+r-ptacL(v traatineaor c 
+y S-Ps dmagtie ielISassfm sT
+featC namet/mustsbegunique inoilsl=rrsat15
+characlers. mHow we ,eglebal funcilti namet/elnTrromahecunique inoils
+airsi=6acharaclerslry drfy,on _NEED_SHORT_EXTERNAL_NAMES 
+yMolibinfoyabd eapomp rexurePc dmamaITbibgl lned bycapadon _jZEnorg.txt,
+jmolicfg.h, stifji6cludm.h.
+
+yNddes f===MS-DOSe releons imh
+n  paramet */
+
+    paramet */y
+n onIJ
+
+ZEdenisx  	 gnic(joeIorrer before lyTito80x86a"bm*ll"t==="bedium"
+me libraEdels (i.e., aeraenoykgisryarro16t-Sts unlp7,oexpteritlITdeclaBIe
+"far";
+ZEdennoykgisryelnTrroeiCTEASw ze)tioYed maITbib-bS-D oesee sm*ll
+mthe odetZ aniheoce bep===de be bycitself,upresyed e  vo*rebaboyThive notsee
+bediumraEdelTultianyolar
+	AStaions
+	Pca.l Ttoindon't makeomuchSdtfimee
+ce in
+pesfopln(cetioYed *e  v*Ttakeya teroceabom pesfopln(cethiesi) yedTu-eya
+lar
+	-deraome libraEdel (peshaps 10%-25%), 	Pron  pAy the avoic "hu  " aEdel
+i) eatalldporsibS-.
+
+Thonce.
+
++DCTSIZEer selelITtramso2Kb-3Kbp=fnwtacktwnsam.ioIgoI  veaher
+m*lloc 	bd ea20K-30Kp=fnneaseheaphwnsamywhr c execuoon _(	Prolotsp=fnfar
+heap,opreoilaatdoesn't ZEunt i6 ntoincl culatLit).   SisaorgonsnI  vev_BI
+aeite y pDdstsepecifdhopesttirefm dm,u	Proioeaclp7,erbrxteet itoe
+   Tw ze.y S-r Tiryalsoeabd ea5Kb-6Kbp=fnZ nAtull deraoI
+	chfwe vebipelloc ofd inoils
+neasederaoregons _(	bd ea4Kbp=fnprtset iileterhlAtmass   tpabom).
+n u,oyed hive peshaps 20Kptvaihabom ====oCTEASm]du cs'nwtat)c derao	ndnneas
+heaphwnsamybEG libyed trame hpgooioeaclar
+	ASme libraEdel. m S-PCP+DCTSIZ's
+wtat)c deraoI  veacZEunt aorys we al Kp=fnprts,opreoilaatsp  vel lv usacgood
+dpave====yed==tramswio(I) yed are t usea=nhwnsam,nn  /c thesapdutso p Tstzes
+i) shonI/O
+--timese*lloc ofd by/jderasrc.cpstifjderadst.c,ullytflica4K no
+1KaioAaoCTEASlorsibn you isx oemov ushonerhlASmass   tpabom to far/me lib;
+trisxsy the be doabom we t
+tilITloc   b dhhackL(v anejerhlA.c.)
+
+Abd ea2K i) shonneaseheaphwnsamyisx"pesarye
+i"Sme librere pI  veter be
+BI----ed until n  pd 	veoutjpe-ce.
+
+=bjeci.   SisairytilITlnTissueeifvn  
+llv ua=ce.
+
+=bjeci pEtwe-a ZEand multip===drZEand multipopesttiits.
+
+FasederaornsamymaITalsoe-a a t usead moents
+w
+tion  pare aellon _de toAar
+	
+i
+   s. m S-Pmosi=ma lib-int nulvenclse isx  ZEand multipwe to
+wo-nhsttZE*nt
+qunt tzatLit,_op l FIl_-nhsttqunt tzatLit doaatoextetnallI ry cte dhZE*nt
+map.   Sisa[equiBIi a 128KbtZE*nt lookuptpabom plusestrapa--timese-mEunton 
+soeabd ea40nryt sopesnZE*umnnultinr sele sistsa(voaatLisp(e ,n	bd ea25600
+ryt so====* 640-nixel-e dE-i
+   )tioYed maITter be abom to *4]cp7,oe dE
+i
+   sTi) yed hile lar
+	 deraorpersiurEs ofTn  r ownr
+
+OwaZEuree,malld=wajpesevcE(cerns vtyishsi) yedTu-eyab32--St flat-ma lib-aEdel
+c anihee,nwuchSas/DJGPP_op Watc a C.  Wesh uslI[rIs ametinflatraEdel ifvn  
+elnTu-eyyt;ejpe-ce.
+
++DCTSIZEisxs gnibefae lyTflsrEASinnflatraEdel.

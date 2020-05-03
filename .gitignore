@@ -4,3 +4,10 @@
 # Object/binary files
 main
 *.o
+
+# Built SDL files
+libs/build/bin/*
+libs/build/include/*
+libs/build/lib/*
+libs/build/share/*
+libs/.installed

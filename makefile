@@ -40,20 +40,15 @@ ifeq ($(SDL_INSTALLED), 1)
 	@echo ### SDL2 ALREADY INSTALLED
 else
 	@echo ### STARTING SETUP
-	
-	@echo ### Unzipping SDL2 and SDL2_image archives
-	cd libs && unzip SDL2-2.0.12.zip
-	cd libs && unzip SDL2_image-2.0.5.zip
-	
+# @echo ### Unzipping SDL2 and SDL2_image archives
+# cd libs && unzip SDL2-2.0.12.zip
+# cd libs && unzip SDL2_image-2.0.5.zip
 	@echo ### Installing SDL2 into libs/build folder
 	cd libs/SDL2-2.0.12 && ./configure --prefix=$(INSTALLDIR); make; make install
-
 	@echo ### Installing SDL2_image into libs/build folder
 	cd libs/SDL2_image-2.0.5 && ./configure --prefix=$(INSTALLDIR); make all; make install
-	
 # fichier qui nous dit si sdl est installé ou pas
 	@touch libs/.installed
-
 	@echo ### SETUP COMPLETE
 endif
 
@@ -66,13 +61,10 @@ else
 	rm -rf libs/build/include
 	rm -rf libs/build/lib
 	rm -rf libs/build/share
-
-	@echo ### REMOVING EXTRACTED FILES
-	rm -rf libs/SDL2-2.0.12
-	rm -rf libs/SDL2_image-2.0.5
-
+# @echo ### REMOVING EXTRACTED FILES
+# rm -rf libs/SDL2-2.0.12
+# rm -rf libs/SDL2_image-2.0.5
 	rm libs/.installed
-
 	@echo ### SDL2 SUCCESSFULLY UNINSTALLED
 endif
 

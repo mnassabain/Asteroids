@@ -1,0 +1,155 @@
+                     ===========================
+                      PNG: The Definitive Guide
+                     ===========================
+
+                             Source Code
+
+Chapters 13, 14 and 15 of "PNG: The Definitive Guide" discuss three free,
+cross-platform demo programs that show how to use the libpng reference
+library:  rpng, rpng2 and wpng.  rpng and rpng2 are viewers; the first is
+a very simple example that that shows how a standard file-viewer might use
+libpng, while the second is designed to process streaming data and shows
+how a web browser might be written.  wpng is a simple command-line program
+that reads binary PGM and PPM files (the ``raw'' grayscale and RGB subsets
+of PBMPLUS/NetPBM) and converts them to PNG.
+
+The source code for all three demo programs currently compiles under
+Unix, OpenVMS, and 32-bit Windows.  (Special thanks to Martin Zinser,
+zinser at decus.de, for making the necessary changes for OpenVMS and for
+providing an appropriate build script.)  Build instructions can be found
+below.
+
+Files:
+
+   README             this file
+   LICENSE            terms of distribution and reuse (BSD-like or GNU GPL)
+   COPYING            GNU General Public License (GPL)
+
+   Makefile.unx       Unix makefile
+   Makefile.w32       Windows (MSVC) makefile
+   makevms.com        OpenVMS build script
+
+   rpng-win.c         Windows front end for the basic viewer
+   rpng-x.c           X Window System (Unix, OpenVMS) front end
+   readpng.c          generic back end for the basic viewer
+   readpng.h          header file for the basic viewer
+
+   rpng2-win.c        Windows front end for the progressive viewer
+   rpng2-x.c          X front end for the progressive viewer
+   readpng2.c         generic back end for the progressive viewer
+   readpng2.h         header file for the progressive viewer
+
+   wpng.c             generic (text) front end for the converter
+   writepng.c         generic back end for the converter
+   writepng.h         header file for the converter
+
+   toucan.png         transparent PNG for testing (by Stefan Schneider)
+
+Note that, although the programs are designed to be functional, their
+primary purpose is to illustrate how to use libpng to add PNG support to
+other programs.  As such, their user interfaces are crude and definitely
+are not intended for everyday use.
+
+Please see http://www.libpng.org/pub/png/pngbook.html for further infor-
+mation and links to the latest version of the source code, and Chapters
+13-15 of the book for detailed discussion of the three programs.
+
+Greg Roelofs
+https://pobox.com/~newt/greg_contact.html
+16 March 2008
+
+
+BUILD INSTRUCTIONS
+
+ - Prerequisites (in order of compilation):
+
+      - zlib            https://zlib.net/
+      - libpng          http://www.libpng.org/pub/png/libpng.html
+      - pngbook         http://www.libpng.org/pub/png/book/sources.html
+
+     The pngbook demo programs are explicitly designed to demonstrate proper
+     coding techniques for using the libpng reference library.  As a result,
+     you need to downloadof th   aces afor thGB    T  008
+
+
+BUI)efereivcow tare fi 008
+pycobadhe libpng re  rtoipng     o-for thea combLIs Mavcow neing the libpnaEyw"r,oD-pub/png/book/sip/   generk   isGe proper
+     coding t  thTs of e    o-for thea comble.badhe l   ixel, 0rbook/euraryh cod
+re.bfedhe lth cod
+re.combLlheir user interfaces are )ogrto add PNG cc(user ineuraregi%(inllib cog
+r"g referwriageal, their
+primary purr int   wmownds binae.badhe PGMbper
+fadofexamse lwho wishport to
+a PBMpfi ake adoto the tegiqueae.badhdp:/lopmeritepvi wrmerial, thonude and   uraf coeadptps://zlUnrwriurce code, aG cc(usek demo  ( fi 00 beu, 0roOpespreamsourc th://zl   LICE cod  corogre    o-forhe souovidi corogib co    o-for ps://zlCopyfile
+   Makefiecus.e
+   Mhe soediturce .  *he soZ* vanstbod
+interfaild instrugrt(usesibgrtalsource X* vanstbod
+ ifS and for
+) ps://zlild ams are exr libpno "ow.
+g
+r" targedessoucopyflofs
+httpsexsarttbod
+ somewexr ms aree.bcesserarei adrune for   wmo      OpenVe    o-for thA
+r"g refewto ms areinsnVea       usage  Wieere fererunewined Veanyads binary PGMargumeria;ook/sipeesion of the thmo theie prsuraf cogressivtps://zlUnrwriurce code, aG cc(usek demo  ( fi 00 beu, 0roOpespreamsourc th://zl   LICE cod  corogreoper
+ , or sio "DOS0 be
+r"  th"ds binas fompt"h://zlhttptiovS/NnVeds binary PGMwressiook focd corogibeeoper
+  wexr bcesh://zlunrwriimar13-15 of the b ps://zlFhtt    ,mbLI s MnVMS and for
+pepvi wrmeri vanstbod
+ bpeinvor Op  Source C%dp:studio%\vc\ ``\vcvans32.bat  Sourcwexr bwexr b%dp:studio%Mavcohe ow.
+g
+r versi    o-forhfhtt     p://wwwDevStudio thIfaces ged "epvi wrmeri d Veb  tefce" error-bit Wi 95/98 interfWiequesaheirktop0 bertartewineh"d:\wressis\ds binaipt
+
+/e:4096" ath://zlbe functioneds binahe PGMaces eturce worr Ope  generk   odd PNG cc(use.badhd   o-for thea codoilee-cte k  odor sinVMS aw DOS- fomptMwressiewineinterfa biggWi epvi wrmeri L)
+   try        binaal,bove ps://zlCopyfile
+   Mafileecus.e
+   Mhe soediturce .  PATHhe soZPATHhvanstbod
+interfaild instrugrt(usesibgrtalsource "INC"he so"LIB" vanstbod
+ ifS ae se) pregi%(inllib conVMS   ts Roelofsdy      aces t vecaEyw"r,oD-pue.comou neeid
+interf tod coding   OpenVM   youovidi co codeadrerg/pus Roelofsou neeid
+ pregi%Alsounms are desis RoeEyw"r,ond Chapt1.0.5,t     DLLer inesodoe.
+
+Pworr.ms are eavc  OpenVM to tefo thr ineso t vecg
+ryof thod exsarttbod
+,hr 
+Plfh://zlbe fDLLeld bod dep:// ged fixed,bit   beriary.  Asuild instruc.  LIBinterfacesZLIBhe PGsewto ixel, 0dy     g
+ryof thod exsarttbod
+ ow.
+
+   ps://zlDource 
+BUI)efy  yp Op  Source Cnild ams are exnloadof0 beu, 0bfs
+httpsexsarttbod
+:front end fexs,ront end foexs,interfacesext) exs.zlCopyf for somewexr ee.bcessePATHh adrune for   wmo   interfW OpenVeoper
+ .zlL    rce      nd Chaps,flofs
+woMwressiedgned to dinterf(he first is
+a )e.
+wramsneirta usage  WieereinowndsnsoleMwressiewa cms aree.voredgwined Veds binary PGMargumeria;    teibpnaw behavirrens Roh://zlbe fJuPGM Pr1drerg/pu.i%(inllib conVMSned to deary:  rp    -styleM"-"h://zluovrD Iuraryhsr,
+zfydorthaps,fow.
+
+   Roelofsmo th-for thDOS/gressivh://zl"/"luovrD IurZinsFhtt standa:fr"ont end f -bgrar 4eopofor ",e.
+
+h://zl"ont end f /bgrar 4eopofor ")raf co.c     tps://zlUnrwriurce G cc(usek demo  corogrep/   generk  e souovidi corogib cook/sip/   generk  ps://zlEdituild script
+
+aild instrugr,hsr,
+zf  g
+ryothe lrareiD-pub/prares://zlvanstbod
+ ps://zl@ild scrams are odrune foSned to d,flofyeld babgrte thatafor thGbembLI s Mns "fo t
+prook/sipymbols,"ewineh"amsk"he so"  g"mbLI aild instrugrtps://zl$the fi == "$amsk:[  g]ystem (exs"s://zl$the f2 == "$amsk:[  g]yste2m (exs"s://zl$twe fi == "$amsk:[  g]ext) exs"
+pregi%Alr"g refewto einsnVea       usage  Wieere fererunewined Veanyads binare.badhe PGMargumeria; peesion of the thmo theie prsui%(inllib conVMSorthapsook/siptyleMibp    -    ,fo.e.,einand seefy "-" iquo ther al"/"urafRUNNblicTHE PROGRA  tinsVERY) BRIEF INTRO
+pregi%rprogram
+that rea.  Ae the sib corbooamsneirtby Stefan Schnesewinehaook/sipr,
+zf seefwrigrE   adslor;e httpstanda,  Source Crprog-bgdslor \#ff0000nt PNG for   Sourcweu, 0amsneirtbhe omage winehadreeefwrigrE   ; the f2gram
+t           s://zlv the sib cohatucode,en.  wpng is a  f somenloar,
+ia; icorbooamsneirms areemageal,gaow.
+ eiuo thaefwrigrE   adslorh ada0dy     g
+ryoerterqueae.badhfwrigrE   aemage.zlFhtt standa:  Source Crpro2 -bgrar 16nt PNG for   Sourcwprogram
+tpurelyads binary PGMomage     trans   wmo ``raw''hem to PNG.
+
+ Sourchow ar (.pgmh ad.ppm) all th;e httpstanda,  Source Cwprog-timen<nt PNG -.
+
+y St.ppm >nt PNG -.
+
+y St.pr   Sourcweu, 0    traar13-1r,
+zf seeale and  (brary.ree gene  ht all thesiuto-s://zlilvecg
+ryobLIiary.  As.  Amodzf  ge  h-timenchunk.
+pregi%Alr"orthaps
+   READabbrevstrud  odd PN berte, aueferelvalue;e httpstanda, ://zl"-bgd"e htt-bgdslor (nd Cusl"-bgp"e htt-bgrar),  th"-g"e htt-ga bi.
