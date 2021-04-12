@@ -13,7 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Update apt-get
+      run: sudo apt-get update
     - name: Setup SDL2 and SDL2_image
-      run: sudo apt-get install -y libsdl2-dev libsdl2-image-dev --fix-missing
+      run: sudo apt-get install -y libsdl2-dev libsdl2-image-dev
     - name: Build game
       run: make setup-asteroids
