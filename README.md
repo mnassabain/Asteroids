@@ -3,6 +3,8 @@
 Projet astéroid - Programmation avancée C++ M1 SIL.
 NASSABAIN Marco, WENDLING Nicolas
 
+![Capture d'écran](https://i.imgur.com/aQaKHab.png)
+
 ## Installation
 
 **IMPORTANT - Si vous lancez l'installation complète, c'est à dire le setup qui installe SDL2 et SDL2_image, il est normal que l'installation soit lente**
